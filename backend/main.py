@@ -1,0 +1,28 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import text
+
+from app.config import settings
+from app.database import engine
+
+app = FastAPI(title="Badge-by-Badge API")
+
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=[settings.frontend_origin],
+  allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+  allow_headers=["Authorization", "Content-Type"],
+)
+
+@app.get("/health")
+def health():
+  return {"status": "ok"}
+
+@app.get("/health/db")
+def health_db():
+  try:
+    with engine.connect() as conn:
+      conn.execute(text("SELECT 1"))
+    return {"database": "ok"}
+  except Exception:
+    raise HTTPException(status_code=503, detail="Database unreachable")
