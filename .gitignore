@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Frontend (Vite / Node)
+node_modules/
+dist/
+*.local
+
+# Secrets and editor files
+.env
+.env.*
+.env.example
+.vscode/
+.idea/
