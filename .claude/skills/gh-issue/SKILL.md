@@ -12,8 +12,8 @@ model: claude-sonnet-5-5
 
 Creates the issue, links it to the Project with status Backlog, and (second approval) creates the branch
 `{category}/{number}-{slug}` from the number GitHub just assigned, so `CLAUDE.md` R2 holds from the start.
-Project identifiers (`{{PROJECT_NUMBER}}`, field and option ids) live in `CLAUDE.md` § GitHub. If any still
-reads `{{...}}`, stop and tell the developer to fill it in.
+Project identifiers live in `CLAUDE.md` § GitHub: project number `4`, project id `PVT_kwHOCOvsj84BnHK3`,
+Status field `PVTSSF_lAHOCOvsj84BnHK3zhltR2w`, Backlog option `f75ad846`.
 
 ## Flow
 
@@ -73,7 +73,7 @@ context, read that file first. Run each command as its own Bash call. Pass multi
    characters, no trailing hyphen.
 
 8. **Approval gate 1 (GitHub write).** Show the title, body, label (and whether it is new), Project
-   `{{PROJECT_NUMBER}}` with status Backlog, no assignee, the branch preview, and (sub-issue only) the link to parent #{N}. Ask with `AskUserQuestion`:
+   `4` with status Backlog, no assignee, the branch preview, and (sub-issue only) the link to parent #{N}. Ask with `AskUserQuestion`:
    **"Create the issue"**, **"Edit the draft"**, **"Cancel"**. Touch GitHub only after the first.
 
 9. **On approval, create it.** Write the body to `temp/gh-issue-body.md` with the Write tool. Then, each as
@@ -81,8 +81,8 @@ context, read that file first. Run each command as its own Bash call. Pass multi
    - Only if the label is missing: `gh label create {label} --repo mrlhfz/badge-by-badge`
    - `gh issue create --repo mrlhfz/badge-by-badge --title "{title}" --body-file temp/gh-issue-body.md --label {label}`
      and read the issue number `N` from the URL it prints.
-   - `gh project item-add {{PROJECT_NUMBER}} --owner mrlhfz --url {issue-url} --format json` and read `id`.
-   - `gh project item-edit --id {item-id} --project-id {{PROJECT_ID}} --field-id {{STATUS_FIELD_ID}} --single-select-option-id {{STATUS_BACKLOG_OPTION_ID}}`
+   - `gh project item-add 4 --owner mrlhfz --url {issue-url} --format json` and read `id`.
+   - `gh project item-edit --id {item-id} --project-id PVT_kwHOCOvsj84BnHK3 --field-id PVTSSF_lAHOCOvsj84BnHK3zhltR2w --single-select-option-id f75ad846`
       - Sub-issue only: `gh api repos/mrlhfz/badge-by-badge/issues/{child} --jq .id` to get the child's
      numeric id, then
      `gh api repos/mrlhfz/badge-by-badge/issues/{N}/sub_issues -X POST -F sub_issue_id={child-id}` to link

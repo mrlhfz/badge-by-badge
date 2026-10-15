@@ -10,16 +10,22 @@ model: claude-sonnet-5-5
 > applies only for the rest of the current turn and is skipped when an `availableModels` allowlist does not
 > allow the model.
 
-Drafts the PR text only. The developer creates the PR themselves. The repo squash-merges, so the PR title
-becomes the commit on `main`; GitHub appends the PR number, so the title carries none. Project identifiers
-live in `CLAUDE.md` § GitHub; if any still reads `{{...}}`, stop and tell the developer to fill it in.
+Drafts the PR text only. Run on its own, the developer creates the PR themselves. When run as a step of
+`pr-create`, that skill opens the PR after its own gates. The repo squash-merges, so the PR title becomes the
+commit on `main`; GitHub appends the PR number, so the title carries none. Project identifiers live in
+`CLAUDE.md` § GitHub; if any still reads `{{...}}`, stop and tell the developer to fill it in.
+
+> **Sync rule:** This skill's steps, approval gate (step 8) and `In review` side effect (step 9) are composed
+> by `.claude/skills/pr-create/SKILL.md` step 4. If any of those change shape, review `pr-create` for consistency,
+> and vice versa.
 
 ## Flow
 
 **Command rules:** injected at session start from `CLAUDE.command-rules.md`; if they are not in your
 context, read that file first. Run each command as its own Bash call.
 
-0. **Announce the model pin** in one short line: "This skill is pinned to Sonnet 5.5."
+0. **Announce the model pin** in one short line: "This skill is pinned to Sonnet 5.5." When it runs as a step of
+   another skill (`pr-create`), announce the pin in one line only.
 
 1. **Gate: branch.** Run `git branch --show-current`. If it is `main`, stop. Read the issue number `N` from the
    branch name `{category}/{N}-{slug}`; if it does not match, stop and report an R2 breach.
@@ -52,14 +58,15 @@ context, read that file first. Run each command as its own Bash call.
    **"Request changes"**. On changes, revise, rewrite the file, and ask again. Never infer approval.
 
 9. **On approval, transition the issue.** As separate calls:
-   - `gh project item-list {{PROJECT_NUMBER}} --owner mrlhfz --format json -L 500 -q ".items[] | select(.content.number == {N}) | {id: .id, status: .status}"`
+   - `gh project item-list 4 --owner mrlhfz --format json -L 500 -q ".items[] | select(.content.number == {N}) | {id: .id, status: .status}"`
    - If nothing is printed, the issue is not on the Project: skip and say so. If `status` is not one of
      Backlog, Ready, In progress or In review (for example Done), skip and say why. If it is already
      In review, record it as a no-op.
-   - Otherwise: `gh project item-edit --id {item-id} --project-id {{PROJECT_ID}} --field-id {{STATUS_FIELD_ID}} --single-select-option-id {{STATUS_IN_REVIEW_OPTION_ID}}`
+   - Otherwise: `gh project item-edit --id {item-id} --project-id PVT_kwHOCOvsj84BnHK3 --field-id PVTSSF_lAHOCOvsj84BnHK3zhltR2w --single-select-option-id df73e18b`
 
 10. **Report back:** the file path, the issue grouping used, and the status result (moved, already In review,
-    or skipped with the reason). Then print the command for the developer to run themselves, with the real
-    title filled in:
+    or skipped with the reason). Then, when run standalone, print the command for the developer to run
+    themselves, with the real title filled in:
     `gh pr create --repo mrlhfz/badge-by-badge --base main --draft --title "{title}" --body-file temp/pr-message-{N}.md`
+    When run as a step of `pr-create`, skip this printout, because `pr-create` creates the PR itself.
     Mention that the draft file stays until they delete it.
