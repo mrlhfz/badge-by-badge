@@ -45,7 +45,9 @@ venv is not active, ask the developer.
 - **Scopes:** `backend`, `frontend`, `db`, `auth`, `docs`, `tooling`. Omit `[scope]` if none fits. To add a
   scope, change this list in its own commit.
 - **PRs:** squash-merge, so the PR title becomes the commit on `main` (GitHub appends the PR number).
-  The `pr-message` skill drafts it; the developer creates the PR.
+  The `pr-message` skill drafts the title and body. After approval, `pr-create` opens the PR as a draft and
+  adds it to the Project. The developer marks it ready and reviews it. `pr-commit-message` drafts the
+  squash-merge commit message.
 
 ## GitHub
 
@@ -61,8 +63,9 @@ venv is not active, ask the developer.
 
 Scratch output goes in `temp/` (gitignored). Do not `mkdir temp` as a precaution; create it only if a write
 fails because it is missing. Delete a temp file as soon as the command that needed it has finished. Drafts
-the skills write for later reference (`temp/pr-message-{n}.md`, `temp/code-review-{n}.md`) stay until the
-developer removes them. `{n}` is the issue number from the branch name.
+the skills write for later reference (`temp/pr-message-{n}.md`, `temp/code-review-{n}.md`,
+`temp/pr-commit-message-{n}.md`) stay until the developer removes them. `{n}` is the issue number from the
+branch name.
 
 ## Command Execution
 
@@ -97,7 +100,7 @@ be decided from the command text.
 - **Exception:** the developer renames the branch (`git branch -m`) or moves the work to its own branch;
   otherwise they confirm the mismatch for that single action.
 - **Enforced by:** `gh-issue` (creates issue and branch from one number; step 1a asks on added work); `commit-message` (warns);
-  `pr-message` (hard stop); `code-review` dimension 11.
+  `pr-message` (hard stop); `pr-create` and `pr-commit-message` (hard stop); `code-review` dimension 11.
 
 ### R3: Secrets and env vars
 
@@ -155,4 +158,6 @@ be decided from the command text.
 | `gh-issue` | Create an issue, add it to the Project as Backlog, and create the matching branch. |
 | `update-branch-tasks` | Rebuild `branch-tasks.txt` from the branch number and its commits. |
 | `pr-message` | Draft the PR title and body, then move the issue to In review. |
+| `pr-commit-message` | Draft the squash-merge commit message for the whole branch (not staged changes). |
+| `pr-create` | Run the pre-PR gates and review, then open the PR as a draft after confirmation. |
 | `code-review` | Review the whole branch against `main` across 11 dimensions. |
