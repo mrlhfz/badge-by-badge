@@ -18,8 +18,8 @@ Scope split: `commit-message` covers **staged changes** for a single commit. Thi
 for the squash merge.
 
 > **Sync rule:** The format here must match `CLAUDE.md` § Git conventions. The gates must match steps 1 to 3 of
-> `.claude/skills/pr-message/SKILL.md`. The output path must match what `pr-message` step 7b and `pr-create` expect
-> (`temp/pr-commit-message-{N}.md`). If any of those change shape, review this file, and vice versa.
+> `.claude/skills/pr-message/SKILL.md`. The title check in step 6 reads `temp/pr-message-{N}.md`, which
+> `pr-message` step 7 writes. If any of those change shape, review this file, and vice versa.
 
 ## Flow
 

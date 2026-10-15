@@ -75,6 +75,9 @@ steps inherit this.
      marked on demand is still re-checked; its marker stays if it verifies.
    - If any Critical or Warning finding does not verify, stop and name the `Finding {index}` and the
      `L.{index}.{n}` locations that still fail. Do not continue on partial fixes.
+   - **Fixes must be pushed.** Once every Critical and Warning finding verifies, re-run step 1 checks 4 to 6 (clean
+     tree, pushed, up to date with main). Fixes live in new commits, so a branch that was pushed before the review
+     fails check 5. If any check fails, stop and tell the developer to commit and push, then re-run this skill.
 
 4. **PR text.** Execute the `pr-message` skill. It writes `temp/pr-message-{N}.md` and asks for its own approval of
    the title and body. Do not infer approval from silence.
@@ -82,6 +85,8 @@ steps inherit this.
      even if the PR is never created. Say so explicitly when reporting back.
 
 5. **Create the PR.**
+   - Right before asking, run `git log -1 --format=%H` and `git log -1 --format=%H origin/{branch}` again. If they
+     differ, stop and tell the developer to push. The PR must open on the pushed head the review checked.
    - Ask **one more confirmation**, separate from step 4's approval, with `AskUserQuestion`: **"Create draft PR"**,
      **"Cancel"**. Approving the text is not approving the publish. Do not proceed without an explicit yes.
    - On yes, as two separate single-line Bash calls:
