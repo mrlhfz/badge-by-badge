@@ -14,8 +14,8 @@ Chains branch validation, `branch-tasks.txt` regeneration, code review and PR-te
 ends in opening the PR as a draft, so a branch cannot reach PR creation without passing the same bar every time.
 It composes `update-branch-tasks`, `code-review` and `pr-message` as steps rather than repeating their logic.
 
-Project identifiers live in `CLAUDE.md` § GitHub. Repo: `mrlhfz/badge-by-badge`. Project number: `4`, owner `mrlhfz`.
-The project number in step 5 must match `CLAUDE.md` § GitHub. If it changes, update both.
+Project identifiers live in `CLAUDE.md` § GitHub and are read there at run time (step 5). Repo: `mrlhfz/badge-by-badge`.
+Owner: `mrlhfz`.
 
 > **Sync rule:** Step 4 depends on `.claude/skills/pr-message/SKILL.md`'s drafting and approval flow, its
 > `In review` side effect, and its output path `temp/pr-message-{N}.md`. If any of those change shape, review this
@@ -101,10 +101,11 @@ steps inherit this.
      gh pr create --repo mrlhfz/badge-by-badge --base main --draft --title "{title}" --body-file temp/pr-body-{N}.md --assignee @me
      ```
 
-     Then, using the URL the first call printed:
+     Then, after reading the project number from `CLAUDE.md` § GitHub with the Read tool, and using the URL the
+     first call printed:
 
      ```sh
-     gh project item-add 4 --owner mrlhfz --url {pr-url}
+     gh project item-add {project-number} --owner mrlhfz --url {pr-url}
      ```
 
    - Leave the PR as a draft so the developer marks it ready for review.

@@ -19,7 +19,8 @@ commit on `main`; GitHub appends the PR number, so the title carries none. Proje
 > by `.claude/skills/pr-create/SKILL.md` step 4. If any of those change shape, review `pr-create` for consistency,
 > and vice versa.
 >
-> **Sync rule:** The Project ids in step 9 must match `CLAUDE.md` § GitHub. If either changes, update both.
+> **Sync rule:** Step 9 reads the Project ids from `CLAUDE.md` § GitHub at run time, so there is no copy here to
+> keep in step.
 
 ## Flow
 
@@ -60,12 +61,13 @@ context, read that file first. Run each command as its own Bash call.
    **In review** in the Project. Ask with `AskUserQuestion`: **"Approve and move to In review"**,
    **"Request changes"**. On changes, revise, rewrite the file, and ask again. Never infer approval.
 
-9. **On approval, transition the issue.** As separate calls:
-   - `gh project item-list 4 --owner mrlhfz --format json -L 500 -q ".items[] | select(.content.number == {N}) | {id: .id, status: .status}"`
+9. **On approval, transition the issue.** Read `CLAUDE.md` § GitHub with the Read tool and take the project number,
+   project id, Status field id and In review option id from it. Then, as separate calls, using those values:
+   - `gh project item-list {project-number} --owner mrlhfz --format json -L 500 -q ".items[] | select(.content.number == {N}) | {id: .id, status: .status}"`
    - If nothing is printed, the issue is not on the Project: skip and say so. If `status` is not one of
      Backlog, Ready, In progress or In review (for example Done), skip and say why. If it is already
      In review, record it as a no-op.
-   - Otherwise: `gh project item-edit --id {item-id} --project-id PVT_kwHOCOvsj84BnHK3 --field-id PVTSSF_lAHOCOvsj84BnHK3zhltR2w --single-select-option-id df73e18b`
+   - Otherwise: `gh project item-edit --id {item-id} --project-id {project-id} --field-id {status-field-id} --single-select-option-id {in-review-option-id}`
 
 10. **Report back:** the file path, the issue grouping used, and the status result (moved, already In review,
     or skipped with the reason). Then, when run standalone, write lines 3 onward of `temp/pr-message-{N}.md` to
