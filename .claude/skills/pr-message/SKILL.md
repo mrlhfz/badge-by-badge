@@ -50,8 +50,8 @@ context, read that file first. Run each command as its own Bash call.
 6. **Compose the draft.**
    - Title: `{type}[{scope}]: {title description}`, present tense, under 72 characters (count it yourself),
      no `(#...)` suffix.
-   - Body: `# {title description}`, `## Summary` (what changed and why), optional `## Breaking Changes` (omit
-     if none), and `## Related Issues` with `Closes: #N`.
+   - Body: start at `## Summary` (what changed and why), optional `## Breaking Changes` (omit if none), and
+     `## Related Issues` with `Closes: #N`. Do not repeat the title as a heading: the PR already shows it.
 
 7. **Write the draft** to `temp/pr-message-{N}.md`. Line 1 is the full title `{type}[{scope}]: {title description}`,
    line 2 is blank, and the rest is the body. Do not create the PR.
@@ -68,8 +68,9 @@ context, read that file first. Run each command as its own Bash call.
    - Otherwise: `gh project item-edit --id {item-id} --project-id PVT_kwHOCOvsj84BnHK3 --field-id PVTSSF_lAHOCOvsj84BnHK3zhltR2w --single-select-option-id df73e18b`
 
 10. **Report back:** the file path, the issue grouping used, and the status result (moved, already In review,
-    or skipped with the reason). Then, when run standalone, print the command for the developer to run
-    themselves, with the real title filled in:
-    `gh pr create --repo mrlhfz/badge-by-badge --base main --draft --title "{title}" --body-file temp/pr-message-{N}.md`
-    When run as a step of `pr-create`, skip this printout, because `pr-create` creates the PR itself.
-    Mention that the draft file stays until they delete it.
+    or skipped with the reason). Then, when run standalone, write lines 3 onward of `temp/pr-message-{N}.md` to
+    `temp/pr-body-{N}.md` with the Write tool, so the body does not repeat the title. Print the command for the
+    developer to run themselves, with the real title filled in:
+    `gh pr create --repo mrlhfz/badge-by-badge --base main --draft --title "{title}" --body-file temp/pr-body-{N}.md`
+    When run as a step of `pr-create`, skip this step, because `pr-create` splits the file and creates the PR itself.
+    Mention that the draft file and the body file stay until they delete them.
