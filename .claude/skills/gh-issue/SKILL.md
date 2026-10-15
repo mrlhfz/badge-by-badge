@@ -12,9 +12,9 @@ model: claude-sonnet-5-5
 
 Creates the issue, links it to the Project with status Backlog, and (second approval) creates the branch
 `{category}/{number}-{slug}` from the number GitHub just assigned, so `CLAUDE.md` R2 holds from the start.
-Project identifiers live in `CLAUDE.md` § GitHub: project number `4`, project id `PVT_kwHOCOvsj84BnHK3`,
-Status field `PVTSSF_lAHOCOvsj84BnHK3zhltR2w`, Backlog option `f75ad846`. These ids must match `CLAUDE.md` § GitHub;
-if either changes, update both.
+The Project ids below are copied from `CLAUDE.md` § GitHub, which is the source of truth: project number `4`,
+project id `PVT_kwHOCOvsj84BnHK3`, Status field `PVTSSF_lAHOCOvsj84BnHK3zhltR2w`, Backlog option `f75ad846`.
+If any change in `CLAUDE.md`, update this file too.
 
 ## Flow
 

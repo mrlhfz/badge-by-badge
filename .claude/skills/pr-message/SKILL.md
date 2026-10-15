@@ -53,7 +53,8 @@ context, read that file first. Run each command as its own Bash call.
    - Body: `# {title description}`, `## Summary` (what changed and why), optional `## Breaking Changes` (omit
      if none), and `## Related Issues` with `Closes: #N`.
 
-7. **Write the draft** to `temp/pr-message-{N}.md`. Do not create the PR.
+7. **Write the draft** to `temp/pr-message-{N}.md`. Line 1 is the full title `{type}[{scope}]: {title description}`,
+   line 2 is blank, and the rest is the body. Do not create the PR.
 
 8. **Approval gate (GitHub write).** Show the draft. Say clearly that approving it also moves issue `#N` to
    **In review** in the Project. Ask with `AskUserQuestion`: **"Approve and move to In review"**,

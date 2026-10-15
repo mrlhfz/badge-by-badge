@@ -54,7 +54,7 @@ read that file before running any shell command. Run each command as its own Bas
    - **Body:** a blank line, then a paragraph on what changed and why, then the "Unrelated / No Issue" section if
      any.
    - **Footer:** a blank line, then `Refs: #N`.
-   - **Title check:** if `temp/pr-message-{N}.md` exists, read its title line. If its title differs from this
+   - **Title check:** if `temp/pr-message-{N}.md` exists, read line 1, the title. If it differs from this
      subject, warn the developer: the squash commit takes the **PR title**, so the PR title and this subject must
      match. Ask them to fix whichever is wrong.
 

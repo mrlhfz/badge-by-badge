@@ -92,10 +92,13 @@ steps inherit this.
      differ, stop and tell the developer to push. The PR must open on the pushed head the review checked.
    - Ask **one more confirmation**, separate from step 4's approval, with `AskUserQuestion`: **"Create draft PR"**,
      **"Cancel"**. Approving the text is not approving the publish. Do not proceed without an explicit yes.
+   - Split the draft first, because `pr-message`'s file starts with the title. Line 1 of `temp/pr-message-{N}.md` is
+     the `{title}`. With the Write tool, write lines 3 onward to `temp/pr-body-{N}.md`, so the PR body does not repeat
+     the title. Delete `temp/pr-body-{N}.md` once the create call has finished.
    - On yes, as two separate single-line Bash calls:
 
      ```sh
-     gh pr create --repo mrlhfz/badge-by-badge --base main --draft --title "{title}" --body-file temp/pr-message-{N}.md --assignee @me
+     gh pr create --repo mrlhfz/badge-by-badge --base main --draft --title "{title}" --body-file temp/pr-body-{N}.md --assignee @me
      ```
 
      Then, using the URL the first call printed:
