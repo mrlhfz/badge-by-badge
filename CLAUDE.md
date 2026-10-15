@@ -50,10 +50,10 @@ venv is not active, ask the developer.
 ## GitHub
 
 - Repo `mrlhfz/badge-by-badge`. Issues and a GitHub Project are used. Project owner: `mrlhfz`.
-- Project number: `{{PROJECT_NUMBER}}`
-- Project id: `{{PROJECT_ID}}`
-- Status field id: `{{STATUS_FIELD_ID}}`
-- Status option ids: Backlog `{{STATUS_BACKLOG_OPTION_ID}}`, In review `{{STATUS_IN_REVIEW_OPTION_ID}}`
+- Project number: `4`
+- Project id: `PVT_kwHOCOvsj84BnHK3`
+- Status field id: `PVTSSF_lAHOCOvsj84BnHK3zhltR2w`
+- Status option ids: Backlog `f75ad846`, In review `df73e18b`
 - Find them with `gh project list --owner mrlhfz`, then `gh project field-list <number> --owner mrlhfz --format json`
   (fields and options) and `gh project view <number> --owner mrlhfz --format json` (project id).
 
@@ -91,11 +91,12 @@ be decided from the command text.
 - **MUST:** name branches `{category}/{issue-number}-{slug}` using the number GitHub assigned; end commits with
   `Refs: #{that number}`; make the PR close that issue.
 - **MUST NOT:** guess or invent an issue number; reference a different issue from this branch without
-  approval.
+  approval; add work beyond the branch's issue (scope creep) without the developer choosing how: update
+  that issue, make a sub-issue, or run a new `gh-issue`.
 - **Exemptions:** `main`, and the bootstrap commits made before this workflow existed.
 - **Exception:** the developer renames the branch (`git branch -m`) or moves the work to its own branch;
   otherwise they confirm the mismatch for that single action.
-- **Enforced by:** `gh-issue` (creates issue and branch from one number); `commit-message` (warns);
+- **Enforced by:** `gh-issue` (creates issue and branch from one number; step 1a asks on added work); `commit-message` (warns);
   `pr-message` (hard stop); `code-review` dimension 11.
 
 ### R3: Secrets and env vars
@@ -116,7 +117,7 @@ be decided from the command text.
 
 - **What:** every table has RLS enabled, so the public key cannot read or write rows it should not.
 - **MUST:** enable RLS and define policies for the allowed roles in the same migration that creates the
-  table (migrations live in `{{MIGRATIONS_DIR}}`).
+  table (migrations live in `backend/migrations`).
 - **MUST NOT:** ship a table without RLS; disable RLS to make a bug go away.
 - **Exemptions:** Alembic's own `alembic_version` table.
 - **Exception:** a deliberately public table is allowed if a comment in its migration and the PR description
@@ -126,8 +127,8 @@ be decided from the command text.
 ### R5: Roles and statuses in one place
 
 - **What:** roles (Admin, Leader, Scout) and badge statuses are defined once, not retyped.
-- **MUST:** define each as an enum in the backend at `{{BACKEND_ENUMS_PATH}}` and mirror it once in the
-  frontend at `{{FRONTEND_ENUMS_PATH}}`; import from those files everywhere else.
+- **MUST:** define each as an enum in the backend at `backend/app/enums.py` and mirror it once in the
+  frontend at `frontend/src/enums.ts`; import from those files everywhere else.
 - **MUST NOT:** write role or status string literals (`"verified"`, `"Leader"`) in routes, queries or
   components.
 - **Exemptions:** tests asserting exact values; past Alembic migrations (frozen in time).
