@@ -15,6 +15,7 @@ ends in opening the PR as a draft, so a branch cannot reach PR creation without 
 It composes `update-branch-tasks`, `code-review` and `pr-message` as steps rather than repeating their logic.
 
 Project identifiers live in `CLAUDE.md` § GitHub. Repo: `mrlhfz/badge-by-badge`. Project number: `4`, owner `mrlhfz`.
+The project number in step 5 must match `CLAUDE.md` § GitHub. If it changes, update both.
 
 > **Sync rule:** Step 4 depends on `.claude/skills/pr-message/SKILL.md`'s drafting and approval flow, its
 > `In review` side effect, and its output path `temp/pr-message-{N}.md`. If any of those change shape, review this
@@ -48,9 +49,11 @@ steps inherit this.
    5. **Pushed.** `git fetch`, then compare `git log -1 --format=%H` with `git log -1 --format=%H origin/{branch}`.
       If they differ, stop and tell the developer to run `git push` themselves, then re-run this skill. This
       skill never pushes.
-   6. **Up to date with main.** `git log HEAD..origin/main --oneline` must print nothing. If it does, stop and tell
-      the developer to merge `main` into the branch locally and resolve conflicts, then re-run. This skill never
-      merges.
+   6. **Up to date with main.** First, local `main` must equal `origin/main`: compare `git log -1 --format=%H main`
+      with `git log -1 --format=%H origin/main`. If they differ, stop and tell the developer to update local `main`
+      on `main` themselves, then re-run. This skill never updates `main`. Then `git log HEAD..origin/main --oneline`
+      must print nothing. If it does, stop and tell the developer to merge `main` into the branch locally and
+      resolve conflicts, then re-run. This skill never merges.
    7. **Has something to PR.** `git log main..HEAD --oneline` must print at least one commit.
 
 2. **Regenerate `branch-tasks.txt`.** Execute the `update-branch-tasks` skill. If the developer does not accept its

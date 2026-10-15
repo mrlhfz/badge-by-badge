@@ -13,11 +13,13 @@ model: claude-sonnet-5-5
 Drafts the PR text only. Run on its own, the developer creates the PR themselves. When run as a step of
 `pr-create`, that skill opens the PR after its own gates. The repo squash-merges, so the PR title becomes the
 commit on `main`; GitHub appends the PR number, so the title carries none. Project identifiers live in
-`CLAUDE.md` § GitHub; if any still reads `{{...}}`, stop and tell the developer to fill it in.
+`CLAUDE.md` § GitHub.
 
 > **Sync rule:** This skill's steps, approval gate (step 8) and `In review` side effect (step 9) are composed
 > by `.claude/skills/pr-create/SKILL.md` step 4. If any of those change shape, review `pr-create` for consistency,
 > and vice versa.
+>
+> **Sync rule:** The Project ids in step 9 must match `CLAUDE.md` § GitHub. If either changes, update both.
 
 ## Flow
 
