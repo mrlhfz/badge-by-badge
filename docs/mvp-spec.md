@@ -82,6 +82,7 @@ Tier: **MUST** = needed for the demo, **SHOULD** = good to have, **CUT** = drop 
 - As a leader, I want to see a progress bar for each Scout toward their level's top award, so that I know who needs help. **MUST**
 - As a leader, I want to promote a Scout to the next level once they have passed the top award in person, so that their history moves on. I want to see the next level open to the Scout's stream before I promote them. **MUST**
 - As a leader, I want to be notified when a Scout in my troop reaches 70% progress, so that I can plan their next step. **CUT**
+- As a leader, I want a progress card for each Scout in my troop, showing the Scout's name and a completion % bar toward their level's top award, similar to a course progress card, so that I can see where each Scout is at a glance. Not in the MVP. **CUT**
 
 ### Scout
 

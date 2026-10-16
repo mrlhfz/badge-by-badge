@@ -269,7 +269,7 @@ How many skill badges a Scout must complete for a level and stream. Set by the A
 | --- | --- | --- |
 | level_id | uuid, PK, FK to levels | |
 | stream_id | uuid, PK, FK to streams | |
-| required_count | int | 0 or more. Must not exceed the number of skill badges for that level and stream. The Admin API rejects a higher value |
+| required_count | int | 0 or more. Must not exceed the number of skill badges for that level and stream, counted as in [Decisions](#decisions). The Admin API rejects a higher value |
 
 Composite primary key on `(level_id, stream_id)`.
 
@@ -373,7 +373,8 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
 - **Progress % is toward the current level's top award.** Counted per Scout, for their stream:
   - Compulsory badges = badges with `kind` `compulsory` in the Scout's current level, for their stream.
   - Skill badges required = `required_skill_counts.required_count` for that level and stream, capped at the number
-    of skill badges that exist for that level and stream.
+    of skill badges that exist for that level and stream. "Exist" means badges with `kind` `skill`, `deleted_at` null,
+    and `stream_id` null or equal to the stream, the same rule as the checklist.
   - `progress = (completed compulsory + min(completed skill, required)) / (total compulsory + required)`, where
     `required` is the capped value. Progress can always reach 100%.
   - If the denominator is 0 (no compulsory badges and a required count of 0), progress is 0%.
@@ -381,8 +382,9 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
     raise progress.
 - **Notification threshold is 70%, a placeholder.** The stories say 70%. Keep it as one constant so it can
   change once the team picks the moment to notify.
-- **Notifications are in-app and computed on read.** No notifications table. When a Leader or Scout loads the
-  app and progress is at or above the threshold, the app shows the alert. Nothing is stored, so there is no
+- **Notifications are in-app and computed on read.** No notifications table. When a Scout loads the app and their
+  own progress is at or above the threshold, the app shows the alert. When a Leader loads the app, the app shows the
+  alert for each Scout in their troop who is at or above the threshold. Nothing is stored, so there is no
   read/unread state, and the alert shows again on each visit while the threshold is met. Email is deferred.
 - **Scouts' personal data is limited to full name and PPM membership number** (`ppm_number`). The app does not
   store birth date, IC number or contact details for Scouts, because Scouts are minors and PDPA asks for only

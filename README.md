@@ -54,8 +54,9 @@ Streams and their levels are fixed in the MVP. The full level-by-stream matrix i
 - **Skill badges** count up to the number required for the level and stream. Extra skill badges do not raise progress.
 - A badge is **complete** when every general and stream-specific requirement has a confirmed entry.
 - A badge only counts as unlocked once the Scout is **verified**. Unverified Scouts can still add entries.
-- A Scout or Leader whose progress reaches 70% (a placeholder) sees an in-app alert when they open the app.
-  The notification story is marked CUT, so it is the first feature to drop if time runs short.
+- A Scout whose progress reaches 70% (a placeholder) sees an in-app alert when they open the app. A Leader sees
+  the same alert for each Scout in their troop who reaches 70%.
+  The notification stories are marked CUT, so they are the first features to drop if time runs short.
 
 The formula, with the data behind it, is in [docs/data-model.md](docs/data-model.md#decisions).
 
