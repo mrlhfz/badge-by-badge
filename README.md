@@ -162,7 +162,8 @@ The full rules are in [CLAUDE.md](CLAUDE.md).
 
 ## Not in the MVP
 
-- Levels Pengakap Lebah, Pengakap Kanak-Kanak and Pengakap Kelana, and streams other than Pengakap Laut (WIP)
+- Everything outside the Pengakap Laut path from Pengakap Muda to Anugerah Pengakap Raja. Other levels and streams
+  are listed in the app in light grey and cannot be clicked (WIP)
 - Changing a Scout's stream after it is set
 - Email notifications (deferred)
 - Entry comments, printable logbook and filtering by badge are SHOULD stories and come after the MUST stories

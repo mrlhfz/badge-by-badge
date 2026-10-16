@@ -40,7 +40,8 @@ Each badge has general requirements, which apply to every stream, and stream-spe
 checklist is the general requirements plus the ones for their stream.
 
 **MVP scope for the deployment and presentation:** the Pengakap Laut path from Pengakap Muda, through Pengakap
-Remaja, to Anugerah Pengakap Raja. Other levels and streams are work in progress (WIP).
+Remaja, to Anugerah Pengakap Raja. Every level and stream is listed in the app, but only this path is built in the
+MVP. The others show in light grey and cannot be clicked. They are work in progress (WIP).
 
 ## Top award prerequisites
 
