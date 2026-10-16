@@ -64,6 +64,7 @@ Tier: **MUST** = needed for the demo, **SHOULD** = good to have, **CUT** = drop 
 - As an admin, I want to set how many Leaders each troop has, so that troops of different sizes are each staffed properly. **MUST**
 - As an admin, I want to create, edit and delete badges for each level, so that Scouts work from an up-to-date catalog. **MUST**
 - As an admin, I want to manage each badge's general and stream-specific requirements, so that Scouts know exactly what to do. **MUST**
+- As an admin, I want to set how many skill badges each level and stream requires, so that a Scout knows when they have enough skill badges. **MUST**
 - As an admin, I want to see a list of unverified Scouts with their troop, stream, current level and Leaders, so that I can check them against the official Persekutuan Pengakap Malaysia list. **MUST**
 - As an admin, I want to mark a Scout as verified (and undo it), so that only officially registered Scouts count as verified. **MUST**
 - As an admin, I want the system to record who verified a Scout and when, so that verification can be audited. **MUST**

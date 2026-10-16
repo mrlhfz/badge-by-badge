@@ -166,5 +166,6 @@ The full rules are in [CLAUDE.md](CLAUDE.md).
 - Everything outside the Pengakap Laut path from Pengakap Muda to Anugerah Pengakap Raja. Other levels and streams
   are listed in the app in light grey and cannot be clicked (WIP)
 - Changing a Scout's stream after it is set
+- Progress alerts at 70% for Scouts and Leaders (CUT). The alert described above is the planned behavior
 - Email notifications (deferred)
 - Entry comments, printable logbook and filtering by badge are SHOULD stories and come after the MUST stories

@@ -371,7 +371,8 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
 - **Leaders edit Scout names in their troop.** RLS on `scouts` lets a troop's Leader update `full_name`. Scouts cannot.
 - **Passwords live in Supabase Auth.** These tables never store them.
 - **Progress % is toward the current level's top award.** Counted per Scout, for their stream:
-  - Compulsory badges = badges with `kind` `compulsory` in the Scout's current level, for their stream.
+  - Compulsory badges = badges with `kind` `compulsory`, `deleted_at` null, and `stream_id` null or equal to the
+    stream, in the Scout's current level. The same rule as the checklist and the skill count.
   - Skill badges required = `required_skill_counts.required_count` for that level and stream, capped at the number
     of skill badges that exist for that level and stream. "Exist" means badges with `kind` `skill`, `deleted_at` null,
     and `stream_id` null or equal to the stream, the same rule as the checklist.
