@@ -1,1 +1,1 @@
-from . import base, catalog, people  # noqa: F401
+from . import base, catalog, people, progress  # noqa: F401
