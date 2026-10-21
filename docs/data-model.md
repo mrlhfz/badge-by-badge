@@ -38,6 +38,8 @@ erDiagram
   LEVELS ||--o{ BADGES : "contains"
   LEVELS ||--o{ REQUIRED_SKILL_COUNTS : "sets skill count for"
   STREAMS ||--o{ REQUIRED_SKILL_COUNTS : "sets skill count for"
+  BADGES ||--o{ REQUIREMENT_GROUPS : "has pick rules"
+  REQUIREMENT_GROUPS ||--o{ REQUIREMENTS : "groups"
   BADGES ||--o{ REQUIREMENTS : "has checklist"
   REQUIREMENTS ||--o{ ENTRIES : "is done as"
   ENTRIES ||--o{ ENTRY_COMMENTS : "has"
@@ -100,10 +102,16 @@ erDiagram
     uuid level_id PK, FK
     uuid stream_id PK, FK
   }
+  REQUIREMENT_GROUPS {
+    uuid id PK
+    uuid badge_id FK
+    int pick_count
+  }
   REQUIREMENTS {
     uuid id PK
     uuid badge_id FK
     uuid stream_id FK
+    uuid group_id FK
   }
   ENTRIES {
     uuid id PK
@@ -273,6 +281,21 @@ How many skill badges a Scout must complete for a level and stream. Set by the A
 
 Composite primary key on `(level_id, stream_id)`.
 
+### requirement_groups
+
+A pick rule inside a badge, such as "do 2 of these 6". Requirements with no group are all required.
+
+| Column | Type | Notes |
+| --- | --- | --- |
+| id | uuid, PK | |
+| badge_id | uuid, FK to badges | |
+| title | text | Short label, for example "Bahagian A" |
+| pick_count | int | How many requirements in the group must be confirmed. 1 or more, and no more than the group's size |
+| position | int | Unique per badge |
+
+Use one group per choice set. Rules that mix choices, such as "Ujian 1-6 ATAU 7-14", become two groups with
+`pick_count` 1, and the book wording goes in `detail`.
+
 ### requirements
 
 The checklist for a badge.
@@ -282,8 +305,10 @@ The checklist for a badge.
 | id | uuid, PK | |
 | badge_id | uuid, FK to badges | |
 | stream_id | uuid, FK to streams, nullable | Null = general requirement, for every stream. Set = stream-specific |
+| group_id | uuid, FK to requirement_groups, nullable | Null = always required. Set = counts toward the group's `pick_count` |
 | position | int | Unique per badge |
-| text | text | |
+| text | text | Short checklist label the Scout sees |
+| detail | text, nullable | Full wording from the book, including sub-items. Shown when the Scout opens the requirement |
 
 ### entries
 
@@ -345,8 +370,10 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
 ## Decisions
 
 - **Badge status is computed, not stored.** `not_started` = no entries. `in_progress` = some entries.
-  `complete` = every general and stream-specific requirement in the Scout's checklist has a confirmed entry. A badge
-  only counts as unlocked when the Scout is verified.
+  `complete` = every requirement in the Scout's checklist that is not in a group has a confirmed entry, and every
+  group has at least `pick_count` confirmed entries. A badge only counts as unlocked when the Scout is verified.
+- **Pick rules use groups.** A requirement in a group counts toward that group's `pick_count`, not individually. Extra
+  confirmed entries in a group are allowed and do not change the result.
 - **One entry per requirement per Scout.** A requirement is done once. Editing an entry changes it.
 - **Editing a confirmed entry sets it back to `pending`.** So the Leader sees the change.
 - **Badges are soft-deleted.** Deleting a badge sets `deleted_at`, so entries keep their history.
