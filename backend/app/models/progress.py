@@ -54,6 +54,19 @@ class Badge(UUIDPk, Base):
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
+class RequirementGroup(UUIDPk, Base):
+    __tablename__ = "requirement_groups"
+    __table_args__ = (
+        UniqueConstraint("badge_id", "position", name="uq_requirement_groups_badge_position"),
+        CheckConstraint("pick_count >= 1", name="ck_requirement_groups_pick_count"),
+    )
+
+    badge_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("badges.id"))
+    title: Mapped[str]
+    pick_count: Mapped[int]
+    position: Mapped[int]
+
+
 class Requirement(UUIDPk, Base):
     __tablename__ = "requirements"
     __table_args__ = (
@@ -62,9 +75,12 @@ class Requirement(UUIDPk, Base):
 
     badge_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("badges.id"))
     stream_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("streams.id"))
+    group_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("requirement_groups.id")
+    )
     position: Mapped[int]
     text: Mapped[str]
-
+    detail: Mapped[str | None]
 
 class RequiredSkillCount(Base):
     __tablename__ = "required_skill_counts"
