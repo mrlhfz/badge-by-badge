@@ -194,11 +194,25 @@ Pick 1 from Bahagian A (Kepelautan) and 2 from Bahagian B (Am). Bahagian B is in
 6. Menunjukkan cara pemulihan pernafasan mulut ke mulut (CPR/EAR) dengan patung.
 
 ### 8.2 Kuartermaster
-Lakukan Kumpulan Ujian 1-6 ATAU Kumpulan Ujian 7-14.
-- Ujian A (1-6): membantu Kuartermaster selama 6 bulan; tunjuk cara jaga tali-menali, khemah dan alatan;
-  simpan rekod; simpan alatan (kod warna); cara menjaga alatan pandang dengar; nilai harga barang.
-- Ujian B (7-14): membantu Kuartermaster dalam satu perkhemahan; tunjuk cara jaga tali-menali, khemah, alatan
-  dan alatan masak; senarai alatan; senarai makanan 48 jam; simpanan makanan; kebersihan.
+Lakukan Kumpulan Ujian 1-6 ATAU Kumpulan Ujian 7-14 (pick 1 part; the two parts are child groups in the database).
+
+Kumpulan Ujian A (1-6), all required:
+1. Telah membantu Kuartermaster selama enam bulan; (a) cara menjaga tali-menali: membuat pemecut, mematikan hujung tali, menganyam, memintal, melingkar, memeriksa dan menyimpannya.
+2. (b) Cara menjaga khemah: memperbaiki tali penarik, menampal/menjahit koyak kecil, mengalis supaya tahan hujan, memeriksa dan menyimpannya; (c) cara menjaga alatan: mengasah, membersihkan, memeriksa dan menyimpannya.
+3. Cara menyimpan rekod yang mudah dan berkesan termasuk catatan keluar dan masuk segala alatan Kumpulan.
+4. (a) Cara menyimpan alatan kegunaan Pengakap; (b) cara menyimpan dengan sistem warna, nombor atau kod berkenaan dengan barang pekerjaan tangan.
+5. Cara menjaga dan menyimpan alatan pandang dengar Kumpulan seperti model, carta dinding, bahan lukisan, kertas lukisan.
+6. Cara menilai barang dan harga barang yang hendak dibeli.
+
+Kumpulan Ujian B (7-14), all required:
+7. Telah membantu Kuartermaster dalam satu perkhemahan Pasukan Pengakap atau PEK bercuti Pengakap Kanak-Kanak selama lima hari.
+8. Cara menjaga semua alatan perkhemahan: (a) tali-menali: menggulung, memeriksa dan menyimpan; (b) khemah: memperbaiki tali penarik, menjahit khemah terkoyak dengan segera, memeriksa khemah; (c) alatan: mengasah, membersih, memeriksa, menyimpan; (d) alatan masak: membersih, memeriksa, menyimpan.
+9. Cara menyimpan rekod yang mudah dan berkesan termasuk catatan keluar dan masuk alatan dalam perkhemahan.
+10. Cara menjaga alat khas dalam perkhemahan: pakaian seragam, alatan mengembara, alatan mendaki bukit/gunung dan perahu.
+11. Satu daftar makanan dalam perkhemahan selama 48 jam, dibincangkan dengan penilai.
+12. Cara mengendalikan penyimpanan barang makanan dalam perkhemahan.
+13. Satu senarai alatan yang perlu dibawa bagi satu perkhemahan dan cara memperbaiki alatan dengan segera dalam kecemasan; buktikan sebab tiap alat dibawa.
+14. Kebersihan sebagai kunci kejayaan Kuartermaster; cara mencapainya dalam urusan perkhemahan sebagai pembantu KM.
 
 ### 8.3 Pemelihara Ekologi Marin
 1. Sertai secara aktif SATU kempen pemeliharaan ekologi marin yang relevan (sungai, pantai, mangrove, hidupan laut).

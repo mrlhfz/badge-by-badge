@@ -34,3 +34,10 @@ export const BadgeKind = {
 } as const;
 
 export type BadgeKind = (typeof BadgeKind)[keyof typeof BadgeKind];
+
+export const AnimalKind = {
+    Poultry: "poultry",
+    Other: "other",
+} as const;
+
+export type AnimalKind = (typeof AnimalKind)[keyof typeof AnimalKind];

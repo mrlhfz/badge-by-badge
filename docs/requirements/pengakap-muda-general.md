@@ -63,11 +63,12 @@ Lulus semua ujian dalam SATU Kumpulan A, B, C atau D. (ringkasan)
 ### Pelukis (p17)
 1. Lukis satu pemandangan dari sebuah cerita yang dipilih oleh Penilai.
 2. Lukis rupa seorang manusia yang wajahnya bengis, tersenyum atau sedih.
-3. Lukis satu pemandangan keindahan alam yang ditentukan oleh Penilai.
+3. Lukis satu pemandangan keindahan alam semulajadi, dan mengetahui kaedah mewarna di atas pelbagai jenis objek. (Wording from a scan; check against the book.)
 4. Lukis poster gambar simpulan dan ikatan yang dipelajarinya.
 5. Lukis gambar perkhemahan (layout) yang ideal.
-6. Lukis lambang Pengakap pada apa-apa bahan.
-7. Mengumpul berbagai lukisan dari keratan akhbar dan majalah sebagai rujukan.
+6. Lukis sekurang-kurangnya tiga gejet yang penting dalam perkhemahan.
+7. Lukis lambang Pengakap pada apa-apa bahan seperti kadbod, papan lapis, polystrene dan sebagainya.
+8. Mengumpul berbagai lukisan dari keratan akhbar dan majalah untuk dijadikan rujukan dan panduan.
 
 ### Penunggang Basikal (p18)
 1. Mempunyai dan menggunakan basikal dengan jayanya selama sekurang-kurangnya 6 bulan.

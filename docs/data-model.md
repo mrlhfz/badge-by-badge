@@ -105,6 +105,7 @@ erDiagram
   REQUIREMENT_GROUPS {
     uuid id PK
     uuid badge_id FK
+    uuid parent_group_id FK
     int pick_count
   }
   REQUIREMENTS {
@@ -289,12 +290,22 @@ A pick rule inside a badge, such as "do 2 of these 6". Requirements with no grou
 | --- | --- | --- |
 | id | uuid, PK | |
 | badge_id | uuid, FK to badges | |
+| parent_group_id | uuid, FK to requirement_groups, nullable | Null = top-level group. Set = this group is one part of a parent choice |
 | title | text | Short label, for example "Bahagian A" |
-| pick_count | int | How many requirements in the group must be confirmed. 1 or more, and no more than the group's size |
+| pick_count | int | How many must be done: requirements for a leaf group, child groups for a parent group. 1 or more, and no more than the number of items it holds |
 | position | int | Unique per badge |
+| applies_when_poultry | boolean | Default false. True = the group only applies if the Scout logged a `poultry` animal on this badge (see Decisions) |
 
-Use one group per choice set. Rules that mix choices, such as "Ujian 1-6 ATAU 7-14", become two groups with
-`pick_count` 1, and the book wording goes in `detail`.
+Groups can nest to any depth. A child group can itself be a parent (Ahli Muzik: part E, then one instrument from four).
+Two shapes at each level:
+- **Leaf group** (`parent_group_id` may be set): holds requirements. `pick_count` = how many of them must be confirmed.
+  For "do all of Bahagian A", `pick_count` = the number of items in that part.
+- **Parent group** (no requirements of its own): holds child groups. `pick_count` = how many child groups must be complete.
+  For "Bahagian A ATAU Bahagian B", the parent has `pick_count` 1 and two child leaf groups.
+
+Use a parent only when the rule chooses between whole parts. A group holds requirements or child groups, never both.
+The app checks this when it writes a group.
+Rules that mix choices, such as "Ujian 1-6 ATAU 7-14", become a parent with two child groups, and the book wording goes in `detail`.
 
 ### requirements
 
@@ -321,6 +332,7 @@ A Scout marking one requirement as done.
 | requirement_id | uuid, FK to requirements | |
 | entry_date | date | When the Scout did it |
 | note | text, nullable | |
+| animal_kind | `animal_kind` enum, nullable | Set only by a Scout on an entry that decides a conditional part, such as Peladang Muda Kumpulan C: `poultry` or `other`. Null for all other entries |
 | status | `entry_status` enum | `pending` or `confirmed` |
 | confirmed_by | uuid, FK to profiles, nullable | The Leader |
 | confirmed_at | timestamptz, nullable | |
@@ -364,6 +376,7 @@ Defined once in `backend/app/enums.py` and mirrored in `frontend/src/enums.ts` (
 | `entry_status` | `pending`, `confirmed` |
 | `verification_action` | `verify`, `unverify` |
 | `badge_kind` | `compulsory`, `skill` |
+| `animal_kind` | `poultry`, `other` |
 
 Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is computed from entries (see Decisions).
 
@@ -371,9 +384,21 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
 
 - **Badge status is computed, not stored.** `not_started` = no entries. `in_progress` = some entries.
   `complete` = every requirement in the Scout's checklist that is not in a group has a confirmed entry, and every
-  group has at least `pick_count` confirmed entries. A badge only counts as unlocked when the Scout is verified.
+  top-level group is complete. A leaf group is complete when it has at least `pick_count` confirmed entries. A parent
+  group is complete when at least `pick_count` of its child groups are complete. A badge only counts as unlocked when
+  the Scout is verified.
+- **Conditional parts.** A group with `applies_when_poultry` = true only applies if the Scout has a confirmed entry
+  with `animal_kind` = `poultry` in the same badge. If it does not apply, the group is skipped. A parent group's
+  `pick_count` drops by one for each skipped child, so Peladang Muda Kumpulan C needs only its basic child when the
+  Scout's animals are not poultry. The completion code (#15) must implement this.
 - **Pick rules use groups.** A requirement in a group counts toward that group's `pick_count`, not individually. Extra
   confirmed entries in a group are allowed and do not change the result.
+- **Choices between whole parts use parent groups.** "Bahagian A atau B" is a parent group with two child groups. This
+  keeps "all of A" and "all of B" as real checks, so half of A plus half of B does not pass.
+- **Category rules are counts, not groups.** The Kepandaian categories (Kegemaran, Pengetahuan, Perkhidmatan) span
+  many badges, so the database only stores the total in `required_skill_counts`. The category split, the compulsory
+  badges (Ahli Berkhemah, Ahli Pertolongan Cemas) and the Laut "one from each part" rules are recorded in
+  `docs/requirements/` and are not enforced by the database for the MVP.
 - **One entry per requirement per Scout.** A requirement is done once. Editing an entry changes it.
 - **Editing a confirmed entry sets it back to `pending`.** So the Leader sees the change.
 - **Badges are soft-deleted.** Deleting a badge sets `deleted_at`, so entries keep their history.
