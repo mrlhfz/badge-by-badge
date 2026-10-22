@@ -14,7 +14,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import Mapped, mapped_column
 
-from ..enums import BadgeKind, EntryStatus, VerificationAction
+from ..enums import AnimalKind, BadgeKind, EntryStatus, VerificationAction
 from .base import Base, CreatedAt, UUIDPk
 
 
@@ -62,9 +62,15 @@ class RequirementGroup(UUIDPk, Base):
     )
 
     badge_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("badges.id"))
+    parent_group_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("requirement_groups.id")
+    )
     title: Mapped[str]
     pick_count: Mapped[int]
     position: Mapped[int]
+    applies_when_poultry: Mapped[bool] = mapped_column(
+        server_default=text("false")
+    )
 
 
 class Requirement(UUIDPk, Base):
@@ -111,6 +117,13 @@ class Entry(UUIDPk, CreatedAt, Base):
     requirement_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("requirements.id"))
     entry_date: Mapped[Date] = mapped_column(Date)
     note: Mapped[str | None]
+    animal_kind: Mapped[AnimalKind | None] = mapped_column(
+        Enum(
+            AnimalKind,
+            name="animal_kind",
+            values_callable=lambda e: [m.value for m in e],
+        )
+    )
     status: Mapped[EntryStatus] = mapped_column(
         Enum(
             EntryStatus,

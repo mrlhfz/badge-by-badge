@@ -243,12 +243,23 @@ def upgrade() -> None:
         sa.Column("title", sa.String(), nullable=False),
         sa.Column("pick_count", sa.Integer(), nullable=False),
         sa.Column("position", sa.Integer(), nullable=False),
+        sa.Column("parent_group_id", sa.Uuid(), nullable=True),
+        sa.Column(
+            "applies_when_poultry",
+            sa.Boolean(),
+            server_default=sa.text("false"),
+            nullable=False,
+        ),
         sa.Column(
             "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"),
         ),
         sa.ForeignKeyConstraint(
             ["badge_id"],
             ["badges.id"],
+        ),
+        sa.ForeignKeyConstraint(
+            ["parent_group_id"],
+            ["requirement_groups.id"],
         ),
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint(
@@ -356,6 +367,11 @@ def upgrade() -> None:
         sa.Column("requirement_id", sa.Uuid(), nullable=False),
         sa.Column("entry_date", sa.Date(), nullable=False),
         sa.Column("note", sa.String(), nullable=True),
+        sa.Column(
+            "animal_kind",
+            sa.Enum("poultry", "other", name="animal_kind"),
+            nullable=True,
+        ),
         sa.Column(
             "status",
             sa.Enum("pending", "confirmed", name="entry_status"),
@@ -603,4 +619,5 @@ def downgrade() -> None:
     sa.Enum(name="entry_status").drop(op.get_bind(), checkfirst=True)
     sa.Enum(name="verification_action").drop(op.get_bind(), checkfirst=True)
     sa.Enum(name="badge_kind").drop(op.get_bind(), checkfirst=True)
+    sa.Enum(name="animal_kind").drop(op.get_bind(), checkfirst=True)
     # ### end Alembic commands ###

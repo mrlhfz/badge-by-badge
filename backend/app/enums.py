@@ -25,3 +25,8 @@ class VerificationAction(Enum):
 class BadgeKind(Enum):
     Compulsory = "compulsory"
     Skill = "skill"
+
+
+class AnimalKind(Enum):
+    Poultry = "poultry"
+    Other = "other"
