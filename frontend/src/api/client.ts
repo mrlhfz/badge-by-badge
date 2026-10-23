@@ -22,8 +22,11 @@ export async function request<T>(
     const response = await fetch(`${API_URL}${path}`, options);
 
     if (!response.ok) {
-        throw new ApiError(response.status, response.statusText);
+        throw new ApiError(
+            response.status,
+            response.statusText ||
+                `Request failed with status ${response.status}`,
+        );
     }
-
     return response.json();
 }
