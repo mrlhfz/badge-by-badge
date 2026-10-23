@@ -10,36 +10,32 @@ describe("request", () => {
         vi.stubEnv("VITE_API_URL", "http://localhost:8000");
         vi.stubGlobal(
             "fetch",
-            vi
-                .fn()
-                .mockResolvedValue(
-                    new Response(null, {
-                        status: 404,
-                        statusText: "Not Found",
-                    }),
-                ),
+            vi.fn().mockResolvedValue(
+                new Response(null, {
+                    status: 404,
+                    statusText: "Not Found",
+                }),
+            ),
         );
         const { request, ApiError } = await import("./client");
 
         await expect(request("/missing")).rejects.toBeInstanceOf(ApiError);
     });
     it("uses a generic message when the response has no status text", async () => {
-      vi.stubEnv("VITE_API_URL", "http://localhost:8000");
-      vi.stubGlobal(
-        "fetch",
-        vi
-          .fn()
-          .mockResolvedValue(
-            new Response(null, {
-              status: 500,
-              statusText: "",
-            }),
-          ),
-      );
-      const { request } = await import("./client");
-      await expect(request("/broken")).rejects.toThrow(
-        "Request failed with status 500",
-      );
+        vi.stubEnv("VITE_API_URL", "http://localhost:8000");
+        vi.stubGlobal(
+            "fetch",
+            vi.fn().mockResolvedValue(
+                new Response(null, {
+                    status: 500,
+                    statusText: "",
+                }),
+            ),
+        );
+        const { request } = await import("./client");
+        await expect(request("/broken")).rejects.toThrow(
+            "Request failed with status 500",
+        );
     });
 });
 
