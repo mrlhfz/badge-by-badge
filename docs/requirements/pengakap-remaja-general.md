@@ -49,13 +49,21 @@ Pilih SATU daripada perkara berikut (ringkasan):
 ## Lencana Ekspidisi (book pages 8-9)
 1. Latihan ekspedisi: keperluan peribadi dan patrol; beg membawa tidak lebih 15 kg termasuk 10 kg makanan (haversack).
 2. Ekspedisi (sekurang-kurangnya SATU daripada pilihan):
-   2.1 Berjalan kaki 4 hari 3 malam sejauh 80 km ATAU berbasikal 150 km;
+   2.1 Berjalan kaki 4 hari 3 malam sejauh 80 km ATAU berbasikal 150 km, dalam patrol 4-7 orang;
+   2.2 Perjalanan hendaklah meliputi jalan raya, jalan desa, hutan berbukit-bukau;
+   2.3 Bermalam di satu lokasi, mendirikan khemah dan menyediakan makan malam dan sarapan secara 'backwoods';
    2.4 Perjalanan meliputi pengembaraan malam tidak kurang 3 jam;
    2.5 Berjalan kaki bersama patrol 4-7 orang tidak kurang 40 km dalam 24 jam;
+   2.6 Perjalanan hendaklah meliputi pinggiran bandar, desa atau luar bandar;
+   2.7 Masa rehat 2 jam untuk menyediakan makanan secara 'backwoods';
    2.8 Ekspedisi diakhiri dengan pengembaraan malam 10 jam;
-   2.9 Berakit/berkayak/berdayung 50 km selama 4 hari 3 malam;
+   2.9 Berakit/berkayak/berdayung 50 km selama 4 hari 3 malam di sungai atau persisiran pantai;
    2.10 Mendaki gunung 3 hari 2 malam (tidak kurang 4,500 kaki dari aras laut).
-3. Tugasan: laporan Log Ekspedisi mengikut format Persekutuan; laporan dengan gambar atau video; hantar Log kepada Pemimpin Kumpulan tidak lewat 10 hari selepas ekspedisi.
+3. Tugasan:
+   3.1 Menyediakan laporan bertulis Log Ekspedisi mengikut format Persekutuan Pengakap Malaysia;
+   3.2 Tugasan tertentu yang berkait dengan perjalanan ekspedisi;
+   3.3 Laporan perjalanan dan tugasan disokong dengan gambar, rakaman atau video;
+   3.4 Log Ekspedisi dihantar kepada Pemimpin Kumpulan tidak lewat 10 hari selepas ekspedisi.
 
 ## Lencana Perkhidmatan (book pages 8-10)
 1. Menyelamatkan Nyawa: lulus dan mempunyai SATU sijil daripada: Pertolongan Cemas (Sijil Peringkat Asas, Pegawai Perubatan / St John / Bulan Sabit Merah / JPAM); Pemadam Api (Sijil Asas Kebombaan, Jabatan Bomba); Penyelamat Nyawa (Bronze Medallion).

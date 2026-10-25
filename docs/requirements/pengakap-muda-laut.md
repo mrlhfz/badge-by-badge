@@ -10,6 +10,8 @@ Status: all badges extracted and condensed. Stream-specific Kepandaian are liste
 
 Compulsory for entry. All items below.
 
+Pengakap Kanak-Kanak who move up to Pengakap Muda Laut do not take these tests. They go through an Istiadat Meningkat Naik ceremony instead.
+
 1. Peraturan pakaian seragam Pengakap.
 2. Prinsip Rukun Negara.
 3. Lambang Pengakap Malaysia dan Lambang Pengakap Sedunia.
@@ -21,8 +23,8 @@ Compulsory for entry. All items below.
 
 ## Lencana Usaha (book pages 9-10)
 
-Prerequisite: Lencana Keahlian. The book text says "Pengakap Udara" in the opening line, which looks like a
-typo for Pengakap Muda Laut.
+Prerequisite: Lencana Keahlian, or Istiadat Meningkat Naik. The book text says "Pengakap Udara" in the opening
+line, which looks like a typo for Pengakap Muda Laut.
 
 ### A. Cita-cita Pengakap
 1. Bendera Malaysia dan Bendera Negeri masing-masing.
@@ -120,8 +122,8 @@ c) Lawatan ke SATU lokasi maritim (contoh: pelabuhan komersil, taman laut, limbu
 
 ## Kepandaian: Kategori Pengetahuan, stream-specific (book pages 19-20)
 
-Pick 3: Ahli Berkhemah (wajib, general file) + 1 from Bahagian A + 1 from Bahagian B. Note: the book says "TIGA
-(3) lencana, 1 Bahagian A dan 2 Bahagian B, Ahli Berkhemah wajib dan 1 pilihan". Check this rule against the book.
+Pick 3: 1 from Bahagian A and 2 from Bahagian B. Ahli Berkhemah (wajib, from the general file) is one of the two
+Bahagian B badges, and the other Bahagian B badge is a free choice.
 
 ### 7.1 Ahli Perahu Dayung
 1. Berenang 20 meter berpakaian lengkap.
@@ -276,7 +278,7 @@ Prerequisite: Lencana Ahli Bot, Lencana Usaha, and 2 Kepandaian Kegemaran badges
 4. Menyediakan peralatan bot dan boleh menamakan alatan tersebut.
 5. Tahu membuat dan menyediakan tali buangan (heaving line).
 6. Menunjukkan cara simpulan: simpul manuk (clove hitch), simpul tindih kasih (bowline), lilit kejap (rolling hitch), Midshipman hitch, simpul penahan (stopper knot).
-7. Mengikuti satu ekspedisi memancing 2 hari 1 malam di bawah pengawasan orang dewasa.
+7. Mengikuti satu ekspedisi memancing 2 hari 1 malam di bawah pengawasan orang dewasa dengan menyimpan rekod dan gambar ke dalam buku log.
 8. Semasa latihan atau perkhemahan Juragan Muda, mendapatkan pengalaman bot atau ekspedisi mini kayak.
 9. Memahami dan mampu menerangkan teknik-teknik asas pelayaran perahu layar: running, reaching, tacking, gybing; dan tahu menggunakan kompas.
 10. Membuat rakit daripada buluh atau kombinasi buluh dan tiub pelampung, tidak lebih 4 orang.
@@ -299,7 +301,7 @@ Prerequisite: Lencana Juragan Muda and Lencana Maju (book page 32-33 says "Lenca
 
 ## Lencana Jaya (book pages 30-33)
 
-Prerequisite: Lencana Maju, plus 3 Kepandaian Pengetahuan badges and 3 Kepandaian Perkhidmatan badges.
+Prerequisite: Lencana Maju, Lencana Juragan Muda, plus 3 Kepandaian Pengetahuan badges and 3 Kepandaian Perkhidmatan badges. The book text says "Pengakap Muda Udara", which looks like a typo for Pengakap Muda Laut.
 
 A. Cita-cita Pengakap
 1. Organisasi Ibu Pejabat Persekutuan Pengakap Malaysia, Biro Pengakap Sedunia dan Biro Wilayah Asia Pasifik.
@@ -319,10 +321,10 @@ C. Kepimpinan
 3. Membawa bendera.
 
 D. Kejayaan (lakukan SATU kemahiran daripada Kumpulan I, II, III, IV atau V)
+Note: the book's choice line says I, II, III, IV or V, but the book prints no Kumpulan IV section. Only I, II, III and V are listed here.
 - Kumpulan I (Cabaran): mendayung perahu atau melayarkan sampan layar; mendaki bukit; pengembaraan malam 8 jam.
 - Kumpulan II (Amali): pekerjaan tangan/tukang gambar; mekanik; kod fonetik antarabangsa; khidmat masyarakat.
 - Kumpulan III (Kesungguhan): pengembaraan 24 km / 50 km berbasikal; gimnastik/seni mempertahankan diri; membuat bekalan dari makanan kering; melakukan SATU kegiatan luar (memanah, memancing, kajian barang purba, kajian isi bumi, pemeliharaan alam sekitar).
-- Kumpulan IV (Masyarakat): menyedia, memasak dan melayan; pertunjukkan hiburan amatur; perkhidmatan dan menjalankan malam pengakap.
 - Kumpulan V (Kemahiran Berpengakap): simpulan dan ikatan Abah-Abah (manharness knot), Rolling hitch, Middleman's knot, Water bowline, Fisherman's knot, Eye splice, Floor/snake lashing, Tripod/figure-8 lashing; mendirikan pondok sementara; projek perintis.
 
 E. Perkhidmatan

@@ -396,8 +396,8 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
 - **Choices between whole parts use parent groups.** "Bahagian A atau B" is a parent group with two child groups. This
   keeps "all of A" and "all of B" as real checks, so half of A plus half of B does not pass.
 - **Category rules are counts, not groups.** The Kepandaian categories (Kegemaran, Pengetahuan, Perkhidmatan) span
-  many badges, so the database only stores the total in `required_skill_counts`. The category split, the compulsory
-  badges (Ahli Berkhemah, Ahli Pertolongan Cemas) and the Laut "one from each part" rules are recorded in
+  many badges, so the database only stores the total in `required_skill_counts`. The category split, the must-do skill
+  badges (Ahli Berkhemah, Ahli Pertolongan Cemas, both `kind` `skill`, counted in `required_count`) and the Laut "one from each part" rules are recorded in
   `docs/requirements/` and are not enforced by the database for the MVP.
 - **One entry per requirement per Scout.** A requirement is done once. Editing an entry changes it.
 - **Editing a confirmed entry sets it back to `pending`.** So the Leader sees the change.
@@ -413,6 +413,7 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
   alongside the stream in the Scout's progress, the Leader's troop list, the Admin's unverified list and the printout.
 - **Badges belong to one level. They are general or stream-specific.** A general badge has a null `stream_id` and
   applies to every stream. A stream-specific badge sets `stream_id`.
+- **General badges can't be hidden from one stream.** When a stream replaces a general badge, as Laut does for Kemahiran and Kegiatan, that stream gets no general row for it. The other streams get their own stream-specific rows when they're built.
 - **Raja needs one stream.** Muda and Remaja must be in the same stream, and Remaja follows Muda. The stream is read
   from `scouts.stream_id`, so this holds while stream changes are off in the MVP.
 - **A Scout's checklist is general plus stream-specific.** For a badge, it is every requirement where `stream_id`

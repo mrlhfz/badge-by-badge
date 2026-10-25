@@ -38,24 +38,17 @@ Status: all five Lencana Tertinggi are condensed here.
 ## 2.3 Lencana Pengail (Laut book pages 7-8)
 1. Mengetahui peraturan keselamatan dalam air, memahami bahaya air dan tindakan sebelum mengharunginya.
 2. Mengail di air tawar atau masin sekurang-kurangnya 6 kali dalam tempoh 3 bulan dengan rekod (ikan, ukuran, berat, cara tangkapan, umpan, cuaca).
-3. Mengenali 20 jenis ikan air tawar atau air masin yang direkodkan dalam buku log; mengetahui arah lubuk, umpan dan matakail dan batu ladung yang sesuai.
-4. Mengetahui cara mematikan lilit (casting) sekurang-kurangnya 5 kali berturut-turut sejauh 5 meter, ATAU melabuhkan mata kail dengan batu ladung ke dalam air sedalam 1 meter.
-5. Mengenali sekurang-kurangnya 6 jenis alat mengail (joran, batu ladung, takal, tali kail, mata kail dll.).
-6. Mengenali ikan dan kehidupan laut yang lain (sotong dan ketam).
-7. Menerangkan kepada Penguji tentang kaedah menangkap ikan yang tidak dibenarkan di Malaysia dan faktor-faktor pengharamannya.
-8. Menerangkan kepada Penguji tentang kaedah tangkap dan lepas (catch and release) dan cara ia dilakukan.
-9. Menyediakan dua masakan menggunakan hidupan laut, satu dengan kaedah biasa dan satu dengan kaedah survival.
+3. Mengenali 20 jenis ikan air tawar atau air masin yang direkodkan dalam buku log.
+4. Mengetahui arah lubuk, umpan, saiz mata kail dan batu ladung yang sesuai.
+5. Mengetahui cara mematikan lilit (casting) sekurang-kurangnya 6 kali berturut-turut sejauh 5 meter, ATAU melabuhkan mata kail dengan batu ladung ke dalam air sedalam 1 meter.
+6. Mengenali sekurang-kurangnya 6 jenis alat mengail (joran, batu ladung, takal, tali kail, mata kail dll.).
+7. Mengenali ikan dan kehidupan laut yang lain (sotong dan ketam).
+8. Menerangkan kepada Penguji tentang kaedah menangkap ikan yang tidak dibenarkan di Malaysia dan faktor-faktor pengharamannya.
+9. Menerangkan kepada Penguji tentang kaedah tangkap dan lepas (catch and release) dan cara ia dilakukan.
+10. Menyediakan dua masakan menggunakan hidupan laut, satu dengan kaedah biasa dan satu dengan kaedah survival.
 
 ## 2.4 Lencana Ekspedisi (Laut book pages 8-9)
-1. Latihan ekspedisi: keperluan peribadi dan patrol; beg membawa tidak lebih 15 kg termasuk 10 kg barang makanan (haversack).
-2. Ekspedisi (sekurang-kurangnya SATU daripada pilihan):
-   2.1 berjalan kaki 4 hari 3 malam sejauh 80 km ATAU berbasikal 150 km;
-   2.4 pengembaraan malam tidak kurang 3 jam;
-   2.5 berjalan kaki bersama patrol 4-7 orang tidak kurang 40 km dalam 24 jam;
-   2.8 ekspedisi diakhiri dengan pengembaraan malam 10 jam;
-   2.9 berakit, berkayak atau berdayung 50 km selama 4 hari 3 malam;
-   2.10 mendaki gunung 3 hari 2 malam (tidak kurang 4,500 kaki dari aras laut).
-3. Tugasan: laporan Log Ekspedisi mengikut format Persekutuan; laporan dengan gambar atau video; hantar Log kepada Pemimpin Kumpulan tidak lewat 10 hari selepas ekspedisi.
+Same as the general Remaja Ekspedisi (`pengakap-remaja-general.md`). Stored as a general badge, not a Laut badge.
 
 ## 2.5 Lencana Perkhidmatan (Laut book pages 9-10)
 1. Menyelamatkan nyawa: lulus dan mempunyai SATU sijil daripada: Pertolongan Cemas (Sijil Peringkat Asas, Pegawai Perubatan / St John / Bulan Sabit Merah / JPAM); Pemadam Api (Sijil Asas Kebombaan, Jabatan Bomba); Penyelamat Nyawa (Bronze Medallion).

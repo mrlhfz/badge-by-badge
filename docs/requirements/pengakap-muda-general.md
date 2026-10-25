@@ -48,10 +48,10 @@ cakera, peluru, bola kriket.)
    manis-manisan.
 5. Menyediakan DUA jenis menu dengan sukatan untuk satu patrol 6 orang.
 
-### Juru Perpustakaan (p15)
+### Pustakawan (p15)
 1. Senarai sekurang-kurangnya 12 jenis buku yang dibaca dalam 12 bulan; jawab soalan mengenai buku itu. (ringkasan)
    ATAU
-2. Senarai buku yang digemari, cara mengatur dan menyusun buku. (ringkasan)
+2. Senarai buku yang digemari; mengetahui apa itu Buku Rujukan dan maklumat yang diperoleh daripadanya; cara mengatur dan menyusun buku. (ringkasan)
 
 ### Peladang Muda (p15-17)
 Lulus semua ujian dalam SATU Kumpulan A, B, C atau D. (ringkasan)
@@ -81,8 +81,8 @@ Lulus semua ujian dalam SATU Kumpulan A, B, C atau D. (ringkasan)
 
 ### Ahli Berkhemah (wajib) (p21)
 1. Telah berkhemah dalam patrol sekurang-kurangnya 12 malam.
-2. Mendiri, meroboh dan menggulungkan khemah pengembara.
-3. Mengarah dengan jayanya kerja mendiri, meroboh dan menggulungkan sebuah khemah patrol.
+2. Mendirikan, merobohkan dan menggulungkan khemah pengembara.
+3. Mengarah dengan jayanya kerja mendirikan, merobohkan dan menggulungkan sebuah khemah patrol.
 4. Mengetahui perkara mustahak untuk tapak perkhemahan.
 5. Mengetahui prinsip berkenaan kebersihan dan keselamatan dalam perkhemahan.
 6. Menunjukkan cara menyimpan bahan makanan di khemah kuartermaster.
@@ -91,18 +91,18 @@ Lulus semua ujian dalam SATU Kumpulan A, B, C atau D. (ringkasan)
 9. Mempunyai pengetahuan untuk mencapai darjah perkhemahan paling tinggi.
 
 ### Ahli Elektronik (p21)
-1. Menunjukkan sekurang-kurangnya 4 jenis litar elektrik yang telah dipasang pada set radio yang mudah.
-2. Senaraikan sekurang-kurangnya 4 jenis alat elektronik untuk kegunaan rumahtangga dan perindustrian.
+1. Menunjukkan sekurang-kurangnya 4 jenis litar elektrik yang telah dipasang, satu daripadanya mestilah pada set radio yang mudah difahami.
+2. Senaraikan sekurang-kurangnya 4 jenis alat elektronik untuk kegunaan rumah tangga dan perindustrian.
 3. Mengetahui teori transistor, 'resistor', 'capacitors' dan 'coils'.
 4. Membuat litar elektrik bagi menyalakan lampu LED.
 
 ### Ahli Ilmu Perintis (p22)
-1. Mengetahui ciri utama tali yang dibuat daripada serabut, cara menggulung dan menjaga tali.
+1. Mengetahui ciri utama dalam berbagai jenis dan ukuran tali yang dibuat daripada serabut biasa. Menunjukkan bagaimana menggulung dan menjaga tali serta menjaga ketegangannya.
 2. Boleh menentukan dan mengawasi keselamatan penggunaan tali.
-3. Mengerti dan menunjukkan kegunaan pancang dogang (anchorage).
+3. Mengerti serta menunjukkan kegunaan pancang dogang (anchorage) untuk peneroka yang boleh digunakan bagi berbagai-bagai projek, tempat dan keadaan tanah termasuk tanah yang gembur dan lembab.
 4. Menunjukkan kegunaan simpulan, ikatan dan cara mematikan tali yang digunakan dalam kegiatan peneroka.
 5. Mengetuai patrol membuat satu projek yang dipilih oleh penilai dengan jayanya.
-6. Dengan jayanya mengetuai patrol membuat projek yang direkanya sendiri selepas berbincang dengan Penilai.
+6. Dengan jayanya mengetuai patrol membuat projek yang direka sendiri dengan terlebih dahulu berbincang dengan Penilai tentang rangka-rangka, model, cara membuatnya, alatan yang digunakan dan jangka masa bagi menyiapkan projek itu.
 
 ### Ahli Komputer (p22)
 1. Mempunyai sebuah komputer atau telah menggunakan komputer sekurang-kurangnya 12 bulan.
@@ -110,7 +110,7 @@ Lulus semua ujian dalam SATU Kumpulan A, B, C atau D. (ringkasan)
 3. Mengetahui sejarah ringkas komputer.
 4. Menerangkan pelbagai jenis komputer dan bagaimana data disimpan.
 5. Mengenai Sistem Pengoperasian (OS) dan kegunaannya (Windows, Macintosh, Linux dll.).
-6. Mengenai virus komputer dan cara mencegahnya.
+6. Mengetahui mengenai virus komputer dan cara mencegahnya.
 7. Mengetahui 6 jenis kegunaan komputer di rumah, pejabat dan industri.
 8. Menyediakan satu pengaturcaraan persembahan komputer (MS PowerPoint) ATAU kemahiran pemprosesan perkataan (MS Word).
 
@@ -169,9 +169,9 @@ Lulus SEMUA ujian dalam TIGA Bahagian (pilihan sendiri daripada A, B, C, D dan E
 7. Menunjukkan cara menghantar berita kecemasan dengan betul secara lisan, bertulis dan telefon.
 
 ### Ahli Anti-Dadah (p31)
-Sijil Anti-Dadah diberi oleh pihak sekolah. TAHAP 1: Unit I Remaja (perubahan, masalah, penyelesaian, perhubungan);
-Unit II Tingkahlaku negatif (sebab dan akibat merokok, dadah, alkohol); Unit III tekanan dan masalah hidup; Unit IV
-dasar negara mengenai dadah. TAHAP 2: pilih DUA perkara Unit I (buku skrap, poster, esei, pertandingan); pilih SATU
+Syarat: lulus TAHAP 1 dan TAHAP 2. Sijil Anti-Dadah diberi oleh pihak sekolah. TAHAP 1: Unit I Remaja (perubahan,
+masalah, penyelesaian, perhubungan); Unit II Tingkah laku negatif (sebab dan akibat merokok, dadah, alkohol, sikap
+masyarakat); Unit III tekanan dan masalah hidup; Unit IV dasar negara mengenai dadah. TAHAP 2: pilih DUA perkara Unit I (buku skrap, poster, esei, pertandingan); pilih SATU
 perkara Unit II (mesej anti dadah, lawatan, ceramah). (ringkasan)
 
 ### Ahli Komuniti (p32)
