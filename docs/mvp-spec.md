@@ -53,6 +53,11 @@ MVP. The others show in light grey and cannot be clicked. They are work in progr
 - Holding the level is enough; the Muda and Remaja badges do not have to be complete.
 - A Scout who starts at Remaja is allowed in the app but is not eligible for Raja.
 
+## Wireframes
+
+The screen wireframes for the MVP are in [wireframes/](wireframes/README.md). That README lists each screen and the
+frontend issue that builds it. The user stories below are the rules the wireframes follow.
+
 ## User stories
 
 Tier: **MUST** = needed for the demo, **SHOULD** = good to have, **CUT** = drop first if time runs short.
