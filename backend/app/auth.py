@@ -1,5 +1,6 @@
 import uuid
 from collections.abc import Callable
+from typing import Annotated
 
 import jwt
 from fastapi import Depends, HTTPException, status
@@ -22,7 +23,7 @@ jwks_client = PyJWKClient(f"{settings.supabase_url}/auth/v1/.well-known/jwks.jso
 
 # Checks the token and returns the user ID
 def get_current_user_id(
-    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
+    credentials: Annotated[HTTPAuthorizationCredentials, Depends(bearer_scheme)],
 ) -> str:
     token = credentials.credentials
     try:
@@ -51,8 +52,8 @@ def get_current_user_id(
 
 # Looks up the user's role in the profiles table
 def get_current_role(
-    user_id: str = Depends(get_current_user_id),
-    db: Session = Depends(get_db),
+    user_id: Annotated[str, Depends(get_current_user_id)],
+    db: Annotated[Session, Depends(get_db)],
 ) -> Role:
     role = db.scalar(select(Profile.role).where(Profile.id == uuid.UUID(user_id)))
     # Signed in, but no profile row exists
@@ -67,7 +68,7 @@ def get_current_role(
 # Builds a dependency that only lets the listed roles through
 def require_role(*allowed: Role) -> Callable[..., Role]:
     # The dependency FastAPI runs before the route
-    def check_role(role: Role = Depends(get_current_role)) -> Role:
+    def check_role(role: Annotated[Role, Depends(get_current_role)]) -> Role:
         # Signed in, but this role isn't on the list: 403
         if role not in allowed:
             raise HTTPException(

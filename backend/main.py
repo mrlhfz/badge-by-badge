@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import settings
 from app.database import engine
@@ -26,5 +27,5 @@ def health_db():
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
         return {"database": "ok"}
-    except Exception:
+    except SQLAlchemyError:
         raise HTTPException(status_code=503, detail="Database unreachable")
