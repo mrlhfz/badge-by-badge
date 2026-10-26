@@ -71,11 +71,12 @@ Lulus semua ujian dalam SATU Kumpulan A, B, C atau D. (ringkasan)
 8. Mengumpul berbagai lukisan dari keratan akhbar dan majalah untuk dijadikan rujukan dan panduan.
 
 ### Penunggang Basikal (p18)
-1. Mempunyai dan menggunakan basikal dengan jayanya selama sekurang-kurangnya 6 bulan.
-2. Memperbaiki kerosakan kecil pada basikal.
-3. Mengetahui peraturan lalulintas dan keselamatan jalanraya, serta boleh membaca peta jalanraya.
-4. Mengambil bahagian dalam kegiatan pengakap yang menggunakan basikal sekurang-kurangnya sejauh 10 km.
-5. Mengulangi kata-kata satu berita yang diberi secara lisan kepada pihak tertentu selepas menunggang basikal selama satu jam.
+Lulus SEMUA ujian (5 item).
+1. Mempunyai dan menggunakan dengan jayanya selama sekurang-kurangnya 6 bulan sebuah basikal yang cukup lengkap dan berkeadaan baik.
+2. Memperbaiki kerosakan seperti menukar tayar dan tiub, menampal tiub bocor, serta mengganti alat brek atau bahagian lain pada basikal mengikut arahan Penilai.
+3. Mengetahui peraturan lalu lintas dan keselamatan jalan raya serta boleh membaca peta jalan raya.
+4. Mengambil bahagian dalam kegiatan pengembaraan basikal sekurang-kurangnya sejauh 10 kilometer.
+5. Mengulangi kata-kata satu berita yang diberi secara lisan dan mesti disampaikan kepada pihak tertentu setelah menunggang basikal selama satu jam.
 
 ## Pengetahuan (book pages 20-29)
 
@@ -121,18 +122,38 @@ Lulus SEMUA ujian dalam SATU Bahagian (A, B atau C). (ringkasan)
 - C: enjin sangkut (outboard), jentera motobot; kerosakan kecil.
 
 ### Ahli Penukang (p24-25)
-Lulus SEMUA ujian dalam TIGA Bahagian (pilihan sendiri daripada A, B, C, D dan E). (ringkasan)
-- A: membuat bakul daripada rotan, rumput atau jerami.
-- B: penjilid buku (memelihara bahan bacaan; kemasan dan persembahan; penilaian; penjagaan buku).
-- C: ahli penyambung (kayu, skru, paku; bangku; kenal jenis kayu).
-- D: tukang kulit (tumit sepatu; barang dari kulit).
-- E: percetakan (surat sebaran; huruf percetakan; kertas).
+Lulus SEMUA ujian dalam TIGA Bahagian (pilihan sendiri daripada A, B, C, D dan E).
+- A. Pembuat Bakul
+  1. Membuat sendiri benda yang boleh digunakan sebagai bakul daripada rotan, rumput atau jerami.
+  2. Mengetahui di mana boleh didapati bahan mentah yang digunakan untuk membuat bakul dan bagaimana ia diproses.
+- B. Penjilid Buku
+  1. Tugas: memelihara berbagai bahan bacaan seperti buku, majalah dan nota.
+  2. Teknik, media dan proses.
+  3. Kemasan dan persembahan: a) ketepatan dan kebersihan bekerja; b) hiasan pada kertas rusuk.
+  4. Penilaian: a) pengetahuan (konsep, prinsip dan aplikasinya); b) proses atau tatacara; c) hasil kerja (kemasan, ketahanan, kebersihan).
+  5. Pemeliharaan dan penjagaan: a) cara menyimpan buku; b) cara menggunakan buku.
+- C. Ahli Penyambung
+  1. Memasukkan skru sedalam 3.5 cm tanpa merosakkan kayu atau skru itu.
+  2. Memaku penutup peti (ensel) dengan betul, menggunakan papan tebal 2 cm dan paku panjang 3.5 cm.
+  3. Membentuk sekeping papan 2.5 cm tebal dan 60 cm panjang dengan gergaji biasa; pembelahan hendaklah lurus dan serongnya tidak boleh lebih daripada 1.6 mm.
+  4. Mengasah pahat dan ketam, membuat lubang tanggam dan sambungan separuh.
+  5. Membuat sebuah bangku (stool) atau kerusi.
+  6. Mengetahui jenis kayu: 2 jenis kayu lembut, 2 jenis kayu sederhana keras dan 3 jenis kayu keras.
+- D. Tukang Kulit
+  1. Membuat tumit sepatu dengan bahan kulit, dijahit atau dipakukan; ATAU mengadakan satu barang sahaja yang dibuat sendiri: rantai kunci, wogel, sarung kapak/pisau atau dompet wang yang dihiasi corak berwarna.
+  2. Mengetahui alatan dan bahan yang digunakan untuk membuat barang yang dipilihnya itu.
+  3. Mengetahui jenis kulit yang biasa digunakan dan cara memilihnya.
+- E. Percetakan
+  1. Mengatur satu rangka surat sebaran, menaip dan mencetak surat sebaran itu.
+  2. Mengenali jenis huruf percetakan mengikut saiz (point-system) dan namakan enam jenis.
+  3. Mengetahui semua tanda pembetulan dalam percetakan serta nama berbagai bentuk kertas yang berlainan jenis dan ukurannya.
 
 ### Ahli Perhutanan (p27)
-1. Mengenali 15 jenis pokok tempatan dan pokok-pokok lain yang berpanduan bahan rujukan.
-2. Mengetahui menanam dan memelihara pokok dan tumbuh-tumbuhan dengan teratur (cantasan, merumput, membaja, dll.).
-3. Menyediakan tapak semaian dengan baja yang sesuai bagi pokok yang ditanam dan mengetahui mengahwin/mencantum pokok.
-4. Mengetahui cara memilih dan menggunakan kapak, menjaganya serta mengetahui peraturan keselamatan dengan mengguna dan menyimpan kapak.
+Lulus SEMUA ujian (6 item).
+1. Mengenali 15 jenis pokok tempatan dan juga mengenali pokok-pokok yang lain dengan berpandukan bahan rujukan.
+2. Mengetahui menanam dan memelihara pokok dan tumbuh-tumbuhan dengan teratur, dengan menerangkan tiap-tiap peringkat yang mustahak seperti membatas, merumput, membaja dan lain-lain sebab berbuat demikian; memahami akibat yang berlaku kepada pokok dan tumbuhan disebabkan kena api, masalah cuaca dan dibinasakan oleh binatang atau serangga.
+3. Menyediakan tapak semaian dengan baja yang sesuai bagi pokok yang ditanam dan mengetahui mengahwin atau mencantum pokok.
+4. Mengetahui cara memilih dan menggunakan kapak, menjaganya serta mengetahui peraturan keselamatan berkenaan dengan menggunakan dan menyimpan kapak.
 5. Menebang sebatang pokok, memotong dahan dan ranting serta menyusunnya dengan kemas potongan itu.
 6. Membuat kajian tumbuh-tumbuhan di Hutan Simpanan Kerajaan / Hutan Lipur.
 
@@ -144,18 +165,20 @@ Lulus SEMUA ujian dalam TIGA Bahagian (pilihan sendiri daripada A, B, C, D dan E
 5. Mengikuti satu jejak di kawasan yang belum pernah dilalui sejauh 1.5 km yang mengandungi sekurang-kurangnya 25 jenis kesan binatang.
 
 ### Pengembara (p28)
-1. Mengembara dengan berjalan kaki, berbasikal, berperahu atau berakit bersama-sama dua orang Pengakap dalam masa sekurang-kurangnya 2 hari 1 malam ke suatu tempat yang belum pernah dilawati.
+Lulus SEMUA ujian (4 item).
+1. Mengembara dengan berjalan kaki, berbasikal, berperahu atau berakit bersama-sama dua orang Pengakap dalam masa sekurang-kurangnya 2 hari 1 malam ke suatu tempat yang belum pernah dilawati, dengan membawa alatan dan bekalan yang cukup.
 2. Mengetahui persediaan suatu pengembaraan serta menyusun alatan berkenaan dengan rapi.
-3. Merancang satu projek berhubung dengan pengembaraan dan membuat peta mengandungi semua jalan kampung dan taliair dalam lingkungan dua kilometer daripada satu tanda.
+3. Merancang satu projek berhubung dengan pengembaraan tersebut dan membuat peta yang mengandungi semua jalan kampung dan taliair dalam lingkungan dua kilometer daripada satu tanda. Rancangan itu ditunjukkan kepada Penilai bagi kelulusannya, kemudian pengembaraan dijalankan seorang diri atau bersama seorang Pengakap lain.
 4. Mengembara dengan seorang Pengakap lain sejauh 10 km dengan berpandukan kompas dan peta sahaja.
 
 ### Tukang Masak (p29)
-1. Mengetahui terma masakan umum: tumis, cincang, parut, seram kuku, manis-manis buah dll.
-2. Menyediakan bahan dan memasak dua jenis makanan daripada senarai: telur goreng; pisang goreng; bubur kacang;
-   sambal tumis; sup; masak kicap; asam pedas; sayur campur.
-3. Memasak dan menghidangkan dengan sempurna untuk dua hingga empat orang tetamu: nasi putih; kari daging;
-   sejenis masakan daripada sayur; manisan; kopi atau teh.
-4. Mengetahui prinsip memotong dan menghiris daging lembu/kambing dan daging ayam, sebelum dan selepas dimasak.
+Lulus SEMUA ujian. Pilih DUA masakan daripada senarai (8 pilihan).
+1. Mengetahui terma masakan umum: tumis, cincang, parut, seram kuku, manis-manis buah dan sebagainya.
+2. Menyediakan bahan dan memasak dua jenis makanan daripada senarai:
+   a) telur goreng; b) pisang goreng; c) bubur kacang; d) sambal tumis; e) sup; f) masak kicap; g) asam pedas; h) sayur campur.
+3. Memasak dan menghidangkan dengan sempurna untuk dua hingga empat orang tetamu:
+   a) nasi putih; b) kari daging; c) sejenis masakan daripada sayur; d) manisan; e) kopi atau teh.
+4. Mengetahui prinsip memotong dan menghiris daging lembu, kambing dan daging ayam, sebelum dan selepas dimasak.
 
 ## Perkhidmatan (book pages 30-42)
 
@@ -175,56 +198,77 @@ masyarakat); Unit III tekanan dan masalah hidup; Unit IV dasar negara mengenai d
 perkara Unit II (mesej anti dadah, lawatan, ceramah). (ringkasan)
 
 ### Ahli Komuniti (p32)
-Lulus SEMUA syarat dalam SATU Bahagian. (ringkasan)
-- A: kajian perkhidmatan masyarakat; kajian satu aspek masyarakat; 2 bulan dalam perkhidmatan masyarakat.
-- B: 3 perkara tentang kelemahan orang cacat; 4 cara membantu orang cacat; agensi perkhidmatan; berhubung dengan OKU dalam tempoh 3 bulan.
-- C: balai polis; organisasi polis; sistem perhubungan; tugas anggota polis.
+Lulus SEMUA syarat dalam SATU Bahagian sahaja (A, B atau C).
+- A (lulus SEMUA 3 item):
+  1. Mengkaji perkhidmatan kemasyarakatan setempat (pendidikan, kesihatan, rekreasi dan sosial), dengan sumber Majlis Daerah, pegawai belia dan perpustakaan awam; membincang dengan Majlis Ketua Patrol bagaimana perkhidmatan itu membantu keperluan masyarakat.
+  2. Menjalankan kajian berkenaan satu aspek masyarakat setempat selepas mengemukakan kepada Majlis Ketua Patrol dan Pemimpin Pengakap; sekurang-kurangnya 6 bulan; kumpulan yang dikaji ialah orang dewasa, kanak-kanak, orang cacat, yatim piatu dan penganggur.
+  3. Mengambil bahagian dalam perkhidmatan masyarakat sekurang-kurangnya 2 bulan dan menerangkan kepada Penilai segala pengalaman semasa aktiviti itu.
+- B (lulus SEMUA 6 bahagian):
+  1. Mengetahui 3 perkara tentang kelemahan orang cacat mengenai perkara berikut (pilih TIGA daripada enam): deria; intelek; sistem saraf; paru-paru dan jantung; perkembangan fizikal; tahap bahasa.
+  2. Menunjukkan kesedaran dan menerangkan 4 cara membantu orang cacat dalam kehidupan harian.
+  3. Menyenaraikan agensi dan penganjur yang memberi perkhidmatan kepada orang cacat (termasuk perkhidmatan sosial).
+  4. Berhubung giat dengan orang cacat dalam tempoh 3 bulan.
+  5. Menunjukkan kemahiran perkhidmatan yang berkaitan dengan satu bahagian kecacatan (pilih SATU): bahasa isyarat untuk orang pekak; braille untuk orang buta; pengurusan dan penjagaan kerusi roda; teknik pengendalian orang cacat (misalnya mengangkat atau mengusung).
+  6. Menyiapkan satu daripada perkara berikut: a) merakamkan sebuah cerpen atau sajak untuk orang buta; b) mengkaji berkenaan bangunan awam di bandar; c) menemani seorang orang buta untuk membeli-belah atau bersiar-siar.
+- C (lulus SEMUA):
+  1. Melawat balai polis tempatan dan membuat kajian mengenai: a) organisasi jabatan polis dan struktur jawatan atau pangkat; b) bahagian yang terdapat di Jabatan Polis; c) jenis perhubungan (seperti radio dan walkie-talkie), sistem kecemasan dan kod fonetik yang digunakan; d) tugas anggota polis amnya dan pembenterasan jenayah khasnya.
 
 ### Jurubahasa (p33)
-Lulus ujian dalam bahasa lain daripada bahasa ibunda:
-1. Berceramah dengan Pengakap atas tajuk yang diberi selama sekurang-kurangnya 5 minit.
-2. Menulis satu karangan sekurang-kurangnya 150 patah perkataan.
-3. Menterjemahkan satu petikan daripada surat khabar atau majalah lebih kurang 100 patah perkataan.
-4. Menjadi jurubahasa kepada pelawat asing, ATAU surat berkala dengan seorang Pengakap luar negeri selama 6 bulan.
-5. Menunjukkan kemahiran perkhidmatan berkaitan orang cacat (bahasa isyarat, Braille, pengurusan kerusi roda).
-6. Menyiapkan satu daripada: cerpen untuk orang buta; kajian bangunan awam; menemani orang buta.
+Lulus SEMUA ujian dalam bahasa lain daripada bahasa ibunda. Item 4b ialah pilihan SATU.
+1. Berceramah dengan Pengakap atas tajuk yang diberi oleh Penilai selama sekurang-kurangnya 5 minit.
+2. Menulis satu karangan sekurang-kurangnya 150 patah perkataan atas tajuk yang diberi oleh Penilai.
+3. Menterjemahkan satu petikan daripada surat khabar atau majalah, lebih kurang 100 patah perkataan. Pengakap diberi masa 10 minit untuk membaca dan menterjemah.
+4. Menjadi jurubahasa kepada seorang pelawat luar negeri.
+   Pilih SATU:
+   a) Menulis sepucuk surat kepada satu Kumpulan Pengakap, sekolah atau pertubuhan berkenaan dengan suatu lawatan.
+   b) Berkirim-kiriman surat dalam jangka masa tidak kurang enam bulan dengan seorang Pengakap atau sahabat luar negeri yang sebaya.
 
 ### Pemadam Api (p35-36)
+Lulus SEMUA ujian (7 item).
 1. Mengetahui tugas Pasukan Bomba dan Penyelamat Tempatan.
-2. Memahami bahaya api dan mengetahui tindakan mencegah kebakaran di rumah.
-3. Merancang persediaan mencegah kebakaran bagi sesuatu perhimpunan Pengakap atau sempadan.
-4. Mengetahui bahaya api dalam perkhemahan dan persediaan mencegah kebakaran.
-5. Menerangkan apa dan mengapa tindakan mesti diambil apabila berlakunya kebakaran.
-6. Mengetahui kerja mencegah kebakaran dengan baldi berderat; pam kaki dan pam tangan; cara guna pemadam api.
-7. Mengendali seorang yang terbakar pakaian di badannya.
+2. Memahami bahaya api dan mengetahui tindakan mencegah kebakaran di rumah mengenai semua jenis alat pemanas, khususnya pemanas yang menggunakan minyak dan bahan pembakar terbuka, pemanas elektrik, mancis, wayar elektrik, fius dan lain-lain alat; penggunaan alat gas dan minyak petrol; pengawasan bunga api, lilin, unggun api dan perhiasan rumah.
+3. Merancang persediaan mencegah kebakaran bagi sesuatu perhimpunan Pengakap atau acara, termasuk peraturan tempat duduk, dan mengetahui sebab persediaan sedemikian perlu.
+4. Mengetahui bahaya api dalam perkhemahan dan persediaan mencegah kebakaran, mengetahui punca kebakaran belukar dan lalang, serta tahu bagaimana mengawal kejadian itu.
+5. Menerangkan apa dan mengapa tindakan mesti diambil apabila berlaku kebakaran di dalam dan di luar rumah, termasuk cara memanggil pihak Bomba dan peraturan yang sepatutnya dilakukan sehingga pihak Bomba menerima panggilan itu.
+6. Mengetahui: a) kerja mencegah kebakaran dengan baldi berderet; b) cara menggunakan pam kaki (stirrup pump) dan pam tangan; c) cara menggunakan pemadam api seperti air, asid soda, gas cartridge, karbon tetraklorida dan buih, serta jenis pemadam yang sesuai bagi setiap jenis api.
+7. Mengendalikan seorang yang terbakar pakaian di badannya.
 
 ### Pemandu (p36-37)
-1. Menunjukkan kepada Penilai arah jalan yang mudah diikuti ke tempat yang tertentu.
-2. Membuat peta kasar dengan menandakan tempat-tempat penting (klinik, balai bomba, balai polis, pondok telefon, dll.).
+Lulus SEMUA ujian (4 item).
+1. Menunjukkan kepada Penilai arah jalan yang mudah diikuti ke tempat yang ditentukan.
+2. Membuat sebuah peta kasar dengan menandakan tempat-tempat penting dan utama: a) kediaman doktor, doktor haiwan, doktor gigi, hospital, klinik dan ambulan; b) Balai Bomba, Balai Polis, Pejabat Pos, pondok telefon dan bengkel motokar; c) perhentian bas, stesen keretapi, jalan bas dan keretapi ke tempat yang berhampiran, serta jadual perjalanannya; d) Ibu Pejabat Pengakap, tempat perhimpunan awam, kebun bunga, pawagam, tempat beribadat, muzium dan tempat menarik dan bersejarah; e) kediaman Pesuruhjaya Pengakap Daerah, penolong-penolongnya, pemimpin dan penolong pemimpin kumpulan, serta ahli patrolnya.
 3. Menggunakan peta untuk pergi ke tempat yang diarahkan oleh Penilai.
-4. Mengarahkan dengan jelas arah jalan kepada pelawat ke tapak perkhemahan melebihi 8 km dengan kenderaan awam.
+4. Mengarahkan dengan jelas arah jalan yang mudah diikuti oleh pelawat ke tempat perkhemahan yang jauhnya lebih kurang 8 kilometer, dengan kenderaan awam, berbasikal atau berkereta.
 
 ### Pemelihara (p37)
-1. Mengetahui tujuan pemeliharaan alam sekitar, 5 jenis tanah dan sebab utama tanah boleh terhakis.
-2. Mengetahui sebab utama udara dan air tercemar dan akibatnya.
-3. Mengetahui bagaimana tumbuhan, binatang dan manusia ada hubungan.
-4. Memberi empat contoh alam semulajadi yang boleh rosak dan musnah.
-5. Membuat satu kajian bagi dua kawasan yang berlainan (ringkasan).
-6. Mengambil bahagian dalam satu projek pemeliharaan alam sekitar sekurang-kurangnya sehari.
+Lulus SEMUA ujian (6 item).
+1. Mengetahui: a) tujuan pemeliharaan termasuk usaha pertubuhan pemeliharaan di negara ini; b) 5 jenis tanah dan sebab utama tanah boleh terhakis; c) membandingkan akibat hujan yang terlalu banyak dengan akibat kemarau yang berpanjangan.
+2. Mengetahui sebab utama udara dan air tercemar dan akibatnya, serta cara mengawal pencemaran itu.
+3. Mengetahui bagaimana tumbuhan, binatang dan manusia ada hubungan antara satu sama lain.
+4. Memberi empat contoh bagaimana alam semula jadi boleh rosak dan musnah, dua daripadanya dalam kawasan Pengakap itu sendiri, serta menyatakan cara pemeliharaan bagi mengelakkan atau mencegah kerosakan dan kemusnahan itu.
+5. Membuat: a) satu kajian bagi dua kawasan yang berlainan, satu daripadanya kawasan yang selalu digunakan oleh orang ramai, sekurang-kurangnya dua hari bagi setiap kawasan dan boleh dibuat pada hujung minggu; b) dengan lukisan, menerangkan kepada Penilai hasil kajian: i) penggunaan tanah pada masa lampau dan sekarang; ii) penilaian penggunaan tanah dari segi kemudahan, kemunduran dan kepulihan alam; iii) pemeliharaan hidupan liar (binatang atau tumbuhan); iv) perselisihan antara berbagai-bagai pengguna. Kajian boleh dibuat seorang diri atau bersama seorang Pengakap lain, dengan laporan yang berasingan.
+6. Mengambil bahagian dalam satu projek pemeliharaan alam sekitar selama sekurang-kurangnya tiga bulan.
 
 ### Pengawal Perkhemahan (p38)
-1. Telah berkhemah tidak kurang 10 malam pada sekurang-kurangnya empat tapak perkhemahan yang berlainan.
-2. Telah bertugas sekurang-kurangnya 7 hari di tapak perkhemahan tetap membantu Pengawal Perkhemahan.
-3. Menunjukkan tiga perkara daripada senarai (masak; membuat unggun api; memasang khemah patrol; menyidai kain; mencegah kebakaran).
-4. Menerangkan cara guna alat-alat dalam perkhemahan (kapak penebang; gergaji; alat ketuk; mesin ringan).
-5. Membincangkan dengan Penilai bagaimana sebuah tapak perkhemahan yang tetap dijaga.
+Lulus SEMUA ujian kecuali item 3 dan item 7, yang merupakan pilihan.
+1. Telah berkhemah tidak kurang daripada 10 malam pada sekurang-kurangnya empat tapak perkhemahan yang berlainan.
+2. Telah bertugas sekurang-kurangnya 7 hari di tapak perkhemahan tetap (daerah, negeri atau kebangsaan) membantu Pengawal Perkhemahan dengan memuaskan.
+3. Menunjukkan TIGA daripada lima perkara: a) menggunakan kayu arang untuk memasak; b) membuat unggun api; c) memasang khemah patrol; d) menyidai kain basah dan menganginkan alat tempat tidur dan lain-lain di perkhemahan; e) mencegah "kebakaran" di perkhemahan.
+4. Menerangkan dan, mana yang boleh, menunjukkan cara digunakan dalam perkhemahan untuk: a) membuat meja makanan; b) membuat tandas; c) menjaga alat memasak; d) menjaga air minuman dan makanan; e) menjaga alatan perkhemahan.
+5. Mengetahui betapa mustahaknya menjaga taraf perkhemahan yang tinggi dan baik.
+6. Menyediakan dengan lengkap sebuah peti pertolongan cemas untuk kegunaan satu patrol yang berjalan selama 7 hari.
+7. Menggunakan TIGA daripada empat alat: a) kapak penebang; b) gergaji; c) alat-alat ketuk (tukul); d) alat mesin ringan seperti mesin pemotong rumput, gergaji rantai dan sebagainya.
+8. Membincangkan dengan Penilai bagaimana sebuah tapak perkhemahan yang tidak asing bagi Pengakap boleh diperbaiki dan dimajukan lagi.
 
 ### Setiausaha (p39-40)
-1. Mengetahui peraturan susunan pentadbiran Persekutuan Pengakap dan Daerah.
-2. Di hadapan Penilai: menulis karangan sekurang-kurangnya 250 patah perkataan; ATAU menaip 100 patah perkataan.
-3. Mengetahui peraturan mesyuarat jawatankuasa dan boleh menyediakan aturcara dan minit mesyuarat.
-4. Mengetahui hal ehwal pengurusan kewangan kumpulan (kira-kira penerimaan dan perbelanjaan).
-5. Menulis sepucuk surat atas tajuk yang diberikan oleh Penilai.
-6. Mengetahui urusan dengan Pejabat Pos (bayaran kiriman pos).
-7. Menyediakan keluaran berita berkenaan dengan satu upacara kumpulan untuk majalah.
+Lulus SEMUA ujian. Item 2 ialah pilihan SATU.
+1. Mengetahui peraturan susunan pentadbiran Persekutuan Pengakap peringkat Kumpulan dan Daerah, serta boleh menyediakan surat-menyurat untuk Majlis Ketua Patrol dan Pemimpin Kumpulan Pengakap.
+2. Di hadapan Penilai, pilih SATU:
+   a) menulis sebuah karangan dengan baik, panjangnya 250 patah perkataan;
+   b) menaip 100 patah perkataan dengan mesin taip atau komputer, dengan tidak lebih daripada 5 kesalahan (jika ada); menunjukkan cara membersihkan mesin taip dan menggantikan riben mesin taip atau mesin mencetak.
+3. Mengetahui peraturan mesyuarat jawatankuasa dan boleh menyediakan aturcara dan minit mesyuarat itu.
+4. Mengetahui hal ehwal pengurusan kewangan Kumpulan Pengakap, menyediakan dan menyimpan dengan mudah kira-kira penerimaan dan perbelanjaan bagi Kumpulan atau Patrol, serta mengetahui cara menyimpan wang persendirian dalam bank.
+5. Menulis sepucuk surat mengikut tajuk yang diberi oleh Penilai, dan membuat draf kad jemputan kepada orang ramai untuk suatu upacara Kumpulan, Unit atau Patrol.
+6. Mengetahui penggunaan perkhidmatan Pejabat Pos untuk senarai bayaran kiriman pos dalam Malaysia, kiriman bungkusan, pos berdaftar, pos laju dan pengiriman ke luar negeri.
+7. Menyediakan keluaran berita tentang satu upacara Kumpulan atau Unit yang dihadiri Penilai, untuk Majalah Pengakap.
 8. Mengendalikan pengurusan fail.
