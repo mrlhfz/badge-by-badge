@@ -46,7 +46,7 @@ class Troop(UUIDPk, CreatedAt, Base):
 class TroopLeader(UUIDPk, Base):
     __tablename__ = "troop_leaders"
 
-    troop_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("troops.id"))
+    troop_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("troops.id"), index=True)
     profile_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("profiles.id"), unique=True
     )
@@ -62,7 +62,7 @@ class Scout(UUIDPk, CreatedAt, Base):
     profile_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("profiles.id"), unique=True
     )
-    troop_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("troops.id"))
+    troop_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("troops.id"), index=True)
     stream_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("streams.id"))
     full_name: Mapped[str]
     ppm_number: Mapped[str | None] = mapped_column(unique=True)

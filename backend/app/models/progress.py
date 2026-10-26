@@ -153,7 +153,7 @@ class Entry(UUIDPk, CreatedAt, Base):
     confirmed_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("profiles.id"))
     confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+        DateTime(timezone=True), server_default=func.now()
     )
 
 

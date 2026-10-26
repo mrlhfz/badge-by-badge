@@ -451,6 +451,8 @@ def upgrade() -> None:
             select troop_id from public.troop_leaders where profile_id = auth.uid()
         $$;
     """)
+    # The role names in these policies ('admin') match backend/app/enums.py Role.
+    # Renaming a role needs a new migration that replaces the policies.
     # profiles
     op.execute("alter table profiles enable row level security")
     op.execute("""

@@ -45,8 +45,14 @@ def test_models_import():
 def test_frontend_mirror_matches_backend():
     # Each enum in enums.ts is an `export const Name = { Key: "value", ... } as const;` block.
     source = FRONTEND_ENUMS.read_text(encoding="utf-8")
-    blocks = dict(re.findall(r"export const (\w+) = \{(.*?)\} as const;", source, re.DOTALL))
+    blocks = dict(
+        re.findall(r"export const (\w+) = \{(.*?)\} as const;", source, re.DOTALL)
+    )
 
     for enum_class in MIRRORED_ENUMS:
-        frontend_members = dict(re.findall(r'(\w+):\s*"([^"]*)"', blocks[enum_class.__name__]))
-        assert frontend_members == {m.name: m.value for m in enum_class}, enum_class.__name__
+        frontend_members = dict(
+            re.findall(r'(\w+):\s*"([^"]*)"', blocks[enum_class.__name__])
+        )
+        assert frontend_members == {m.name: m.value for m in enum_class}, (
+            enum_class.__name__
+        )

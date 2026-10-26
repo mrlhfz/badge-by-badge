@@ -20,8 +20,10 @@ depends_on: str | Sequence[str] | None = None
 
 def upgrade() -> None:
     # Stop before creating the indexes if any duplicate names already exist, so the list can be fixed first.
-    duplicates = op.get_bind().execute(
-        sa.text("""
+    duplicates = (
+        op.get_bind()
+        .execute(
+            sa.text("""
             select count(*) from (
                 select level_id, stream_id, name
                 from badges
@@ -29,9 +31,13 @@ def upgrade() -> None:
                 having count(*) > 1
             ) d
         """)
-    ).scalar()
+        )
+        .scalar()
+    )
     if duplicates:
-        raise RuntimeError(f"{duplicates} duplicate badge name(s) found; fix them before this migration runs")
+        raise RuntimeError(
+            f"{duplicates} duplicate badge name(s) found; fix them before this migration runs"
+        )
 
     # A plain unique constraint treats two NULL stream ids as different, so stream-less badges get their own index.
     op.execute("""
