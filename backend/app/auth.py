@@ -1,12 +1,17 @@
+import uuid
+from collections.abc import Callable
+
 import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-from jwt import PyJWKClient
-from sqlalchemy import text
+from jwt import PyJWKClient, PyJWKClientConnectionError
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from app.config import settings
-from app.database import engine
+from app.database import get_db
 from app.enums import Role
+from app.models.people import Profile
 
 # Reads the Authorization header
 bearer_scheme = HTTPBearer()
@@ -27,8 +32,15 @@ def get_current_user_id(
             signing_key.key,
             algorithms=["RS256", "ES256"],
             audience="authenticated",
+            options={"require": ["exp", "sub"]},
         )
-    # Any failed check ends here
+    # Supabase's key server is unreachable: ask the user to retry
+    except PyJWKClientConnectionError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Sign-in service unavailable, try again",
+        )
+    # Any other failed check ends here
     except jwt.PyJWTError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -38,23 +50,22 @@ def get_current_user_id(
 
 
 # Looks up the user's role in the profiles table
-def get_current_role(user_id: str = Depends(get_current_user_id)) -> Role:
-    with engine.connect() as conn:
-        row = conn.execute(
-            text("select role::text from profiles where id = :id"),
-            {"id": user_id},
-        ).first()
+def get_current_role(
+    user_id: str = Depends(get_current_user_id),
+    db: Session = Depends(get_db),
+) -> Role:
+    role = db.scalar(select(Profile.role).where(Profile.id == uuid.UUID(user_id)))
     # Signed in, but no profile row exists
-    if row is None:
+    if role is None:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="No profile found for this user",
         )
-    return Role(row[0])
+    return role
 
 
 # Builds a dependency that only lets the listed roles through
-def require_role(*allowed: Role):
+def require_role(*allowed: Role) -> Callable[..., Role]:
     # The dependency FastAPI runs before the route
     def check_role(role: Role = Depends(get_current_role)) -> Role:
         # Signed in, but this role isn't on the list: 403

@@ -1,9 +1,20 @@
+import uuid
+
 import pytest
 from fastapi import HTTPException
 from fastapi.security import HTTPAuthorizationCredentials
 
-from app.auth import get_current_user_id, require_role
+from app.auth import get_current_role, get_current_user_id, require_role
 from app.enums import Role
+
+
+# Stands in for a database session that returns a fixed role
+class FakeSession:
+    def __init__(self, role):
+        self.role = role
+
+    def scalar(self, statement):
+        return self.role
 
 
 # A token that isn't a real JWT must be refused with 401
@@ -26,3 +37,17 @@ def test_scout_is_refused_by_admin_only():
 def test_admin_is_allowed():
     check = require_role(Role.Admin)
     assert check(role=Role.Admin) == Role.Admin
+
+
+# A found profile returns its role
+def test_profile_role_is_returned():
+    db = FakeSession(Role.Leader)
+    assert get_current_role(user_id=str(uuid.uuid4()), db=db) == Role.Leader
+
+
+# A signed-in user with no profile row is refused with 403
+def test_missing_profile_is_refused():
+    db = FakeSession(None)
+    with pytest.raises(HTTPException) as error:
+        get_current_role(user_id=str(uuid.uuid4()), db=db)
+    assert error.value.status_code == 403
