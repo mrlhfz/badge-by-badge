@@ -38,6 +38,8 @@ erDiagram
   LEVELS ||--o{ BADGES : "contains"
   LEVELS ||--o{ REQUIRED_SKILL_COUNTS : "sets skill count for"
   STREAMS ||--o{ REQUIRED_SKILL_COUNTS : "sets skill count for"
+  BADGES ||--o{ REQUIREMENT_GROUPS : "has pick rules"
+  REQUIREMENT_GROUPS ||--o{ REQUIREMENTS : "groups"
   BADGES ||--o{ REQUIREMENTS : "has checklist"
   REQUIREMENTS ||--o{ ENTRIES : "is done as"
   ENTRIES ||--o{ ENTRY_COMMENTS : "has"
@@ -100,10 +102,17 @@ erDiagram
     uuid level_id PK, FK
     uuid stream_id PK, FK
   }
+  REQUIREMENT_GROUPS {
+    uuid id PK
+    uuid badge_id FK
+    uuid parent_group_id FK
+    int pick_count
+  }
   REQUIREMENTS {
     uuid id PK
     uuid badge_id FK
     uuid stream_id FK
+    uuid group_id FK
   }
   ENTRIES {
     uuid id PK
@@ -273,6 +282,31 @@ How many skill badges a Scout must complete for a level and stream. Set by the A
 
 Composite primary key on `(level_id, stream_id)`.
 
+### requirement_groups
+
+A pick rule inside a badge, such as "do 2 of these 6". Requirements with no group are all required.
+
+| Column | Type | Notes |
+| --- | --- | --- |
+| id | uuid, PK | |
+| badge_id | uuid, FK to badges | |
+| parent_group_id | uuid, FK to requirement_groups, nullable | Null = top-level group. Set = this group is one part of a parent choice |
+| title | text | Short label, for example "Bahagian A" |
+| pick_count | int | How many must be done: requirements for a leaf group, child groups for a parent group. 1 or more, and no more than the number of items it holds |
+| position | int | Unique per badge |
+| applies_when_poultry | boolean | Default false. True = the group only applies if the Scout logged a `poultry` animal on this badge (see Decisions) |
+
+Groups can nest to any depth. A child group can itself be a parent (Ahli Muzik: part E, then one instrument from four).
+Two shapes at each level:
+- **Leaf group** (`parent_group_id` may be set): holds requirements. `pick_count` = how many of them must be confirmed.
+  For "do all of Bahagian A", `pick_count` = the number of items in that part.
+- **Parent group** (no requirements of its own): holds child groups. `pick_count` = how many child groups must be complete.
+  For "Bahagian A ATAU Bahagian B", the parent has `pick_count` 1 and two child leaf groups.
+
+Use a parent only when the rule chooses between whole parts. A group holds requirements or child groups, never both.
+The app checks this when it writes a group.
+Rules that mix choices, such as "Ujian 1-6 ATAU 7-14", become a parent with two child groups, and the book wording goes in `detail`.
+
 ### requirements
 
 The checklist for a badge.
@@ -282,8 +316,10 @@ The checklist for a badge.
 | id | uuid, PK | |
 | badge_id | uuid, FK to badges | |
 | stream_id | uuid, FK to streams, nullable | Null = general requirement, for every stream. Set = stream-specific |
+| group_id | uuid, FK to requirement_groups, nullable | Null = always required. Set = counts toward the group's `pick_count` |
 | position | int | Unique per badge |
-| text | text | |
+| text | text | Short checklist label the Scout sees |
+| detail | text, nullable | Full wording from the book, including sub-items. Shown when the Scout opens the requirement |
 
 ### entries
 
@@ -296,6 +332,7 @@ A Scout marking one requirement as done.
 | requirement_id | uuid, FK to requirements | |
 | entry_date | date | When the Scout did it |
 | note | text, nullable | |
+| animal_kind | `animal_kind` enum, nullable | Set only by a Scout on an entry that decides a conditional part, such as Peladang Muda Kumpulan C: `poultry` or `other`. Null for all other entries |
 | status | `entry_status` enum | `pending` or `confirmed` |
 | confirmed_by | uuid, FK to profiles, nullable | The Leader |
 | confirmed_at | timestamptz, nullable | |
@@ -339,14 +376,29 @@ Defined once in `backend/app/enums.py` and mirrored in `frontend/src/enums.ts` (
 | `entry_status` | `pending`, `confirmed` |
 | `verification_action` | `verify`, `unverify` |
 | `badge_kind` | `compulsory`, `skill` |
+| `animal_kind` | `poultry`, `other` |
 
 Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is computed from entries (see Decisions).
 
 ## Decisions
 
 - **Badge status is computed, not stored.** `not_started` = no entries. `in_progress` = some entries.
-  `complete` = every general and stream-specific requirement in the Scout's checklist has a confirmed entry. A badge
-  only counts as unlocked when the Scout is verified.
+  `complete` = every requirement in the Scout's checklist that is not in a group has a confirmed entry, and every
+  top-level group is complete. A leaf group is complete when it has at least `pick_count` confirmed entries. A parent
+  group is complete when at least `pick_count` of its child groups are complete. A badge only counts as unlocked when
+  the Scout is verified.
+- **Conditional parts.** A group with `applies_when_poultry` = true only applies if the Scout has a confirmed entry
+  with `animal_kind` = `poultry` in the same badge. If it does not apply, the group is skipped. A parent group's
+  `pick_count` drops by one for each skipped child, so Peladang Muda Kumpulan C needs only its basic child when the
+  Scout's animals are not poultry. The completion code (#15) must implement this.
+- **Pick rules use groups.** A requirement in a group counts toward that group's `pick_count`, not individually. Extra
+  confirmed entries in a group are allowed and do not change the result.
+- **Choices between whole parts use parent groups.** "Bahagian A atau B" is a parent group with two child groups. This
+  keeps "all of A" and "all of B" as real checks, so half of A plus half of B does not pass.
+- **Category rules are counts, not groups.** The Kepandaian categories (Kegemaran, Pengetahuan, Perkhidmatan) span
+  many badges, so the database only stores the total in `required_skill_counts`. The category split, the must-do skill
+  badges (Ahli Berkhemah, Ahli Pertolongan Cemas, both `kind` `skill`, counted in `required_count`) and the Laut "one from each part" rules are recorded in
+  `docs/requirements/` and are not enforced by the database for the MVP.
 - **One entry per requirement per Scout.** A requirement is done once. Editing an entry changes it.
 - **Editing a confirmed entry sets it back to `pending`.** So the Leader sees the change.
 - **Badges are soft-deleted.** Deleting a badge sets `deleted_at`, so entries keep their history.
@@ -361,6 +413,7 @@ Badge status (`not_started`, `in_progress`, `complete`) is not stored. It is com
   alongside the stream in the Scout's progress, the Leader's troop list, the Admin's unverified list and the printout.
 - **Badges belong to one level. They are general or stream-specific.** A general badge has a null `stream_id` and
   applies to every stream. A stream-specific badge sets `stream_id`.
+- **General badges can't be hidden from one stream.** When a stream replaces a general badge, as Laut does for Kemahiran and Kegiatan, that stream gets no general row for it. The other streams get their own stream-specific rows when they're built.
 - **Raja needs one stream.** Muda and Remaja must be in the same stream, and Remaja follows Muda. The stream is read
   from `scouts.stream_id`, so this holds while stream changes are off in the MVP.
 - **A Scout's checklist is general plus stream-specific.** For a badge, it is every requirement where `stream_id`
