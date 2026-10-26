@@ -6,6 +6,7 @@ from sqlalchemy import (
     Date,
     DateTime,
     Enum,
+    FetchedValue,
     ForeignKey,
     Index,
     UniqueConstraint,
@@ -152,8 +153,11 @@ class Entry(UUIDPk, CreatedAt, Base):
     )
     confirmed_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("profiles.id"))
     confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # The database trigger sets this on every update, so the ORM reloads it after an update.
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now()
+        DateTime(timezone=True),
+        server_default=func.now(),
+        server_onupdate=FetchedValue(),
     )
 
 
