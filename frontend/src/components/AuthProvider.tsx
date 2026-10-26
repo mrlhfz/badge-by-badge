@@ -43,7 +43,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             .select("role")
             .eq("id", userId)
             .single()
-            .then(({ data }) => {
+            .then(({ data, error }) => {
+                // Log why the role could not be loaded, so it isn't silent
+                if (error) {
+                    console.error("Could not load role:", error.message);
+                    return;
+                }
                 if (isRole(data?.role)) {
                     setRoleFor({ userId, role: data.role });
                 }

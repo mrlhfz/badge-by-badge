@@ -31,6 +31,8 @@ export default function Login() {
             password,
         });
         if (signInError) {
+            // Log the real reason so setup problems show up in DevTools
+            console.error("Sign-in failed:", signInError.message);
             setError("Email or password is incorrect");
         }
     }
