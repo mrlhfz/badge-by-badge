@@ -237,3 +237,7 @@ dist/
 !.env.example
 .vscode/
 .idea/
+
+# Requirement source files: publications, kept on the developer's machine only
+docs/requirements/**/*.pdf
+docs/requirements/*.png
