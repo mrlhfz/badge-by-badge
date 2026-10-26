@@ -30,7 +30,13 @@ target_metadata = Base.metadata
 
 
 def include_object(object, name, type_, reflected, compare_to):
-    return not (type_ == "table" and getattr(object, "schema", None) == "auth")
+    # Foreign keys into Supabase's auth schema are managed by Supabase, not by these migrations.
+    is_auth_table = type_ == "table" and getattr(object, "schema", None) == "auth"
+    is_auth_foreign_key = (
+        type_ == "foreign_key_constraint"
+        and getattr(object.referred_table, "schema", None) == "auth"
+    )
+    return not (is_auth_table or is_auth_foreign_key)
 
 
 def run_migrations_offline() -> None:

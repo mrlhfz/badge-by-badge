@@ -40,6 +40,23 @@ class ScoutLevel(UUIDPk, Base):
 
 class Badge(UUIDPk, Base):
     __tablename__ = "badges"
+    __table_args__ = (
+        Index(
+            "uq_badges_level_name",
+            "level_id",
+            "name",
+            unique=True,
+            postgresql_where=text("stream_id is null"),
+        ),
+        Index(
+            "uq_badges_level_stream_name",
+            "level_id",
+            "stream_id",
+            "name",
+            unique=True,
+            postgresql_where=text("stream_id is not null"),
+        ),
+    )
 
     level_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("levels.id"))
     stream_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("streams.id"))
