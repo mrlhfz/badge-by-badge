@@ -251,7 +251,9 @@ def upgrade() -> None:
             nullable=False,
         ),
         sa.Column(
-            "id", sa.Uuid(), server_default=sa.text("gen_random_uuid()"),
+            "id",
+            sa.Uuid(),
+            server_default=sa.text("gen_random_uuid()"),
         ),
         sa.ForeignKeyConstraint(
             ["badge_id"],
@@ -265,9 +267,7 @@ def upgrade() -> None:
         sa.UniqueConstraint(
             "badge_id", "position", name="uq_requirement_groups_badge_position"
         ),
-        sa.CheckConstraint(
-            "pick_count >= 1", name="ck_requirement_groups_pick_count"
-        )
+        sa.CheckConstraint("pick_count >= 1", name="ck_requirement_groups_pick_count"),
     )
     op.create_table(
         "requirements",

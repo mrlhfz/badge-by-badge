@@ -23,7 +23,13 @@ EKSPEDISI_GROUP = "Ekspedisi: pilih SATU"
 
 # (badge name, position, group title, text, detail)
 REQUIREMENTS = [
-    ("Lencana Jayadiri", 1, None, "Fungsi Parlimen", "Mengetahui fungsi-fungsi Parlimen."),
+    (
+        "Lencana Jayadiri",
+        1,
+        None,
+        "Fungsi Parlimen",
+        "Mengetahui fungsi-fungsi Parlimen.",
+    ),
     (
         "Lencana Jayadiri",
         2,

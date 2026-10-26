@@ -47,7 +47,9 @@ def _set(position: int, text: str, detail: str) -> None:
             where b.id = r.badge_id
               and b.name = :badge_name
               and r.position = :position
-        """).bindparams(text=text, detail=detail, position=position, badge_name=BADGE_NAME)
+        """).bindparams(
+            text=text, detail=detail, position=position, badge_name=BADGE_NAME
+        )
     )
 
 

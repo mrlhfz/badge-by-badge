@@ -57,7 +57,9 @@ class Badge(UUIDPk, Base):
 class RequirementGroup(UUIDPk, Base):
     __tablename__ = "requirement_groups"
     __table_args__ = (
-        UniqueConstraint("badge_id", "position", name="uq_requirement_groups_badge_position"),
+        UniqueConstraint(
+            "badge_id", "position", name="uq_requirement_groups_badge_position"
+        ),
         CheckConstraint("pick_count >= 1", name="ck_requirement_groups_pick_count"),
     )
 
@@ -68,9 +70,7 @@ class RequirementGroup(UUIDPk, Base):
     title: Mapped[str]
     pick_count: Mapped[int]
     position: Mapped[int]
-    applies_when_poultry: Mapped[bool] = mapped_column(
-        server_default=text("false")
-    )
+    applies_when_poultry: Mapped[bool] = mapped_column(server_default=text("false"))
 
 
 class Requirement(UUIDPk, Base):
@@ -87,6 +87,7 @@ class Requirement(UUIDPk, Base):
     position: Mapped[int]
     text: Mapped[str]
     detail: Mapped[str | None]
+
 
 class RequiredSkillCount(Base):
     __tablename__ = "required_skill_counts"

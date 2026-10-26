@@ -25,10 +25,20 @@ GROUPS = [
     ("Tahap 1 Unit I: Remaja", 4, 2, "Tahap 1 (lulus semua unit)"),
     ("Tahap 1 Unit II: Tingkahlaku negatif", 5, 3, "Tahap 1 (lulus semua unit)"),
     ("Tahap 1 Unit III: Tekanan dan masalah hidup", 2, 4, "Tahap 1 (lulus semua unit)"),
-    ("Tahap 1 Unit IV: Dasar negara mengenai dadah", 2, 5, "Tahap 1 (lulus semua unit)"),
+    (
+        "Tahap 1 Unit IV: Dasar negara mengenai dadah",
+        2,
+        5,
+        "Tahap 1 (lulus semua unit)",
+    ),
     ("Tahap 2 (lulus kedua-dua unit)", 2, 6, None),
     ("Tahap 2 Unit I: Amali (pilih DUA)", 2, 7, "Tahap 2 (lulus kedua-dua unit)"),
-    ("Tahap 2 Unit II: Kerja luar (pilih SATU)", 1, 8, "Tahap 2 (lulus kedua-dua unit)"),
+    (
+        "Tahap 2 Unit II: Kerja luar (pilih SATU)",
+        1,
+        8,
+        "Tahap 2 (lulus kedua-dua unit)",
+    ),
 ]
 
 # (group title, position, text)
@@ -42,7 +52,11 @@ REQUIREMENTS = [
     ("Tahap 1 Unit II: Tingkahlaku negatif", 7, "Akibat dadah"),
     ("Tahap 1 Unit II: Tingkahlaku negatif", 8, "Akibat alkohol"),
     ("Tahap 1 Unit II: Tingkahlaku negatif", 9, "Sikap masyarakat"),
-    ("Tahap 1 Unit III: Tekanan dan masalah hidup", 10, "Cabaran di dalam dan luar sekolah"),
+    (
+        "Tahap 1 Unit III: Tekanan dan masalah hidup",
+        10,
+        "Cabaran di dalam dan luar sekolah",
+    ),
     ("Tahap 1 Unit III: Tekanan dan masalah hidup", 11, "Khidmat bantu"),
     ("Tahap 1 Unit IV: Dasar negara mengenai dadah", 12, "Akta keselamatan"),
     ("Tahap 1 Unit IV: Dasar negara mengenai dadah", 13, "Akta Dadah Berbahaya"),
@@ -56,7 +70,9 @@ REQUIREMENTS = [
 ]
 
 
-def _insert_group(title: str, pick_count: int, position: int, parent_title: str | None) -> None:
+def _insert_group(
+    title: str, pick_count: int, position: int, parent_title: str | None
+) -> None:
     op.execute(
         sa.text("""
             insert into requirement_groups (badge_id, title, pick_count, position, parent_group_id)

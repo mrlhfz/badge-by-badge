@@ -161,7 +161,9 @@ REQUIREMENTS = [
 ]
 
 
-def _insert_group(title: str, pick_count: int, position: int, parent_title: str | None) -> None:
+def _insert_group(
+    title: str, pick_count: int, position: int, parent_title: str | None
+) -> None:
     op.execute(
         sa.text("""
             insert into requirement_groups (badge_id, title, pick_count, position, parent_group_id)
@@ -183,7 +185,9 @@ def _insert_group(title: str, pick_count: int, position: int, parent_title: str 
     )
 
 
-def _insert_requirement(position: int, group_title: str, text: str, detail: str) -> None:
+def _insert_requirement(
+    position: int, group_title: str, text: str, detail: str
+) -> None:
     op.execute(
         sa.text("""
             insert into requirements (badge_id, stream_id, group_id, position, text, detail)

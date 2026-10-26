@@ -19,7 +19,9 @@ depends_on: str | Sequence[str] | None = None
 
 BADGE_NAME = "Ahli Sukan"
 
-SUKAN_GROUP = "Pilih LIMA acara: sekurang-kurangnya SATU daripada tiap Kumpulan A, B dan C"
+SUKAN_GROUP = (
+    "Pilih LIMA acara: sekurang-kurangnya SATU daripada tiap Kumpulan A, B dan C"
+)
 
 # (position, text, detail)
 REQUIREMENTS = [

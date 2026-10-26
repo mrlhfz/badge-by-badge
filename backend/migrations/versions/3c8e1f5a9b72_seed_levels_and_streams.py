@@ -60,9 +60,7 @@ def upgrade() -> None:
     op.execute(
         f"insert into levels (name, sort_order, top_award) values {_values(LEVELS)}"
     )
-    op.execute(
-        f"insert into streams (name) values {_values([(s,) for s in STREAMS])}"
-    )
+    op.execute(f"insert into streams (name) values {_values([(s,) for s in STREAMS])}")
     op.execute(f"""
         insert into level_streams (level_id, stream_id)
         select l.id, s.id

@@ -31,15 +31,55 @@ GROUPS = [
 
 # (group title, position, text, detail)
 REQUIREMENTS = [
-    ("Bahagian A", 1, "Enjin 2 lejang dan 4 lejang", "Mengetahui perbezaan di antara enjin jenis 2 lejang dengan 4 lejang."),
+    (
+        "Bahagian A",
+        1,
+        "Enjin 2 lejang dan 4 lejang",
+        "Mengetahui perbezaan di antara enjin jenis 2 lejang dengan 4 lejang.",
+    ),
     ("Bahagian A", 2, "Bahagian asas motosikal", "Mengetahui bahagian asas motosikal."),
-    ("Bahagian A", 3, "Ukuran celah plag motosikal", "Membuka, mencuci dan memeriksa ukuran celah plag motosikal."),
-    ("Bahagian A", 4, "Minyak pelincir motosikal", "Menukar minyak pelincir motosikal; mengetahui cara memeriksa paras minyak pelincir itu."),
-    ("Bahagian A", 5, "Tayar motosikal tiub yang bocor", "Tahu membuka tayar motosikal tiub yang bocor dan memasangnya semula."),
-    ("Bahagian A", 6, "Clutch dan brek motosikal", "Mengetahui cara membetulkan 'clutch' dan brek motosikal."),
-    ("Bahagian A", 7, "Mentol motosikal", "Menukar mentol motosikal yang terbakar atau pecah."),
-    ("Bahagian A", 8, "Rantai motosikal yang kendur", "Mengetahui cara menangani rantai motosikal yang kendur."),
-    ("Bahagian A", 9, "Air bateri motosikal", "Mengetahui cara menambahkan air bateri motosikal."),
+    (
+        "Bahagian A",
+        3,
+        "Ukuran celah plag motosikal",
+        "Membuka, mencuci dan memeriksa ukuran celah plag motosikal.",
+    ),
+    (
+        "Bahagian A",
+        4,
+        "Minyak pelincir motosikal",
+        "Menukar minyak pelincir motosikal; mengetahui cara memeriksa paras minyak pelincir itu.",
+    ),
+    (
+        "Bahagian A",
+        5,
+        "Tayar motosikal tiub yang bocor",
+        "Tahu membuka tayar motosikal tiub yang bocor dan memasangnya semula.",
+    ),
+    (
+        "Bahagian A",
+        6,
+        "Clutch dan brek motosikal",
+        "Mengetahui cara membetulkan 'clutch' dan brek motosikal.",
+    ),
+    (
+        "Bahagian A",
+        7,
+        "Mentol motosikal",
+        "Menukar mentol motosikal yang terbakar atau pecah.",
+    ),
+    (
+        "Bahagian A",
+        8,
+        "Rantai motosikal yang kendur",
+        "Mengetahui cara menangani rantai motosikal yang kendur.",
+    ),
+    (
+        "Bahagian A",
+        9,
+        "Air bateri motosikal",
+        "Mengetahui cara menambahkan air bateri motosikal.",
+    ),
     (
         "Bahagian B",
         10,
@@ -91,7 +131,9 @@ REQUIREMENTS = [
 ]
 
 
-def _insert_group(title: str, pick_count: int, position: int, parent_title: str | None) -> None:
+def _insert_group(
+    title: str, pick_count: int, position: int, parent_title: str | None
+) -> None:
     op.execute(
         sa.text("""
             insert into requirement_groups (badge_id, title, pick_count, position, parent_group_id)
@@ -113,7 +155,9 @@ def _insert_group(title: str, pick_count: int, position: int, parent_title: str 
     )
 
 
-def _insert_requirement(group_title: str, position: int, text: str, detail: str) -> None:
+def _insert_requirement(
+    group_title: str, position: int, text: str, detail: str
+) -> None:
     op.execute(
         sa.text("""
             insert into requirements (badge_id, stream_id, group_id, position, text, detail)
