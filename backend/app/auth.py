@@ -55,7 +55,15 @@ def get_current_role(
     user_id: Annotated[str, Depends(get_current_user_id)],
     db: Annotated[Session, Depends(get_db)],
 ) -> Role:
-    role = db.scalar(select(Profile.role).where(Profile.id == uuid.UUID(user_id)))
+    # Reject a user ID that isn't a UUID instead of crashing
+    try:
+        profile_id = uuid.UUID(user_id)
+    except ValueError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired token",
+        )
+    role = db.scalar(select(Profile.role).where(Profile.id == profile_id))
     # Signed in, but no profile row exists
     if role is None:
         raise HTTPException(
