@@ -1,5 +1,5 @@
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 
 from sqlalchemy import (
     CheckConstraint,
@@ -116,7 +116,7 @@ class Entry(UUIDPk, CreatedAt, Base):
 
     scout_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("scouts.id"))
     requirement_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("requirements.id"))
-    entry_date: Mapped[Date] = mapped_column(Date)
+    entry_date: Mapped[date] = mapped_column(Date)
     note: Mapped[str | None]
     animal_kind: Mapped[AnimalKind | None] = mapped_column(
         Enum(
