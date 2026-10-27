@@ -5,7 +5,16 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import settings
 from app.database import engine
-from app.routers import admin_badges, badges, entries, leader, tanda
+from app.routers import (
+    admin_badges,
+    admin_requirements,
+    admin_scouts,
+    badges,
+    entries,
+    leader,
+    me,
+    tanda,
+)
 
 app = FastAPI(title="Badge-by-Badge API")
 
@@ -13,7 +22,10 @@ app.include_router(entries.router)
 app.include_router(badges.router)
 app.include_router(tanda.router)
 app.include_router(admin_badges.router)
+app.include_router(admin_scouts.router)
+app.include_router(admin_requirements.router)
 app.include_router(leader.router)
+app.include_router(me.router)
 
 app.add_middleware(
     CORSMiddleware,

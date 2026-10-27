@@ -107,6 +107,8 @@ class Requirement(UUIDPk, Base):
     position: Mapped[int]
     text: Mapped[str]
     detail: Mapped[str | None]
+    # Set when an Admin removes the requirement; removed requirements keep their entries
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class RequiredSkillCount(Base):

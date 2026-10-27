@@ -28,15 +28,26 @@ export default function LeaderTroop() {
     }
     return (
         <section>
-            <h1>My troop</h1>
+            <header className="home-header">
+                <h1>My troop</h1>
+                <div className="tags">
+                    <span className="tag">
+                        {scouts.length} {scouts.length === 1 ? "Scout" : "Scouts"}
+                    </span>
+                </div>
+            </header>
             {scouts.length === 0 && <p>No Scouts in your troop yet.</p>}
-            <ul>
+            <div className="badge-grid">
                 {scouts.map((scout) => (
-                    <li key={scout.id}>
-                        <Link to={`/leader/scouts/${scout.id}`}>{scout.full_name}</Link>
-                    </li>
+                    <Link
+                        key={scout.id}
+                        to={`/leader/scouts/${scout.id}`}
+                        className="badge-card"
+                    >
+                        <span className="badge-name">{scout.full_name}</span>
+                    </Link>
                 ))}
-            </ul>
+            </div>
         </section>
     );
 }

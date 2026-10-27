@@ -55,7 +55,10 @@ def duplicate_name_error(
 def list_badges(db: Session, level_id: uuid.UUID) -> list[Badge]:
     return list(
         db.scalars(
-            select(Badge).where(Badge.level_id == level_id).order_by(Badge.sort_order)
+            select(Badge)
+            .where(Badge.level_id == level_id)
+            # Path order first, so the list follows the order Scouts complete it; off-path badges go last
+            .order_by(Badge.path_row.nulls_last(), Badge.sort_order)
         ).all()
     )
 
@@ -99,7 +102,7 @@ def update_badge(db: Session, badge: Badge, body: BadgeUpdate) -> Badge:
 
 # Every level and stream, for the Admin's dropdowns
 def catalog(db: Session) -> dict:
-    levels = db.scalars(select(Level).order_by(Level.name)).all()
+    levels = db.scalars(select(Level).order_by(Level.sort_order)).all()
     streams = db.scalars(select(Stream).order_by(Stream.name)).all()
     return {"levels": list(levels), "streams": list(streams)}
 

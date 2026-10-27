@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import type { BadgeDetailOut, EntryOut, RequirementOut } from "../api/types";
 import { EntryStatus } from "../enums";
 import { ApiError } from "../api/client";
+import Chevron from "../components/Chevron";
 import { authedRequest } from "../lib/api";
 import { useAuth } from "../lib/useAuth";
 
@@ -47,8 +48,10 @@ export default function BadgeDetail() {
 
     return (
         <section>
-            <h1>{badge.name}</h1>
-            <p>{badge.description}</p>
+            <header className="home-header">
+                <h1>{badge.name}</h1>
+                <p>{badge.description}</p>
+            </header>
             {badge.requirements.map((req) => (
                 <RequirementRow
                     key={req.id}
@@ -73,6 +76,8 @@ function RequirementRow({ requirement, token, onChanged }: RowProps) {
     const [note, setNote] = useState("");
     const [error, setError] = useState<string | null>(null);
     const entry: EntryOut | null = requirement.entry;
+    // Whether a confirmed entry's note is showing; the Scout can hide it with the button
+    const [showNote, setShowNote] = useState(true);
 
     // Run an API call, then refresh the checklist; show a message if it fails
     async function run(call: () => Promise<unknown>) {
@@ -109,19 +114,90 @@ function RequirementRow({ requirement, token, onChanged }: RowProps) {
         }
     }
 
+    // Links the Mark done button in the title row to the date and note form below it
+    const formId = `mark-done-${requirement.id}`;
+
+    // Delete for a pending entry; it always sits beside the title, so it stays in the same place on a phone
+    const deleteButton = (
+        <button type="button" className="trash-button" onClick={remove} aria-label="Delete" title="Delete">
+            {/* A trash icon, using the same shapes as the Lucide icon */}
+            <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M3 6h18" />
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                <path d="M10 11v6" />
+                <path d="M14 11v6" />
+            </svg>
+        </button>
+    );
+
     return (
-        <div>
-            <p>{requirement.text}</p>
+        <div className="requirement-card">
+            <div className="requirement-row">
+                <p className="requirement-text">{requirement.text}</p>
+                {entry?.status === EntryStatus.Pending && deleteButton}
+                {!entry && (
+                    <button type="submit" form={formId} aria-label="Mark done" title="Mark done">
+                        {/* A send-horizontal icon, using the same shape as the Lucide icon */}
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z" />
+                            <path d="M6 12h16" />
+                        </svg>
+                    </button>
+                )}
+            </div>
             {entry?.status === EntryStatus.Confirmed && (
-                <p>Confirmed on {entry.entry_date}</p>
+                <div className="confirmed-row">
+                    <span className="tag tag-done">Confirmed on {entry.entry_date}</span>
+                    {entry.note && (
+                        <button
+                            type="button"
+                            className="icon-button"
+                            onClick={() => setShowNote(!showNote)}
+                            aria-label={showNote ? "Hide note" : "Show note"}
+                            title={showNote ? "Hide note" : "Show note"}
+                        >
+                            {showNote ? (
+                                <Chevron direction="down" />
+                            ) : (
+                                <Chevron direction="left" />
+                            )}
+                        </button>
+                    )}
+                </div>
             )}
-            {entry?.status === EntryStatus.Pending && (
-                <button type="button" onClick={remove}>
-                    Delete
-                </button>
+            {entry?.note && (entry.status === EntryStatus.Pending || showNote) && (
+                <div className="requirement-row">
+                    <p>{entry.note}</p>
+                </div>
             )}
+            {requirement.comments.map((comment) => (
+                <p key={comment.id} className="tag tag-progress">
+                    Leader's note: {comment.body}
+                </p>
+            ))}
             {!entry && (
-                <form onSubmit={markDone}>
+                <form id={formId} onSubmit={markDone}>
                     <input
                         type="date"
                         value={date}
@@ -133,7 +209,6 @@ function RequirementRow({ requirement, token, onChanged }: RowProps) {
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
                     />
-                    <button type="submit">Mark done</button>
                 </form>
             )}
             {error && <p role="alert">{error}</p>}

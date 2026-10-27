@@ -87,6 +87,7 @@ def requirements_for_scout(
             select(Requirement)
             .where(
                 Requirement.badge_id == badge_id,
+                Requirement.deleted_at.is_(None),
                 or_(Requirement.stream_id.is_(None), Requirement.stream_id == scout.stream_id),
             )
             .order_by(Requirement.position)
