@@ -97,6 +97,13 @@ def update_badge(db: Session, badge: Badge, body: BadgeUpdate) -> Badge:
     return badge
 
 
+# Every level and stream, for the Admin's dropdowns
+def catalog(db: Session) -> dict:
+    levels = db.scalars(select(Level).order_by(Level.name)).all()
+    streams = db.scalars(select(Stream).order_by(Stream.name)).all()
+    return {"levels": list(levels), "streams": list(streams)}
+
+
 # Soft-deletes a badge: it's hidden from Scouts, but its entries and history stay
 def soft_delete_badge(db: Session, badge: Badge) -> None:
     badge.deleted_at = datetime.now(UTC)

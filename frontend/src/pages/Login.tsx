@@ -4,10 +4,10 @@ import { Role } from "../enums";
 import { useAuth } from "../lib/useAuth";
 import { supabase } from "../lib/supabase";
 
-// Where each role lands after login. Only "/" exists for now; #17 and #18 add pages.
+// Where each role lands after login
 const HOME_BY_ROLE: Record<Role, string> = {
-    [Role.Admin]: "/",
-    [Role.Leader]: "/",
+    [Role.Admin]: "/admin/badges",
+    [Role.Leader]: "/leader",
     [Role.Scout]: "/",
 };
 

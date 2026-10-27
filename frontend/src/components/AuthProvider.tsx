@@ -13,7 +13,8 @@ function isRole(value: unknown): value is Role {
 export function AuthProvider({ children }: { children: ReactNode }) {
     const [session, setSession] = useState<Session | null>(null);
     // The role is stored with the user ID it belongs to, so a stale role is never shown
-    const [roleFor, setRoleFor] = useState<{ userId: string; role: Role } | null>(
+    // A null role here means the lookup finished but found no role, so the guards can stop waiting
+    const [roleFor, setRoleFor] = useState<{ userId: string; role: Role | null } | null>(
         null,
     );
     const [loading, setLoading] = useState(true);
@@ -47,17 +48,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 // Log why the role could not be loaded, so it isn't silent
                 if (error) {
                     console.error("Could not load role:", error.message);
+                    setRoleFor({ userId, role: null });
                     return;
                 }
-                if (isRole(data?.role)) {
-                    setRoleFor({ userId, role: data.role });
-                }
+                setRoleFor({ userId, role: isRole(data?.role) ? data.role : null });
             });
     }, [session]);
 
-    // Only show the role if it belongs to the current user
-    const role =
-        session && roleFor?.userId === session.user.id ? roleFor.role : null;
+    // Only use the role lookup if it belongs to the current user
+    const current = session && roleFor?.userId === session.user.id ? roleFor : null;
+    const role = current ? current.role : null;
+    const roleChecked = current !== null;
 
     // Ends the session; the listener above clears it
     const signOut = async () => {
@@ -65,7 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ session, role, loading, signOut }}>
+        <AuthContext.Provider value={{ session, role, roleChecked, loading, signOut }}>
             {children}
         </AuthContext.Provider>
     );

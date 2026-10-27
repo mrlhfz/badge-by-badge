@@ -1,8 +1,13 @@
 import { createBrowserRouter } from "react-router";
 import RequireAuth from "./components/RequireAuth";
+import RequireRole from "./components/RequireRole";
+import { Role } from "./enums";
 import Layout from "./layout/Layout";
+import AdminBadges from "./pages/AdminBadges";
 import BadgeDetail from "./pages/BadgeDetail";
 import Home from "./pages/Home";
+import LeaderScout from "./pages/LeaderScout";
+import LeaderTroop from "./pages/LeaderTroop";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -18,6 +23,19 @@ export const router = createBrowserRouter([
                 children: [
                     { index: true, element: <Home /> },
                     { path: "badges/:badgeId", element: <BadgeDetail /> },
+                    {
+                        // Admin screens: only Admins get through
+                        element: <RequireRole allowed={[Role.Admin]} />,
+                        children: [{ path: "admin/badges", element: <AdminBadges /> }],
+                    },
+                    {
+                        // Leader screens: only Leaders get through
+                        element: <RequireRole allowed={[Role.Leader]} />,
+                        children: [
+                            { path: "leader", element: <LeaderTroop /> },
+                            { path: "leader/scouts/:scoutId", element: <LeaderScout /> },
+                        ],
+                    },
                 ],
             },
             { path: "*", element: <NotFound /> },

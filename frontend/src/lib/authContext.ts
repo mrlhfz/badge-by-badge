@@ -5,6 +5,8 @@ import type { Role } from "../enums";
 export type AuthState = {
     session: Session | null;
     role: Role | null;
+    // True once the role lookup has finished, even when it found no role
+    roleChecked: boolean;
     loading: boolean;
     signOut: () => Promise<void>;
 };

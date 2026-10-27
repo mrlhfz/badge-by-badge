@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.auth import require_role
 from app.database import get_db
 from app.enums import Role
-from app.schemas.admin_badges import BadgeAdminOut, BadgeCreate, BadgeUpdate
+from app.schemas.admin_badges import BadgeAdminOut, BadgeCreate, BadgeUpdate, CatalogOut
 from app.services import admin_badges as badge_service
 
 # One guard on the router covers every route, so a route added later can't forget it
@@ -16,6 +16,12 @@ router = APIRouter(
     tags=["admin badges"],
     dependencies=[Depends(require_role(Role.Admin))],
 )
+
+
+# Admin: every level and stream, for the dropdowns on the badge screen
+@router.get("/catalog", response_model=CatalogOut)
+def get_catalog(db: Annotated[Session, Depends(get_db)]):
+    return badge_service.catalog(db)
 
 
 # Admin: every badge on a level, including deleted ones

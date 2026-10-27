@@ -29,6 +29,7 @@ describe("Login", () => {
             session: null,
             role: null,
             loading: false,
+            roleChecked: true,
             signOut: vi.fn(),
         });
 
@@ -43,6 +44,7 @@ describe("Login", () => {
             session: {} as Session,
             role: null,
             loading: false,
+            roleChecked: true,
             signOut: vi.fn(),
         });
 
