@@ -10,7 +10,9 @@ export default function AdminBadges() {
     const [levelId, setLevelId] = useState("");
     const [badges, setBadges] = useState<AdminBadge[]>([]);
     const [editing, setEditing] = useState<AdminBadge | null>(null);
+    // Page-level error for loading failures; actionError for a save or delete that failed
     const [error, setError] = useState<string | null>(null);
+    const [actionError, setActionError] = useState<string | null>(null);
 
     // Load the badges for one level, using the current session token
     const loadBadges = useCallback(
@@ -50,7 +52,7 @@ export default function AdminBadges() {
 
     // Run an API call, then reload the level; show a message if it fails
     async function run(call: () => Promise<unknown>) {
-        setError(null);
+        setActionError(null);
         try {
             await call();
             setEditing(null);
@@ -58,7 +60,8 @@ export default function AdminBadges() {
                 loadBadges(session.access_token, levelId);
             }
         } catch {
-            setError("That didn't work. Check the details and try again.");
+            // Keep the list on screen, and show the message above it
+            setActionError("That didn't work. Check the details and try again.");
         }
     }
 
@@ -114,6 +117,7 @@ export default function AdminBadges() {
                     ))}
                 </select>
             </label>
+            {actionError && <p role="alert">{actionError}</p>}
             <ul>
                 {badges.map((badge) => (
                     <li key={badge.id}>

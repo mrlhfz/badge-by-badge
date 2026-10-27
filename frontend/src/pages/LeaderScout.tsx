@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import type { ScoutProgress } from "../api/types";
 import { EntryStatus } from "../enums";
 import { authedRequest } from "../lib/api";
+import { STATUS_LABEL } from "../lib/statusLabels";
 import { useAuth } from "../lib/useAuth";
 
 // One Scout's progress, with their entries ready to confirm
@@ -10,7 +11,9 @@ export default function LeaderScout() {
     const { scoutId } = useParams();
     const { session } = useAuth();
     const [progress, setProgress] = useState<ScoutProgress | null>(null);
+    // Page-level error for loading failures; actionError for a confirm that failed
     const [error, setError] = useState<string | null>(null);
+    const [actionError, setActionError] = useState<string | null>(null);
 
     // Load the Scout's progress again after each change, so the screen stays current
     const load = useCallback(() => {
@@ -31,11 +34,12 @@ export default function LeaderScout() {
         if (!session) {
             return;
         }
+        setActionError(null);
         authedRequest<unknown>(`/entries/${entryId}/confirm`, session.access_token, {
             method: "POST",
         })
             .then(load)
-            .catch(() => setError("That entry could not be confirmed. Try again."));
+            .catch(() => setActionError("That entry could not be confirmed. Try again."));
     }
 
     if (error) {
@@ -57,12 +61,13 @@ export default function LeaderScout() {
             <ul>
                 {progress.badges.map((badge) => (
                     <li key={badge.id}>
-                        {badge.name}: {badge.status}
+                        {badge.name}: {STATUS_LABEL[badge.status]}
                     </li>
                 ))}
             </ul>
 
             <h2>Entries</h2>
+            {actionError && <p role="alert">{actionError}</p>}
             <ul>
                 {progress.entries.map((entry) => (
                     <li key={entry.id}>
