@@ -1,11 +1,13 @@
 import uuid
 from dataclasses import dataclass
 
+from app.services.badge_names import LENCANA_AHLI_BOT, LENCANA_USAHA
+
 # Skill rows where a set number of picks completes the row. Other rows need every badge done.
 PICKS_PER_ROW: dict[int, int] = {3: 2, 5: 3, 6: 3}
 
 # A badge that waits for another badge in the same row (the book: Ahli Bot after Usaha)
-WAITS_FOR: dict[str, str] = {"Lencana Ahli Bot": "Lencana Usaha"}
+WAITS_FOR: dict[str, str] = {LENCANA_AHLI_BOT: LENCANA_USAHA}
 
 
 # One badge on the path, as the lock rule sees it

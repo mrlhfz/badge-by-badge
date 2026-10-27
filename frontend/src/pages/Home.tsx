@@ -27,6 +27,7 @@ export default function Home() {
     const { session } = useAuth();
     const [badges, setBadges] = useState<BadgeListItem[] | null>(null);
     const [tanda, setTanda] = useState<TandaOut | null>(null);
+    const [tandaError, setTandaError] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     // Load the Scout's badges and Tanda standing once the session is ready
@@ -39,7 +40,11 @@ export default function Home() {
             .catch(() => setError("Could not load your badges"));
         authedRequest<TandaOut>("/tanda/current", session.access_token)
             .then(setTanda)
-            .catch(() => setTanda(null));
+            .catch((err: unknown) => {
+                // Log the real reason, and tell the Scout the card is missing
+                console.error("Could not load Tanda standing:", err);
+                setTandaError("Could not load your Tanda standing");
+            });
     }, [session]);
 
     if (error) {
@@ -64,6 +69,7 @@ export default function Home() {
                     </li>
                 ))}
             </ul>
+            {tandaError && <p role="alert">{tandaError}</p>}
             {tanda && (
                 <aside>
                     <h2>Tanda Cemerlang Rambu Pengakap Muda</h2>

@@ -2,6 +2,7 @@ import calendar
 import uuid
 from dataclasses import dataclass
 from datetime import date
+from zoneinfo import ZoneInfo
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -10,14 +11,18 @@ from app.enums import ProgressStatus, TandaState
 from app.models.catalog import Stream
 from app.models.people import Scout
 from app.models.progress import Badge, Entry, Requirement
+from app.services.badge_names import LENCANA_JAYA, LENCANA_JURAGAN, PENGAKAP_LAUT_STREAM
 from app.services.progress import badge_status
 
 # How long the badges must be held before the Tanda can be awarded
 TANDA_MONTHS = 3
 
+# Confirmations are dated in Malaysia time, so a late-night one counts on the right day
+MALAYSIA = ZoneInfo("Asia/Kuala_Lumpur")
+
 # The Laut stream must hold Jaya and Juragan; the Darat path needs only Jaya
-LAUT_REQUIRED = ["Lencana Jaya", "Lencana Juragan"]
-DARAT_REQUIRED = ["Lencana Jaya"]
+LAUT_REQUIRED = [LENCANA_JAYA, LENCANA_JURAGAN]
+DARAT_REQUIRED = [LENCANA_JAYA]
 
 
 # Adds whole months to a date, keeping the day if the month is long enough
@@ -61,7 +66,7 @@ def completed_on(db: Session, scout: Scout, badge_id: uuid.UUID) -> date | None:
         .join(Requirement, Requirement.id == Entry.requirement_id)
         .where(Entry.scout_id == scout.id, Requirement.badge_id == badge_id)
     )
-    return latest.date() if latest else None
+    return latest.astimezone(MALAYSIA).date() if latest else None
 
 
 # The Tanda state for one Scout, using their stream and their current level
@@ -69,7 +74,7 @@ def tanda_for_scout(
     db: Session, scout: Scout, level_id: uuid.UUID | None, today: date
 ) -> TandaResult:
     stream = db.get(Stream, scout.stream_id)
-    is_laut = stream is not None and stream.name == "Pengakap Laut"
+    is_laut = stream is not None and stream.name == PENGAKAP_LAUT_STREAM
     names = LAUT_REQUIRED if is_laut else DARAT_REQUIRED
 
     dates: dict[str, date | None] = {}

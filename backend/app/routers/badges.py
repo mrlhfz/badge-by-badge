@@ -30,16 +30,20 @@ def list_current_badges(
     if level_id is None:
         return []
 
-    path = progress.path_badges(db, scout, level_id)
+    # Work out each status once, then reuse it for the path and the list
+    badges = progress.visible_badges(db, scout, level_id)
+    statuses = progress.badge_statuses(db, scout, badges)
+    path = progress.path_from(badges, statuses)
     on_path = {p.id: p for p in path}
+
     items = []
-    for badge in progress.visible_badges(db, scout, level_id):
+    for badge in badges:
         placed = on_path.get(badge.id)
         items.append(
             BadgeListItem(
                 id=badge.id,
                 name=badge.name,
-                status=progress.badge_status(db, scout, badge.id),
+                status=statuses[badge.id],
                 row=placed.row if placed else None,
                 locked=is_locked(placed, path) if placed else False,
             )
@@ -63,7 +67,15 @@ def get_badge_detail(
         )
 
     # A locked badge can't be opened until the rows before it are complete
-    path = progress.path_badges(db, scout, badge.level_id)
+    badges = progress.visible_badges(db, scout, badge.level_id)
+    statuses = progress.badge_statuses(db, scout, badges)
+    # A badge from another stream is not visible to this Scout, so treat it as missing
+    if badge_id not in statuses:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Badge not found",
+        )
+    path = progress.path_from(badges, statuses)
     placed = next((p for p in path if p.id == badge_id), None)
     if placed is not None and is_locked(placed, path):
         raise HTTPException(
@@ -95,7 +107,7 @@ def get_badge_detail(
         id=badge.id,
         name=badge.name,
         description=badge.description,
-        status=progress.badge_status(db, scout, badge_id),
+        status=statuses[badge_id],
         groups=groups,
         requirements=requirements,
     )

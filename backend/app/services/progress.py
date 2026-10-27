@@ -140,14 +140,24 @@ def visible_badges(db: Session, scout: Scout, level_id: uuid.UUID) -> list[Badge
     )
 
 
-# The path the Scout sees: each badge with its row and whether it is complete
-def path_badges(db: Session, scout: Scout, level_id: uuid.UUID) -> list[PathBadge]:
-    path = []
-    for badge in visible_badges(db, scout, level_id):
-        if badge.path_row is None:
-            continue
-        complete = badge_status(db, scout, badge.id) == ProgressStatus.Complete
-        path.append(
-            PathBadge(id=badge.id, name=badge.name, row=badge.path_row, complete=complete)
+# Each badge's status for this Scout, worked out once per badge
+def badge_statuses(
+    db: Session, scout: Scout, badges: list[Badge]
+) -> dict[uuid.UUID, ProgressStatus]:
+    return {badge.id: badge_status(db, scout, badge.id) for badge in badges}
+
+
+# The path the Scout sees, built from badges whose statuses are already known
+def path_from(
+    badges: list[Badge], statuses: dict[uuid.UUID, ProgressStatus]
+) -> list[PathBadge]:
+    return [
+        PathBadge(
+            id=badge.id,
+            name=badge.name,
+            row=badge.path_row,
+            complete=statuses[badge.id] == ProgressStatus.Complete,
         )
-    return path
+        for badge in badges
+        if badge.path_row is not None
+    ]

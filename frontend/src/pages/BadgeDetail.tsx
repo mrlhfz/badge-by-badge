@@ -2,12 +2,13 @@ import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { useParams } from "react-router";
 import type { BadgeDetailOut, EntryOut, RequirementOut } from "../api/types";
 import { EntryStatus } from "../enums";
+import { ApiError } from "../api/client";
 import { authedRequest } from "../lib/api";
 import { useAuth } from "../lib/useAuth";
 
-// Today's date as YYYY-MM-DD, for the date field
+// Today's date as YYYY-MM-DD in the device's own time zone, for the date field
 function today(): string {
-    return new Date().toISOString().slice(0, 10);
+    return new Date().toLocaleDateString("en-CA");
 }
 
 export default function BadgeDetail() {
@@ -23,7 +24,14 @@ export default function BadgeDetail() {
         }
         authedRequest<BadgeDetailOut>(`/badges/${badgeId}`, session.access_token)
             .then(setBadge)
-            .catch(() => setError("Could not load this badge"));
+            .catch((err: unknown) => {
+                // A 403 means the badge is locked; anything else is a general failure
+                if (err instanceof ApiError && err.status === 403) {
+                    setError("Finish the earlier rows before opening this badge");
+                } else {
+                    setError("Could not load this badge");
+                }
+            });
     }, [session, badgeId]);
 
     useEffect(() => {
