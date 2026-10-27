@@ -7,7 +7,7 @@ import { supabase } from "../lib/supabase";
 // Where each role lands after login
 const HOME_BY_ROLE: Record<Role, string> = {
     [Role.Admin]: "/admin/badges",
-    [Role.Leader]: "/leader",
+    [Role.Leader]: "/",
     [Role.Scout]: "/",
 };
 
@@ -41,28 +41,31 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            <label>
-                Email
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </label>
-            {error && <p role="alert">{error}</p>}
-            <button type="submit">Sign in</button>
-        </form>
+        <div className="login-page">
+            <form className="login-card" onSubmit={handleSubmit}>
+                <h1>Badge-by-Badge</h1>
+                <p className="login-tagline">Track your Pengakap journey</p>
+                <label>
+                    Email
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Password
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </label>
+                {error && <p role="alert">{error}</p>}
+                <button type="submit">Sign in</button>
+            </form>
+        </div>
     );
 }

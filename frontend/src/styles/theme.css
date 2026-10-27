@@ -1,0 +1,802 @@
+/* The palette (Pengakap classic): forest green is the main colour, gold is the accent,
+   and Melaka red is for warnings. Change a colour here and it changes everywhere. */
+:root {
+    color-scheme: light;
+
+    --primary: #1e5a3a;
+    --primary-light: #3d8a5f;
+    --primary-soft: #e4f0e8;
+    --accent: #e0b043;
+    --accent-soft: #fbf1d6;
+    --danger: #b3202a;
+    --danger-soft: #f8e1e2;
+
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --text: #1f2a24;
+    --muted: #5b6b62;
+    --border: #d9d6cc;
+
+    --space: 12px;
+    --radius: 8px;
+
+    font: 16px/1.5 system-ui, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+}
+
+body {
+    margin: 0;
+}
+
+/* The background follows the time of day, set by main.tsx: day from 07:31 to 19:30, night otherwise.
+   The image is a fixed layer that always covers the whole window, behind the content. */
+body.day::after,
+body.night::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: center / cover no-repeat;
+    pointer-events: none;
+}
+
+body.day::after {
+    background-image: url("/backgrounds/bbb-bg-day.svg");
+}
+
+body.night::after {
+    background-image: url("/backgrounds/bbb-bg-night.svg");
+}
+
+/* A light layer over either image, so the background is softer behind the content.
+   Lower the last number (0.7) for a stronger image, or raise it for a softer one. */
+body.day::before,
+body.night::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(247, 246, 242, 0.7);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Top bar: the app name and the links, on the primary green */
+nav {
+    /* A fixed height, so the login page can fill exactly the space below it */
+    height: 64px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space);
+    padding: var(--space) 20px;
+    background: var(--primary);
+}
+
+nav h1 {
+    margin: 0 auto 0 0;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+/* Links and buttons in the top bar look the same: outlined, with a light hover */
+nav a,
+nav button {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: #ffffff;
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+nav a:hover,
+nav button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    filter: none;
+}
+
+/* The top bar's links: in a row on a wide screen, and a dropdown behind the menu button on a phone */
+.menu-toggle {
+    display: none;
+}
+
+/* On a wide screen the links stay direct children of the top bar, in one row */
+.nav-links {
+    display: contents;
+}
+
+@media (max-width: 719px) {
+    .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        margin-left: auto;
+        padding: 6px;
+        border: 0;
+        border-radius: var(--radius);
+        background: transparent;
+        color: #ffffff;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    /* The dropdown opens under the top bar, with its links stacked and full width */
+    .nav-links.nav-links-open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        gap: 0;
+        padding: 0 20px;
+        background: var(--primary);
+    }
+
+    .nav-links.nav-links-open > * {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 14px 4px;
+        text-align: left;
+    }
+
+    /* A simple line between each link in the dropdown */
+    .nav-links.nav-links-open > * + * {
+        border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Page content: one centred column, with room above the bottom tab bar */
+main,
+section {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 20px 96px;
+}
+
+h1,
+h2 {
+    color: var(--primary);
+}
+
+a {
+    color: var(--primary);
+}
+
+/* Buttons: the same font as the text around them, so buttons and links are the same size */
+button {
+    padding: 8px 14px;
+    font: inherit;
+    border: 0;
+    border-radius: var(--radius);
+    background: var(--primary);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+/* Lists become glass cards, like the login card */
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    margin: 8px 0;
+    padding: var(--space);
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius);
+}
+
+/* The progress bar: a visible grey track with a green fill */
+progress {
+    width: 100%;
+    height: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    border-radius: 999px;
+    background: #e4e1d8;
+    overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+    background: #e4e1d8;
+}
+
+progress::-webkit-progress-value {
+    background: var(--primary);
+}
+
+progress::-moz-progress-bar {
+    background: var(--primary);
+}
+
+/* Errors and failed actions use Melaka red */
+[role="alert"] {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+input,
+select {
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font: inherit;
+}
+
+/* ---- My Badges screen ---- */
+
+/* The greeting sits in a glass card, so it stays readable over the background image */
+.home-header {
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius);
+}
+
+.home-header h1 {
+    margin: 0 0 8px;
+    font-size: 26px;
+}
+
+/* The greeting and the verification icon sit on one line; the icon is a little larger than the text */
+.greeting-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.greeting-row h1 {
+    margin: 0;
+}
+
+.greeting-row .verification-icon {
+    width: 30px;
+    height: 30px;
+}
+
+/* Small tags: the level, the verification state and each badge's status */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 14px;
+    background: var(--surface);
+}
+
+.tag-done {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    color: var(--primary);
+}
+
+.tag-progress {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: #6b4e00;
+}
+
+.tag-warn {
+    border-color: var(--danger);
+    background: var(--danger-soft);
+    color: var(--danger);
+}
+
+.tag-locked {
+    color: var(--muted);
+}
+
+/* The top award card: one large card with the progress bar */
+.progress-card {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-left: 6px solid var(--accent);
+    border-radius: var(--radius);
+}
+
+.eyebrow {
+    margin: 0;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.progress-card h2 {
+    margin: 4px 0 12px;
+    font-size: 22px;
+}
+
+.progress-card p {
+    margin: 8px 0 0;
+    color: var(--muted);
+}
+
+/* One block per row of the badge path, with a heading */
+.path-row {
+    margin: 24px 0;
+}
+
+/* Row titles sit on a frosted label, so they stay readable over the background image */
+.path-row h2 {
+    display: inline-block;
+    margin: 0 0 12px;
+    padding: 6px 12px;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.7);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius);
+}
+
+/* The badge cards: two per row on phones, more on wide screens */
+.badge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space);
+}
+
+@media (min-width: 720px) {
+    .badge-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.badge-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: var(--space);
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius);
+    color: var(--text);
+    text-decoration: none;
+}
+
+a.badge-card:hover {
+    border-color: var(--primary);
+}
+
+/* Until a badge has its own picture, this grey block stands in for it */
+.badge-image {
+    height: 80px;
+    border-radius: var(--radius);
+    background: repeating-linear-gradient(45deg, #d9d6cc 0 10px, #e8e6df 10px 20px);
+}
+
+.badge-name {
+    font-weight: 600;
+}
+
+/* A requirement on the badge detail page, in the same glass card style as the badge cards */
+.requirement-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+    padding: var(--space);
+    background: rgba(255, 255, 255, 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius);
+}
+
+.requirement-text {
+    margin: 0;
+    font-weight: 600;
+}
+
+/* The "Mark done" form sits in one tidy row: date, note, then the button */
+.requirement-card form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.requirement-card input[type="date"] {
+    flex: 0 0 auto;
+}
+
+.requirement-card input:not([type]) {
+    flex: 1 1 160px;
+}
+
+.requirement-card form button {
+    flex: 0 0 auto;
+}
+
+/* A row that holds text or a note, with a button on the right when there is one */
+.requirement-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.requirement-row p {
+    margin: 0;
+}
+
+/* One Scout on the Admin's list: the name on the left, the status and button on the right.
+   It wraps onto two lines on a narrow phone. */
+.scout-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.scout-name {
+    font-weight: 600;
+}
+
+/* The name and the verification icon sit side by side */
+.scout-identity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.scout-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* The circle-plus icon for adding: a larger green outline with no border or background */
+.add-button {
+    flex: 0 0 auto;
+    display: inline-flex;
+    padding: 2px;
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+}
+
+/* The square-pen icon for editing: a green icon with no border, the same size as the trash icon */
+.pen-button {
+    flex: 0 0 auto;
+    display: inline-flex;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    color: var(--primary);
+}
+
+/* The trash icon on a pending entry: a red icon with no border or fill, and a small touch target */
+.trash-button {
+    flex: 0 0 auto;
+    display: inline-flex;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    color: var(--danger);
+}
+
+/* Delete is a secondary action: outlined in red, so it doesn't compete with Mark done */
+.delete-button {
+    flex: 0 0 auto;
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+/* The confirmed tag and its note toggle sit on one line */
+.confirmed-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* The note toggle: a small chevron in a thin outline, with minimal padding */
+.icon-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--primary);
+    line-height: 0;
+}
+
+/* The Admin catalog header: the level dropdown and the Verify Scouts link sit on one row */
+.header-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* On a phone the Level dropdown takes the full row, with its label above it */
+@media (max-width: 719px) {
+    .header-row label {
+        display: flex;
+        flex: 1 1 200px;
+        flex-direction: column;
+        gap: 4px;
+        font-weight: 600;
+    }
+
+    .header-row select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* The add button sits on the dropdown's row, lined up with the dropdown's bottom edge */
+    .header-row {
+        align-items: flex-end;
+    }
+}
+
+/* The link and the count keep their size and sit side by side */
+.header-row .outline-button,
+.header-row .tag {
+    flex: 0 0 auto;
+}
+
+/* A text-only button, for the quieter actions such as Requirements */
+.link-button {
+    padding: 8px 4px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    text-decoration: underline;
+}
+
+/* On a phone a badge's buttons take a full row under its name: Requirements on the left,
+   and the pen and trash icons grouped together on the right */
+@media (max-width: 719px) {
+    .badge-admin-row .scout-actions {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    /* The pen moves to the right edge, and the trash icon sits just after it */
+    .badge-admin-row .pen-button {
+        margin-left: auto;
+    }
+
+    /* The name sits on the left of the line and its tags are pushed to the right end */
+    .badge-admin-row > div:first-child {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .badge-admin-row .tags {
+        margin: 0;
+    }
+}
+
+/* Outlined buttons and links, such as Edit, Cancel and Verify Scouts */
+.outline-button {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* The requirements panel under a badge: its rows and the add form, with full-width inputs */
+.admin-requirements {
+    margin-top: 12px;
+}
+
+.admin-requirements ul {
+    padding: 0;
+}
+
+.admin-requirements input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.admin-requirements form button {
+    margin-top: 4px;
+}
+
+/* The badge edit form: one column on a phone, two on a wide screen */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space);
+    margin-top: 12px;
+}
+
+@media (min-width: 720px) {
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.form-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: 600;
+}
+
+.form-grid input,
+.form-grid select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* The verification icon: a grey outline until the Scout is verified; then a lighter green fill with a white tick */
+.verification-icon {
+    flex: 0 0 auto;
+    color: #9b9b93;
+}
+
+.verification-icon.verified {
+    color: var(--primary);
+}
+
+.verification-icon.verified .badge-fill {
+    fill: var(--primary-light);
+}
+
+.verification-icon.verified .check-mark {
+    stroke: #ffffff;
+}
+
+/* A locked badge is faded and can't be clicked */
+.badge-card-locked {
+    opacity: 0.55;
+}
+
+/* The bottom tab bar, like a phone app */
+.tabbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    z-index: 10;
+}
+
+.tab {
+    padding: 4px 12px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.tab-active {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.tab-disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+/* ---- Login page ---- */
+
+/* Remove the page padding around the login page, so it fills the space under the top bar */
+main:has(.login-page) {
+    max-width: none;
+    padding: 0;
+}
+
+.login-page {
+    position: relative;
+    height: 100vh;
+    min-height: 480px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    overflow: hidden;
+    /* No background of its own, so the day or night image shows through */
+}
+
+/* Glass card: see-through white, blurred background behind it, and a soft light border */
+.login-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    box-sizing: border-box;
+    padding: 32px 28px;
+    background: rgba(255, 255, 255, 0.55);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-top: 6px solid var(--primary);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(31, 42, 36, 0.12);
+}
+
+.login-card h1 {
+    margin: 0 0 4px;
+    text-align: center;
+    font-size: 26px;
+}
+
+.login-tagline {
+    margin: 0 0 24px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.login-card label {
+    display: block;
+    margin-bottom: 14px;
+    font-weight: 600;
+}
+
+.login-card input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+    padding: 10px 12px;
+    font-size: 16px;
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px;
+    background: var(--primary);
+    font-size: 16px;
+    font-weight: 600;
+}

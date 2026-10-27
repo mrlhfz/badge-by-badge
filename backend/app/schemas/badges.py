@@ -3,6 +3,7 @@ import uuid
 from pydantic import BaseModel
 
 from app.enums import ProgressStatus
+from app.schemas.comments import CommentOut
 from app.schemas.entries import EntryOut
 
 
@@ -22,6 +23,8 @@ class RequirementOut(BaseModel):
     detail: str | None
     group_id: uuid.UUID | None
     entry: EntryOut | None
+    # The Leader's comments on the Scout's entry, oldest first
+    comments: list[CommentOut] = []
 
 
 # A checklist section, such as "pick 2 of these 4"

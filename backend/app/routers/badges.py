@@ -12,7 +12,9 @@ from app.schemas.badges import (
     GroupOut,
     RequirementOut,
 )
+from app.schemas.comments import CommentOut
 from app.schemas.entries import EntryOut
+from app.services import comments as comment_service
 from app.services import progress
 from app.services.path_rules import is_locked
 from app.services.scouts import get_current_scout
@@ -84,16 +86,22 @@ def get_badge_detail(
         )
 
     entries = progress.entries_by_requirement(db, scout, badge_id)
-    requirements = [
-        RequirementOut(
-            id=req.id,
-            text=req.text,
-            detail=req.detail,
-            group_id=req.group_id,
-            entry=EntryOut.model_validate(entries[req.id]) if req.id in entries else None,
+    comments = comment_service.comments_by_entry(db, [e.id for e in entries.values()])
+    requirements = []
+    for req in progress.requirements_for_scout(db, scout, badge_id):
+        entry = entries.get(req.id)
+        requirements.append(
+            RequirementOut(
+                id=req.id,
+                text=req.text,
+                detail=req.detail,
+                group_id=req.group_id,
+                entry=EntryOut.model_validate(entry) if entry is not None else None,
+                comments=[CommentOut.model_validate(c) for c in comments.get(entry.id, [])]
+                if entry is not None
+                else [],
+            )
         )
-        for req in progress.requirements_for_scout(db, scout, badge_id)
-    ]
     groups = [
         GroupOut(
             id=group.id,

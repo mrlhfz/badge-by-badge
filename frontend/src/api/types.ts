@@ -25,6 +25,14 @@ export type BadgeListItem = {
     locked: boolean;
 };
 
+// The signed-in Scout's own details, for the greeting
+export type MeOut = {
+    full_name: string;
+    level_name: string | null;
+    stream_name: string | null;
+    is_verified: boolean;
+};
+
 export type GroupOut = {
     id: string;
     title: string;
@@ -38,6 +46,15 @@ export type RequirementOut = {
     detail: string | null;
     group_id: string | null;
     entry: EntryOut | null;
+    comments: Comment[];
+};
+
+// A Leader's comment on an entry
+export type Comment = {
+    id: string;
+    entry_id: string;
+    body: string;
+    created_at: string;
 };
 
 export type TandaOut = {
@@ -104,6 +121,7 @@ export type ScoutEntry = {
     entry_date: string;
     note: string | null;
     status: EntryStatus;
+    comments: Comment[];
 };
 
 // Leader: one Scout's full progress
@@ -114,4 +132,54 @@ export type ScoutProgress = {
     total: number;
     badges: ScoutBadgeProgress[];
     entries: ScoutEntry[];
+};
+
+// Leader: the counts on the Leader's home page
+export type LeaderSummary = {
+    full_name: string | null;
+    scout_count: number;
+    pending_entries: number;
+};
+
+// Leader: one entry waiting for confirmation, from any Scout in the troop
+export type PendingEntry = {
+    id: string;
+    scout_id: string;
+    scout_name: string;
+    badge_name: string;
+    requirement_text: string;
+    entry_date: string;
+    note: string | null;
+    comments: Comment[];
+};
+
+// Leader: one entry the Leader confirmed, with its comments
+export type LeaderLogEntry = {
+    id: string;
+    scout_id: string;
+    scout_name: string;
+    badge_name: string;
+    requirement_text: string;
+    entry_date: string;
+    note: string | null;
+    confirmed_at: string | null;
+};
+
+// Admin: one requirement on a badge; removed ones have a deleted_at time
+export type AdminRequirement = {
+    id: string;
+    badge_id: string;
+    position: number;
+    text: string;
+    detail: string | null;
+    group_id: string | null;
+    stream_id: string | null;
+    deleted_at: string | null;
+};
+
+// Admin: one Scout, with whether they are verified
+export type AdminScout = {
+    id: string;
+    full_name: string;
+    is_verified: boolean;
 };
