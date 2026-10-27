@@ -1,29 +1,33 @@
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import select
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
 
 from app.auth import get_current_user_id, require_role
 from app.database import get_db
 from app.enums import Role
 from app.models.people import Scout
-from app.models.progress import Entry
 from app.schemas.entries import EntryCreate, EntryOut, EntryUpdate
 from app.services import entries as entry_service
 from app.services.scouts import get_current_scout
 
 router = APIRouter(prefix="/entries", tags=["entries"])
 
+# Paging for list endpoints: at most 100 rows per page, 50 by default
+LimitParam = Annotated[int, Query(ge=1, le=100)]
+OffsetParam = Annotated[int, Query(ge=0)]
 
-# Scout: list their own entries
+
+# Scout: list their own entries, one page at a time
 @router.get("/mine", response_model=list[EntryOut])
 def list_my_entries(
     scout: Annotated[Scout, Depends(get_current_scout)],
     db: Annotated[Session, Depends(get_db)],
+    limit: LimitParam = 50,
+    offset: OffsetParam = 0,
 ):
-    return db.scalars(select(Entry).where(Entry.scout_id == scout.id)).all()
+    return entry_service.list_entries_for_scout(db, scout.id, limit, offset)
 
 
 # Leader: list one scout's entries, only for a scout in their troop
@@ -36,6 +40,8 @@ def list_scout_entries(
     scout_id: uuid.UUID,
     user_id: Annotated[str, Depends(get_current_user_id)],
     db: Annotated[Session, Depends(get_db)],
+    limit: LimitParam = 50,
+    offset: OffsetParam = 0,
 ):
     scout = db.get(Scout, scout_id)
     if scout is None:
@@ -44,7 +50,7 @@ def list_scout_entries(
             detail="Scout not found",
         )
     entry_service.assert_leader_leads_scout(db, uuid.UUID(user_id), scout)
-    return db.scalars(select(Entry).where(Entry.scout_id == scout.id)).all()
+    return entry_service.list_entries_for_scout(db, scout.id, limit, offset)
 
 
 # Scout: mark a requirement done with a date and a note

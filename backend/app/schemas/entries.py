@@ -1,7 +1,7 @@
 import uuid
 from datetime import date, datetime
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.enums import EntryStatus
 
@@ -13,10 +13,18 @@ class EntryCreate(BaseModel):
     note: str | None = Field(default=None, max_length=500)
 
 
-# What a Scout sends to change an entry; only the fields that are sent are changed
+# What a Scout sends to change an entry; only the fields that are sent are changed.
+# The date can be left out, but it can't be sent as null, because an entry always has a date.
 class EntryUpdate(BaseModel):
     entry_date: date | None = None
     note: str | None = Field(default=None, max_length=500)
+
+    @field_validator("entry_date")
+    @classmethod
+    def date_is_not_null(cls, value: date | None) -> date | None:
+        if value is None:
+            raise ValueError("entry_date cannot be null")
+        return value
 
 
 # What the API returns for an entry
