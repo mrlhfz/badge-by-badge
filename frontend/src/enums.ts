@@ -49,3 +49,11 @@ export const ProgressStatus = {
 } as const;
 
 export type ProgressStatus = (typeof ProgressStatus)[keyof typeof ProgressStatus];
+
+export const TandaState = {
+    NotYet: "not_yet",
+    Waiting: "waiting",
+    Eligible: "eligible",
+} as const;
+
+export type TandaState = (typeof TandaState)[keyof typeof TandaState];
