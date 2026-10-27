@@ -5,8 +5,11 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.config import settings
 from app.database import engine
+from app.routers import entries
 
 app = FastAPI(title="Badge-by-Badge API")
+
+app.include_router(entries.router)
 
 app.add_middleware(
     CORSMiddleware,
