@@ -6,11 +6,13 @@ from app.enums import ProgressStatus
 from app.schemas.entries import EntryOut
 
 
-# One badge on the Scout's current level, with its progress status
+# One badge on the Scout's current level, with its progress status and place on the path
 class BadgeListItem(BaseModel):
     id: uuid.UUID
     name: str
     status: ProgressStatus
+    row: int | None = None
+    locked: bool = False
 
 
 # One requirement on a badge, with the Scout's own entry for it if there is one

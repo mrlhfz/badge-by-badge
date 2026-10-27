@@ -64,6 +64,8 @@ class Badge(UUIDPk, Base):
     name: Mapped[str]
     description: Mapped[str]
     sort_order: Mapped[int]
+    # Which row of the badge path this sits in (1 to 7 for Pengakap Muda); None if off the path
+    path_row: Mapped[int | None]
     kind: Mapped[BadgeKind] = mapped_column(
         Enum(
             BadgeKind, name="badge_kind", values_callable=lambda e: [m.value for m in e]

@@ -7,6 +7,7 @@ from app.enums import AnimalKind, EntryStatus, ProgressStatus
 from app.models.people import Scout
 from app.models.progress import Badge, Entry, Requirement, RequirementGroup, ScoutLevel
 from app.services.badge_rules import RuleGroup, RuleRequirement, badge_is_complete
+from app.services.path_rules import PathBadge
 
 
 # The level a Scout is on right now, or None if they have no current level
@@ -122,3 +123,31 @@ def live_badge(db: Session, badge_id: uuid.UUID) -> Badge | None:
     if badge is None or badge.deleted_at is not None:
         return None
     return badge
+
+
+# The badges on a level that this Scout can see, in display order
+def visible_badges(db: Session, scout: Scout, level_id: uuid.UUID) -> list[Badge]:
+    return list(
+        db.scalars(
+            select(Badge)
+            .where(
+                Badge.level_id == level_id,
+                Badge.deleted_at.is_(None),
+                or_(Badge.stream_id.is_(None), Badge.stream_id == scout.stream_id),
+            )
+            .order_by(Badge.sort_order)
+        ).all()
+    )
+
+
+# The path the Scout sees: each badge with its row and whether it is complete
+def path_badges(db: Session, scout: Scout, level_id: uuid.UUID) -> list[PathBadge]:
+    path = []
+    for badge in visible_badges(db, scout, level_id):
+        if badge.path_row is None:
+            continue
+        complete = badge_status(db, scout, badge.id) == ProgressStatus.Complete
+        path.append(
+            PathBadge(id=badge.id, name=badge.name, row=badge.path_row, complete=complete)
+        )
+    return path

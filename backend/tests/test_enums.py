@@ -8,6 +8,7 @@ from app.enums import (
     PinKind,
     ProgressStatus,
     Role,
+    TandaState,
     VerificationAction,
 )
 
@@ -20,6 +21,7 @@ MIRRORED_ENUMS = [
     BadgeKind,
     AnimalKind,
     ProgressStatus,
+    TandaState,
 ]
 
 
