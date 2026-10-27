@@ -30,3 +30,10 @@ class BadgeKind(Enum):
 class AnimalKind(Enum):
     Poultry = "poultry"
     Other = "other"
+
+
+# How far a Scout has got with one badge; computed, not stored
+class ProgressStatus(Enum):
+    NotStarted = "not_started"
+    InProgress = "in_progress"
+    Complete = "complete"

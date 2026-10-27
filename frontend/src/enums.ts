@@ -41,3 +41,11 @@ export const AnimalKind = {
 } as const;
 
 export type AnimalKind = (typeof AnimalKind)[keyof typeof AnimalKind];
+
+export const ProgressStatus = {
+    NotStarted: "not_started",
+    InProgress: "in_progress",
+    Complete: "complete",
+} as const;
+
+export type ProgressStatus = (typeof ProgressStatus)[keyof typeof ProgressStatus];

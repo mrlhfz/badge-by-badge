@@ -6,12 +6,21 @@ from app.enums import (
     BadgeKind,
     EntryStatus,
     PinKind,
+    ProgressStatus,
     Role,
     VerificationAction,
 )
 
 FRONTEND_ENUMS = Path(__file__).resolve().parents[2] / "frontend" / "src" / "enums.ts"
-MIRRORED_ENUMS = [Role, PinKind, EntryStatus, VerificationAction, BadgeKind, AnimalKind]
+MIRRORED_ENUMS = [
+    Role,
+    PinKind,
+    EntryStatus,
+    VerificationAction,
+    BadgeKind,
+    AnimalKind,
+    ProgressStatus,
+]
 
 
 def test_role_values():
@@ -36,6 +45,10 @@ def test_badge_kind_values():
 
 def test_animal_kind_values():
     assert [m.value for m in AnimalKind] == ["poultry", "other"]
+
+
+def test_progress_status_values():
+    assert [m.value for m in ProgressStatus] == ["not_started", "in_progress", "complete"]
 
 
 def test_models_import():
