@@ -4,12 +4,24 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy.dialects import postgresql
 
 from app.auth import get_current_user_id
 from app.database import get_db
 from app.enums import Role
 from app.services import admin_requirements as requirement_service
+from app.services import progress
 from main import app
+
+
+# Records the query it's given, so the test can read the SQL that would run
+class CaptureSession:
+    def __init__(self):
+        self.statement = None
+
+    def scalars(self, statement):
+        self.statement = statement
+        return SimpleNamespace(all=list)
 
 
 # Stands in for a database session whose role lookup returns a fixed role
@@ -85,3 +97,12 @@ def test_admin_gets_requirement_list(client_as, monkeypatch):
     assert response.status_code == 200
     assert response.json()[0]["text"] == "Renang 50 meter"
     assert response.json()[0]["deleted_at"] is not None
+
+
+# A removed requirement must not be in a Scout's checklist, so the Scout's query skips it
+def test_scout_checklist_query_skips_removed_requirements():
+    session = CaptureSession()
+    scout = SimpleNamespace(stream_id=None)
+    progress.requirements_for_scout(session, scout, uuid.uuid4())
+    sql = str(session.statement.compile(dialect=postgresql.dialect()))
+    assert "requirements.deleted_at IS NULL" in sql
