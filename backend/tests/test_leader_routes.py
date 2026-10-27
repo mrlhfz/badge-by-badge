@@ -1,13 +1,17 @@
 import uuid
 from datetime import date, datetime
+from types import SimpleNamespace
 
 import pytest
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from app.auth import get_current_user_id
 from app.database import get_db
-from app.enums import Role
+from app.enums import EntryStatus, Role
 from app.schemas.leader import LeaderSummaryOut, LogEntryOut, PendingEntryOut
+from app.services import comments as comment_service
+from app.services import entries as entry_service
 from app.services import leader as leader_service
 from main import app
 
@@ -144,3 +148,21 @@ def test_leader_gets_log(client_as, monkeypatch):
     response = client_as(Role.Leader).get("/leader/log")
     assert response.status_code == 200
     assert response.json()[0]["scout_name"] == "Test Scout"
+
+
+# Stands in for a database session: the Scout lookup returns a stub Scout
+class CommentFakeDb:
+    def get(self, model, key):
+        return SimpleNamespace(id=key, troop_id=uuid.uuid4())
+
+
+# A comment on a confirmed entry is refused, since the entry is already settled
+def test_comment_on_confirmed_entry_is_refused(monkeypatch):
+    # Skip the troop check here, so the test reaches the confirmed-entry rule
+    monkeypatch.setattr(entry_service, "assert_leader_leads_scout", lambda db, leader_id, scout: None)
+    entry = SimpleNamespace(
+        id=uuid.uuid4(), scout_id=uuid.uuid4(), status=EntryStatus.Confirmed
+    )
+    with pytest.raises(HTTPException) as error:
+        comment_service.add_comment(CommentFakeDb(), entry, uuid.uuid4(), "Well done")
+    assert error.value.status_code == 409
