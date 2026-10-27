@@ -12,13 +12,16 @@ const HOME_BY_ROLE: Record<Role, string> = {
 };
 
 export default function Login() {
-    const { session, role } = useAuth();
+    const { session, role, roleChecked } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
 
-    // Signed in: send the user to their role's home
+    // Signed in: wait for the role lookup, then send the user to their role's home
     if (session) {
+        if (!roleChecked) {
+            return <p>Loading...</p>;
+        }
         return <Navigate to={role ? HOME_BY_ROLE[role] : "/"} replace />;
     }
 
