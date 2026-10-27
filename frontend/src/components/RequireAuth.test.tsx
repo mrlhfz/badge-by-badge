@@ -32,6 +32,7 @@ describe("RequireAuth", () => {
             session: null,
             role: null,
             loading: true,
+            roleChecked: true,
             signOut: vi.fn(),
         });
 
@@ -43,6 +44,7 @@ describe("RequireAuth", () => {
             session: null,
             role: null,
             loading: false,
+            roleChecked: true,
             signOut: vi.fn(),
         });
 
@@ -54,6 +56,7 @@ describe("RequireAuth", () => {
             session: {} as Session,
             role: Role.Scout,
             loading: false,
+            roleChecked: true,
             signOut: vi.fn(),
         });
 

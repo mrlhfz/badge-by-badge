@@ -1,4 +1,9 @@
-import type { EntryStatus, ProgressStatus, TandaState } from "../enums";
+import type {
+    BadgeKind,
+    EntryStatus,
+    ProgressStatus,
+    TandaState,
+} from "../enums";
 
 // These match the backend response shapes in backend/app/schemas
 
@@ -51,4 +56,62 @@ export type BadgeDetailOut = {
     status: ProgressStatus;
     groups: GroupOut[];
     requirements: RequirementOut[];
+};
+
+// Admin: one level or stream, for the dropdowns
+export type CatalogItem = {
+    id: string;
+    name: string;
+};
+
+export type Catalog = {
+    levels: CatalogItem[];
+    streams: CatalogItem[];
+};
+
+// Admin: one badge, including soft-deleted ones
+export type AdminBadge = {
+    id: string;
+    level_id: string;
+    stream_id: string | null;
+    name: string;
+    description: string;
+    sort_order: number;
+    kind: BadgeKind;
+    path_row: number | null;
+    deleted_at: string | null;
+};
+
+// Leader: one Scout in their troop
+export type LeaderScout = {
+    id: string;
+    full_name: string;
+    stream_id: string;
+};
+
+// Leader: one badge in a Scout's progress
+export type ScoutBadgeProgress = {
+    id: string;
+    name: string;
+    status: ProgressStatus;
+};
+
+// Leader: one entry a Scout has made
+export type ScoutEntry = {
+    id: string;
+    badge_name: string;
+    requirement_text: string;
+    entry_date: string;
+    note: string | null;
+    status: EntryStatus;
+};
+
+// Leader: one Scout's full progress
+export type ScoutProgress = {
+    scout_id: string;
+    full_name: string;
+    complete: number;
+    total: number;
+    badges: ScoutBadgeProgress[];
+    entries: ScoutEntry[];
 };

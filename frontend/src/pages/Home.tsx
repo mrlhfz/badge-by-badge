@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import type { BadgeListItem, TandaOut } from "../api/types";
-import { ProgressStatus, TandaState } from "../enums";
+import { TandaState } from "../enums";
 import { authedRequest } from "../lib/api";
+import { STATUS_LABEL } from "../lib/statusLabels";
 import { useAuth } from "../lib/useAuth";
-
-// The words shown next to each badge
-const STATUS_LABEL: Record<ProgressStatus, string> = {
-    [ProgressStatus.NotStarted]: "Not started",
-    [ProgressStatus.InProgress]: "In progress",
-    [ProgressStatus.Complete]: "Complete",
-};
 
 // Tanda card text for each state. The award itself is given outside the app.
 function tandaMessage(tanda: TandaOut): string {

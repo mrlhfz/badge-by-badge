@@ -49,3 +49,17 @@ class BadgeAdminOut(BaseModel):
     kind: BadgeKind
     path_row: int | None
     deleted_at: datetime | None
+
+
+# One level or stream, for the Admin's dropdowns
+class CatalogItem(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    name: str
+
+
+# Every level and stream an Admin can choose from
+class CatalogOut(BaseModel):
+    levels: list[CatalogItem]
+    streams: list[CatalogItem]

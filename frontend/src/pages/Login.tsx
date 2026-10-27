@@ -4,21 +4,24 @@ import { Role } from "../enums";
 import { useAuth } from "../lib/useAuth";
 import { supabase } from "../lib/supabase";
 
-// Where each role lands after login. Only "/" exists for now; #17 and #18 add pages.
+// Where each role lands after login
 const HOME_BY_ROLE: Record<Role, string> = {
-    [Role.Admin]: "/",
-    [Role.Leader]: "/",
+    [Role.Admin]: "/admin/badges",
+    [Role.Leader]: "/leader",
     [Role.Scout]: "/",
 };
 
 export default function Login() {
-    const { session, role } = useAuth();
+    const { session, role, roleChecked } = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
 
-    // Signed in: send the user to their role's home
+    // Signed in: wait for the role lookup, then send the user to their role's home
     if (session) {
+        if (!roleChecked) {
+            return <p>Loading...</p>;
+        }
         return <Navigate to={role ? HOME_BY_ROLE[role] : "/"} replace />;
     }
 
