@@ -29,6 +29,28 @@ def assert_level_and_stream_exist(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Stream not found")
 
 
+# The 409 for a name already in use. A deleted badge still holds its name, so say so when it's the cause.
+def duplicate_name_error(
+    db: Session, level_id: uuid.UUID, stream_id: uuid.UUID | None, name: str
+) -> HTTPException:
+    deleted_holder = db.scalar(
+        select(Badge.id)
+        .where(
+            Badge.level_id == level_id,
+            Badge.stream_id == stream_id,
+            Badge.name == name,
+            Badge.deleted_at.is_not(None),
+        )
+        .limit(1)
+    )
+    detail = (
+        "A deleted badge already uses this name here"
+        if deleted_holder
+        else "A badge with this name already exists here"
+    )
+    return HTTPException(status_code=status.HTTP_409_CONFLICT, detail=detail)
+
+
 # Every badge on a level, including soft-deleted ones, in display order
 def list_badges(db: Session, level_id: uuid.UUID) -> list[Badge]:
     return list(
@@ -47,32 +69,30 @@ def create_badge(db: Session, body: BadgeCreate) -> Badge:
         db.commit()
     except IntegrityError:
         db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="A badge with this name already exists here",
-        )
+        raise duplicate_name_error(db, body.level_id, body.stream_id, body.name)
     db.refresh(badge)
     return badge
 
 
-# Changes a badge; only the fields that were sent are changed
+# Changes a badge; only the fields that were sent are changed. A deleted badge can't be changed.
 def update_badge(db: Session, badge: Badge, body: BadgeUpdate) -> Badge:
+    if badge.deleted_at is not None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="This badge is deleted, so it can't be changed",
+        )
     changes = body.model_dump(exclude_unset=True)
-    assert_level_and_stream_exist(
-        db,
-        changes.get("level_id", badge.level_id),
-        changes.get("stream_id", badge.stream_id),
-    )
+    target_level = changes.get("level_id", badge.level_id)
+    target_stream = changes.get("stream_id", badge.stream_id)
+    target_name = changes.get("name", badge.name)
+    assert_level_and_stream_exist(db, target_level, target_stream)
     for field, value in changes.items():
         setattr(badge, field, value)
     try:
         db.commit()
     except IntegrityError:
         db.rollback()
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="A badge with this name already exists here",
-        )
+        raise duplicate_name_error(db, target_level, target_stream, target_name)
     db.refresh(badge)
     return badge
 

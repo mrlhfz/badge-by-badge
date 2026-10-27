@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from app.enums import BadgeKind
 
@@ -26,6 +26,14 @@ class BadgeUpdate(BaseModel):
     sort_order: int | None = None
     kind: BadgeKind | None = None
     path_row: int | None = Field(default=None, ge=1, le=7)
+
+    # These fields can be left out, but never sent as null: the database needs a value
+    @field_validator("level_id", "name", "description", "sort_order", "kind")
+    @classmethod
+    def required_fields_are_not_null(cls, value):
+        if value is None:
+            raise ValueError("this field cannot be null")
+        return value
 
 
 # What the Admin API returns for a badge, including soft-deleted ones
