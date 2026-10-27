@@ -50,4 +50,18 @@ describe("Login", () => {
 
         expect(renderLogin()).not.toContain("Sign in");
     });
+
+    it("shows a loading message while a signed-in user's role is still loading", () => {
+        vi.mocked(useAuth).mockReturnValue({
+            session: {} as Session,
+            role: null,
+            loading: false,
+            roleChecked: false,
+            signOut: vi.fn(),
+        });
+
+        const html = renderLogin();
+        expect(html).toContain("Loading...");
+        expect(html).not.toContain("Sign in");
+    });
 });
