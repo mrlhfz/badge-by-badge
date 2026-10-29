@@ -1,9 +1,12 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter } from "react-router";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import type { AdminHome } from "../api/types";
 import { VerificationAction } from "../enums";
 import { AdminHomeView } from "./AdminHome";
+
+// Keeps the API client (which needs VITE_API_URL) out of this view-only test
+vi.mock("../lib/api", () => ({ authedRequest: vi.fn() }));
 
 // Renders the Admin home view inside a router, as the app does
 function renderView(home: AdminHome) {
