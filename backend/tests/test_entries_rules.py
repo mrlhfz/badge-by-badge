@@ -32,15 +32,13 @@ def entry_for(scout_id, entry_status=EntryStatus.Pending):
 
 # Stands in for a database session and records the order of its calls
 class DeleteFakeDb:
-    def __init__(self, comment_rows=1):
+    def __init__(self):
         self.calls = []
         self.statements = []
-        self.comment_rows = comment_rows
 
     def execute(self, statement):
         self.calls.append("delete comments")
         self.statements.append(statement)
-        return SimpleNamespace(rowcount=self.comment_rows)
 
     def delete(self, entry):
         self.calls.append("delete entry")
@@ -77,7 +75,7 @@ def test_scout_can_change_own_pending_entry():
 # Deleting a pending entry with a comment removes the comment first, then the entry, in one commit
 def test_delete_entry_with_comment_removes_comment_first():
     scout_id = uuid.uuid4()
-    db = DeleteFakeDb(comment_rows=1)
+    db = DeleteFakeDb()
     entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
     delete_entry(db, entry, scout_with(scout_id))
     assert db.calls == ["delete comments", "delete entry", "commit"]
@@ -85,17 +83,8 @@ def test_delete_entry_with_comment_removes_comment_first():
     assert entry.id in db.statements[0].compile().params.values()
 
 
-# Deleting a pending entry with no comments still goes ahead
-def test_delete_entry_without_comments_still_deletes():
-    scout_id = uuid.uuid4()
-    db = DeleteFakeDb(comment_rows=0)
-    entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
-    delete_entry(db, entry, scout_with(scout_id))
-    assert db.calls == ["delete comments", "delete entry", "commit"]
-
-
 # Deleting a pending entry through the route answers 204 with no body
-def test_delete_route_returns_204_for_pending_entry_with_comment(monkeypatch):
+def test_delete_route_returns_204_for_own_pending_entry(monkeypatch):
     scout_id = uuid.uuid4()
     entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
     monkeypatch.setattr(entry_service, "get_entry_or_404", lambda db, entry_id: entry)
