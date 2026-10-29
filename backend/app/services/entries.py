@@ -2,13 +2,13 @@ import uuid
 from datetime import UTC, datetime
 
 from fastapi import HTTPException, status
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.enums import EntryStatus
 from app.models.people import Scout, TroopLeader
-from app.models.progress import Badge, Entry, Requirement, ScoutLevel
+from app.models.progress import Badge, Entry, EntryComment, Requirement, ScoutLevel
 from app.schemas.entries import EntryCreate, EntryUpdate
 
 
@@ -139,9 +139,11 @@ def update_entry(
     return entry
 
 
-# Deletes a pending entry
+# Deletes a pending entry and its comments in one transaction
 def delete_entry(db: Session, entry: Entry, scout: Scout) -> None:
     assert_scout_can_change(entry, scout)
+    # Comments point at the entry with no cascade, so they must go first
+    db.execute(delete(EntryComment).where(EntryComment.entry_id == entry.id))
     db.delete(entry)
     db.commit()
 
