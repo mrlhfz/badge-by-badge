@@ -897,9 +897,14 @@ main:has(.login-page) {
 /* On a phone the form and the welcome text take turns: the help button switches to the welcome
    text, and its "Back to sign in" link switches back */
 @media (max-width: 719px) {
-    /* Keeps the title clear of the help button on both sides, so the text can't run under it */
+    /* Keeps the title clear of the help button on both sides, so the text can't run under it.
+       The title is 22px here so "Badge-by-Badge" fits on one line at 360px. */
     .login-heading {
-        padding: 0 40px;
+        padding: 0 32px;
+    }
+
+    .login-heading h1 {
+        font-size: 22px;
     }
 
     /* Written as .login-card .help-button so it beats the full-width .login-card button rule */
