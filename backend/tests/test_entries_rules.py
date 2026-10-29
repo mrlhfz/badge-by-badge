@@ -5,7 +5,11 @@ import pytest
 from fastapi import HTTPException
 
 from app.enums import EntryStatus
-from app.services.entries import assert_requirement_applies, assert_scout_can_change
+from app.services.entries import (
+    assert_requirement_applies,
+    assert_scout_can_change,
+    delete_entry,
+)
 
 LEVEL = uuid.uuid4()
 OTHER_LEVEL = uuid.uuid4()
@@ -19,6 +23,23 @@ def scout_with(scout_id):
 
 def entry_for(scout_id, entry_status=EntryStatus.Pending):
     return SimpleNamespace(scout_id=scout_id, status=entry_status)
+
+
+# Stands in for a database session and records the order of its calls
+class DeleteFakeDb:
+    def __init__(self, comment_rows=1):
+        self.calls = []
+        self.comment_rows = comment_rows
+
+    def execute(self, statement):
+        self.calls.append("delete comments")
+        return SimpleNamespace(rowcount=self.comment_rows)
+
+    def delete(self, entry):
+        self.calls.append("delete entry")
+
+    def commit(self):
+        self.calls.append("commit")
 
 
 # Another Scout's entry looks the same as a missing one: 404
@@ -44,6 +65,24 @@ def test_scout_can_change_own_pending_entry():
     scout_id = uuid.uuid4()
     # Passing without an error is the result; no HTTPException means allowed
     assert_scout_can_change(entry_for(scout_id), scout_with(scout_id))
+
+
+# Deleting a pending entry with a comment removes the comment first, then the entry, in one commit
+def test_delete_entry_with_comment_removes_comment_first():
+    scout_id = uuid.uuid4()
+    db = DeleteFakeDb(comment_rows=1)
+    entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
+    delete_entry(db, entry, scout_with(scout_id))
+    assert db.calls == ["delete comments", "delete entry", "commit"]
+
+
+# Deleting a pending entry with no comments still goes ahead
+def test_delete_entry_without_comments_still_deletes():
+    scout_id = uuid.uuid4()
+    db = DeleteFakeDb(comment_rows=0)
+    entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
+    delete_entry(db, entry, scout_with(scout_id))
+    assert db.calls == ["delete comments", "delete entry", "commit"]
 
 
 # A requirement on the Scout's level and stream is allowed
