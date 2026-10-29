@@ -736,26 +736,26 @@ main:has(.login-page) {
     padding: 0;
 }
 
+/* No background of its own, so the day or night image shows through.
+   It grows taller on a phone, when the welcome panel sits under the form. */
 .login-page {
     position: relative;
-    height: 100vh;
-    min-height: 480px;
+    min-height: 100vh;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 24px;
-    overflow: hidden;
-    /* No background of its own, so the day or night image shows through */
 }
 
-/* Glass card: see-through white, blurred background behind it, and a soft light border */
-.login-card {
-    position: relative;
+/* One shared glass box holds the form and the welcome panel:
+   stacked on a phone, side by side on a wide screen */
+.login-layout {
+    box-sizing: border-box;
     width: 100%;
     max-width: 380px;
-    box-sizing: border-box;
-    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
     background: rgba(255, 255, 255, 0.55);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
@@ -763,6 +763,88 @@ main:has(.login-page) {
     border-top: 6px solid var(--primary);
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(31, 42, 36, 0.12);
+    overflow: hidden;
+}
+
+@media (min-width: 720px) {
+    .login-layout {
+        flex-direction: row;
+        max-width: 960px;
+    }
+
+    .login-layout .login-card {
+        flex: 0 0 380px;
+    }
+
+    .login-layout .welcome-panel {
+        flex: 1 1 0;
+    }
+}
+
+/* The welcome panel has no box of its own: a thin line divides it from the form,
+   under the form on a phone and beside it on a wide screen */
+.welcome-panel {
+    box-sizing: border-box;
+    padding: 32px 28px;
+    border-top: 1px solid rgba(31, 42, 36, 0.12);
+}
+
+@media (min-width: 720px) {
+    .welcome-panel {
+        border-top: 0;
+        border-left: 1px solid rgba(31, 42, 36, 0.12);
+    }
+}
+
+.welcome-panel h2 {
+    margin: 4px 0 12px;
+    font-size: 24px;
+}
+
+.welcome-panel p {
+    margin: 0 0 16px;
+    color: var(--muted);
+}
+
+/* The three steps, numbered in gold circles, each in its own small card */
+.welcome-steps {
+    counter-reset: step;
+    padding: 0;
+    margin: 16px 0 0;
+}
+
+.welcome-steps li {
+    position: relative;
+    padding-left: 48px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.welcome-steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: var(--space);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--text);
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+}
+
+/* The form half of the shared box: its glass and border come from .login-layout */
+.login-card {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 32px 28px;
 }
 
 .login-card h1 {
@@ -799,4 +881,76 @@ main:has(.login-page) {
     background: var(--primary);
     font-size: 16px;
     font-weight: 600;
+}
+
+/* The title block: the help button sits on its right edge, level with the title */
+.login-heading {
+    position: relative;
+}
+
+/* Hidden on a wide screen, where the welcome text is always beside the form */
+.help-button,
+.back-button {
+    display: none;
+}
+
+/* On a phone the form and the welcome text take turns: the help button switches to the welcome
+   text, and its "Back to sign in" link switches back */
+@media (max-width: 719px) {
+    /* Written as .login-card .help-button so it beats the full-width .login-card button rule */
+    .login-card .help-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        margin-top: 0;
+        padding: 0;
+        background: transparent;
+        color: var(--muted);
+        border: 0;
+        border-radius: 50%;
+    }
+
+    /* Green on hover or keyboard focus, so it reads as clickable without drawing the eye first */
+    .login-card .help-button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+    /* The icon fills the whole button, so it is as large as the button's space */
+    .login-card .help-button svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .login-card .help-button:hover {
+        color: var(--primary);
+        background: var(--primary-soft);
+        filter: none;
+    }
+
+    /* At the bottom of the welcome text, on the right, with a little space above it */
+    .back-button {
+        display: block;
+        width: fit-content;
+        margin-top: 16px;
+        margin-left: auto;
+    }
+
+    .login-layout:not(.show-help) .welcome-panel {
+        display: none;
+    }
+
+    .login-layout.show-help .login-card {
+        display: none;
+    }
+
+    .login-layout.show-help .welcome-panel {
+        border-top: 0;
+    }
 }

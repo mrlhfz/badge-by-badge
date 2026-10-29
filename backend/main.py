@@ -7,6 +7,7 @@ from app.config import settings
 from app.database import engine
 from app.routers import (
     admin_badges,
+    admin_home,
     admin_requirements,
     admin_scouts,
     badges,
@@ -23,6 +24,7 @@ app.include_router(badges.router)
 app.include_router(tanda.router)
 app.include_router(admin_badges.router)
 app.include_router(admin_scouts.router)
+app.include_router(admin_home.router)
 app.include_router(admin_requirements.router)
 app.include_router(leader.router)
 app.include_router(me.router)
