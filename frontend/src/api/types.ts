@@ -187,6 +187,7 @@ export type AdminScout = {
 
 // Admin: one recent verify or unverify, with the Scout's name
 export type RecentVerification = {
+    id: string;
     scout_name: string;
     action: VerificationAction;
     created_at: string;

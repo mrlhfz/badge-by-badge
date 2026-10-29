@@ -33,6 +33,7 @@ describe("AdminHome", () => {
             badge_count: 1,
             recent_verifications: [
                 {
+                    id: "11111111-1111-1111-1111-111111111111",
                     scout_name: "Test Scout",
                     action: VerificationAction.Unverify,
                     created_at: "2026-10-29T09:00:00Z",

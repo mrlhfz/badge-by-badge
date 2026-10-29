@@ -897,6 +897,11 @@ main:has(.login-page) {
 /* On a phone the form and the welcome text take turns: the help button switches to the welcome
    text, and its "Back to sign in" link switches back */
 @media (max-width: 719px) {
+    /* Keeps the title clear of the help button on both sides, so the text can't run under it */
+    .login-heading {
+        padding: 0 40px;
+    }
+
     /* Written as .login-card .help-button so it beats the full-width .login-card button rule */
     .login-card .help-button {
         display: inline-flex;

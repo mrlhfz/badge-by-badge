@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 
 from pydantic import BaseModel
@@ -5,8 +6,10 @@ from pydantic import BaseModel
 from app.enums import VerificationAction
 
 
-# One recent verify or unverify, with the Scout's name so the Admin can see who it was
+# One recent verify or unverify, with the Scout's name so the Admin can see who it was.
+# The event id is unique, so the frontend can use it as a list key.
 class RecentVerificationOut(BaseModel):
+    id: uuid.UUID
     scout_name: str
     action: VerificationAction
     created_at: datetime

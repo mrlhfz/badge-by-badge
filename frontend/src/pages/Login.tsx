@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import { Navigate } from "react-router";
 import { Role } from "../enums";
 import { useAuth } from "../lib/useAuth";
@@ -13,7 +13,16 @@ const HOME_BY_ROLE: Record<Role, string> = {
 
 // The left half: the sign-in form, with its own typed values and error.
 // onHelp opens the welcome text; the help button only shows on a phone.
-function LoginForm({ onHelp }: { onHelp: () => void }) {
+// helpOpen tells screen readers whether the welcome text is showing.
+function LoginForm({
+    onHelp,
+    helpButtonRef,
+    helpOpen,
+}: {
+    onHelp: () => void;
+    helpButtonRef: RefObject<HTMLButtonElement | null>;
+    helpOpen: boolean;
+}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -41,8 +50,11 @@ function LoginForm({ onHelp }: { onHelp: () => void }) {
                 <p className="login-tagline">Track your Pengakap journey</p>
                 <button
                     type="button"
+                    ref={helpButtonRef}
                     className="help-button"
                     aria-label="New to Badge-by-Badge? Show the welcome text"
+                    aria-expanded={helpOpen}
+                    aria-controls="welcome-panel"
                     onClick={onHelp}
                 >
                     <svg
@@ -88,11 +100,20 @@ function LoginForm({ onHelp }: { onHelp: () => void }) {
 
 // The right half: explains the app to new users. It has no state, only text.
 // onBack returns to the form; the back link only shows on a phone.
-function WelcomePanel({ onBack }: { onBack: () => void }) {
+// headingRef lets the page move focus here when the welcome text opens.
+function WelcomePanel({
+    onBack,
+    headingRef,
+}: {
+    onBack: () => void;
+    headingRef: RefObject<HTMLHeadingElement | null>;
+}) {
     return (
-        <aside className="welcome-panel">
+        <aside className="welcome-panel" id="welcome-panel">
             <p className="eyebrow">New to Badge-by-Badge?</p>
-            <h2>Track every badge in one place</h2>
+            <h2 ref={headingRef} tabIndex={-1}>
+                Track every badge in one place
+            </h2>
             <p>
                 Leaders award badges, Admins verify them, and you can see exactly
                 what is left on your path.
@@ -114,6 +135,20 @@ export default function Login() {
     const { session, role, roleChecked } = useAuth();
     // On a phone, true shows the welcome text instead of the form
     const [showHelp, setShowHelp] = useState(false);
+    // Where focus goes when the phone toggle switches: the welcome heading on open, the help button on close
+    const helpButtonRef = useRef<HTMLButtonElement>(null);
+    const welcomeHeadingRef = useRef<HTMLHeadingElement>(null);
+    // Set once the welcome text has opened, so the first render doesn't move focus
+    const helpOpened = useRef(false);
+
+    useEffect(() => {
+        if (showHelp) {
+            helpOpened.current = true;
+            welcomeHeadingRef.current?.focus();
+        } else if (helpOpened.current) {
+            helpButtonRef.current?.focus();
+        }
+    }, [showHelp]);
 
     // Signed in: wait for the role lookup, then send the user to their role's home
     if (session) {
@@ -127,8 +162,15 @@ export default function Login() {
         <div className="login-page">
             {/* The form comes first, so it stays first on a phone */}
             <div className={showHelp ? "login-layout show-help" : "login-layout"}>
-                <LoginForm onHelp={() => setShowHelp(true)} />
-                <WelcomePanel onBack={() => setShowHelp(false)} />
+                <LoginForm
+                    onHelp={() => setShowHelp(true)}
+                    helpButtonRef={helpButtonRef}
+                    helpOpen={showHelp}
+                />
+                <WelcomePanel
+                    onBack={() => setShowHelp(false)}
+                    headingRef={welcomeHeadingRef}
+                />
             </div>
         </div>
     );

@@ -21,7 +21,12 @@ def get_admin_home(db: Session) -> AdminHomeOut:
     )
     # The newest events first, with the Scout's name joined in
     rows = db.execute(
-        select(Scout.full_name, VerificationEvent.action, VerificationEvent.created_at)
+        select(
+            VerificationEvent.id,
+            Scout.full_name,
+            VerificationEvent.action,
+            VerificationEvent.created_at,
+        )
         .join(Scout, Scout.id == VerificationEvent.scout_id)
         .order_by(VerificationEvent.created_at.desc())
         .limit(RECENT_LIMIT)
@@ -30,7 +35,12 @@ def get_admin_home(db: Session) -> AdminHomeOut:
         unverified_scouts=unverified_scouts,
         badge_count=badge_count,
         recent_verifications=[
-            RecentVerificationOut(scout_name=name, action=action, created_at=created_at)
-            for name, action, created_at in rows
+            RecentVerificationOut(
+                id=event_id,
+                scout_name=name,
+                action=action,
+                created_at=created_at,
+            )
+            for event_id, name, action, created_at in rows
         ],
     )

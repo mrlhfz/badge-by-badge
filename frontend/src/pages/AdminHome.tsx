@@ -90,7 +90,7 @@ export function AdminHomeView({ home }: { home: AdminHome }) {
                 <ul>
                     {home.recent_verifications.map((item) => (
                         <ActivityRow
-                            key={`${item.scout_name}-${item.created_at}`}
+                            key={item.id}
                             item={item}
                         />
                     ))}
