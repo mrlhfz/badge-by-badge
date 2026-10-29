@@ -12,11 +12,9 @@ class Settings(BaseSettings):
     @property
     def frontend_origins(self) -> list[str]:
         # Split "https://a.com, http://localhost:5173/" into a clean list of origins
-        return [
-            origin.strip().rstrip("/")
-            for origin in self.frontend_origin.split(",")
-            if origin.strip()
-        ]
+        # Clean each piece first, then drop the ones that are empty after cleaning
+        cleaned = (part.strip().rstrip("/") for part in self.frontend_origin.split(","))
+        return [origin for origin in cleaned if origin]
 
 
 settings = Settings()

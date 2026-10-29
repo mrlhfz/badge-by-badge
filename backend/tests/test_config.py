@@ -26,9 +26,9 @@ def test_frontend_origins_single_origin():
     assert settings.frontend_origins == ["http://localhost:5173"]
 
 
-# Empty pieces from stray commas are dropped
+# Empty pieces, and pieces that are only a slash, are dropped
 def test_frontend_origins_ignores_empty_entries():
-    settings = make_settings("https://app.example.com,, http://localhost:5173,")
+    settings = make_settings("https://app.example.com,, /, http://localhost:5173,")
     assert settings.frontend_origins == [
         "https://app.example.com",
         "http://localhost:5173",
