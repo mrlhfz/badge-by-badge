@@ -3,13 +3,18 @@ from types import SimpleNamespace
 
 import pytest
 from fastapi import HTTPException
+from fastapi.testclient import TestClient
 
+from app.database import get_db
 from app.enums import EntryStatus
+from app.services import entries as entry_service
 from app.services.entries import (
     assert_requirement_applies,
     assert_scout_can_change,
     delete_entry,
 )
+from app.services.scouts import get_current_scout
+from main import app
 
 LEVEL = uuid.uuid4()
 OTHER_LEVEL = uuid.uuid4()
@@ -29,10 +34,12 @@ def entry_for(scout_id, entry_status=EntryStatus.Pending):
 class DeleteFakeDb:
     def __init__(self, comment_rows=1):
         self.calls = []
+        self.statements = []
         self.comment_rows = comment_rows
 
     def execute(self, statement):
         self.calls.append("delete comments")
+        self.statements.append(statement)
         return SimpleNamespace(rowcount=self.comment_rows)
 
     def delete(self, entry):
@@ -74,6 +81,8 @@ def test_delete_entry_with_comment_removes_comment_first():
     entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
     delete_entry(db, entry, scout_with(scout_id))
     assert db.calls == ["delete comments", "delete entry", "commit"]
+    # The comment delete must target only this entry's comments
+    assert entry.id in db.statements[0].compile().params.values()
 
 
 # Deleting a pending entry with no comments still goes ahead
@@ -83,6 +92,20 @@ def test_delete_entry_without_comments_still_deletes():
     entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
     delete_entry(db, entry, scout_with(scout_id))
     assert db.calls == ["delete comments", "delete entry", "commit"]
+
+
+# Deleting a pending entry through the route answers 204 with no body
+def test_delete_route_returns_204_for_pending_entry_with_comment(monkeypatch):
+    scout_id = uuid.uuid4()
+    entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
+    monkeypatch.setattr(entry_service, "get_entry_or_404", lambda db, entry_id: entry)
+    app.dependency_overrides[get_current_scout] = lambda: scout_with(scout_id)
+    app.dependency_overrides[get_db] = lambda: DeleteFakeDb()
+    try:
+        response = TestClient(app).delete(f"/entries/{entry.id}")
+    finally:
+        app.dependency_overrides.clear()
+    assert response.status_code == 204
 
 
 # A requirement on the Scout's level and stream is allowed
