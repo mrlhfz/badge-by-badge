@@ -118,7 +118,9 @@ def pending_entries(db: Session, leader_profile_id: uuid.UUID) -> list[PendingEn
 # One Scout's badge progress on their current level, and every entry they have made
 def scout_progress(db: Session, scout: Scout) -> ScoutProgressOut:
     level_id = progress.current_level_id(db, scout)
-    badges = progress.visible_badges(db, scout, level_id) if level_id is not None else []
+    badges = (
+        progress.visible_badges(db, scout, level_id) if level_id is not None else []
+    )
     statuses = progress.badge_statuses(db, scout, badges)
 
     rows = db.execute(
@@ -136,7 +138,8 @@ def scout_progress(db: Session, scout: Scout) -> ScoutProgressOut:
         complete=sum(1 for s in statuses.values() if s == ProgressStatus.Complete),
         total=len(badges),
         badges=[
-            ScoutBadgeProgress(id=b.id, name=b.name, status=statuses[b.id]) for b in badges
+            ScoutBadgeProgress(id=b.id, name=b.name, status=statuses[b.id])
+            for b in badges
         ],
         entries=[
             ScoutEntryOut(
@@ -146,7 +149,9 @@ def scout_progress(db: Session, scout: Scout) -> ScoutProgressOut:
                 entry_date=entry.entry_date,
                 note=entry.note,
                 status=entry.status,
-                comments=[CommentOut.model_validate(c) for c in comments.get(entry.id, [])],
+                comments=[
+                    CommentOut.model_validate(c) for c in comments.get(entry.id, [])
+                ],
             )
             for entry, requirement_text, badge_name in rows
         ],

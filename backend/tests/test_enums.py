@@ -50,7 +50,11 @@ def test_animal_kind_values():
 
 
 def test_progress_status_values():
-    assert [m.value for m in ProgressStatus] == ["not_started", "in_progress", "complete"]
+    assert [m.value for m in ProgressStatus] == [
+        "not_started",
+        "in_progress",
+        "complete",
+    ]
 
 
 def test_models_import():

@@ -43,9 +43,7 @@ def assert_leader_leads_scout(
     db: Session, leader_profile_id: uuid.UUID, scout: Scout
 ) -> None:
     led_troop = db.scalar(
-        select(TroopLeader.troop_id).where(
-            TroopLeader.profile_id == leader_profile_id
-        )
+        select(TroopLeader.troop_id).where(TroopLeader.profile_id == leader_profile_id)
     )
     if led_troop != scout.troop_id:
         raise HTTPException(
@@ -125,9 +123,7 @@ def list_entries_for_scout(
 
 
 # Changes a pending entry; only the fields that were sent are changed
-def update_entry(
-    db: Session, entry: Entry, scout: Scout, body: EntryUpdate
-) -> Entry:
+def update_entry(db: Session, entry: Entry, scout: Scout, body: EntryUpdate) -> Entry:
     assert_scout_can_change(entry, scout)
     changes = body.model_dump(exclude_unset=True)
     if changes.get("entry_date") is not None:

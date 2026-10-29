@@ -35,7 +35,10 @@ def test_ahli_bot_waits_for_usaha_in_same_row():
 def test_skill_row_needs_its_picks():
     one_pick = [badge("Ahli Renang", 3, complete=True), badge("Ahli Muzik", 3)]
     assert not row_complete(3, one_pick)
-    two_picks = [badge("Ahli Renang", 3, complete=True), badge("Ahli Muzik", 3, complete=True)]
+    two_picks = [
+        badge("Ahli Renang", 3, complete=True),
+        badge("Ahli Muzik", 3, complete=True),
+    ]
     assert row_complete(3, two_picks)
 
 
@@ -58,7 +61,10 @@ def test_compulsory_row_needs_every_badge():
 
 # Juragan (row 7) stays locked until row 6 is complete
 def test_row_seven_waits_for_row_six():
-    perkhidmatan = [badge("Ahli Pertolongan Cemas", 6, complete=True), badge("Setiausaha", 6)]
+    perkhidmatan = [
+        badge("Ahli Pertolongan Cemas", 6, complete=True),
+        badge("Setiausaha", 6),
+    ]
     juragan = badge("Lencana Juragan", 7)
     path = perkhidmatan + [juragan]
     assert is_locked(juragan, path)

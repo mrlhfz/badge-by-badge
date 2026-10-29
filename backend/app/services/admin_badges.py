@@ -15,7 +15,9 @@ from app.schemas.admin_badges import BadgeCreate, BadgeUpdate
 def get_badge_or_404(db: Session, badge_id: uuid.UUID) -> Badge:
     badge = db.get(Badge, badge_id)
     if badge is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Badge not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Badge not found"
+        )
     return badge
 
 
@@ -24,9 +26,13 @@ def assert_level_and_stream_exist(
     db: Session, level_id: uuid.UUID, stream_id: uuid.UUID | None
 ) -> None:
     if db.get(Level, level_id) is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Level not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Level not found"
+        )
     if stream_id is not None and db.get(Stream, stream_id) is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Stream not found")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Stream not found"
+        )
 
 
 # The 409 for a name already in use. A deleted badge still holds its name, so say so when it's the cause.

@@ -76,7 +76,9 @@ def test_scout_can_change_own_pending_entry():
 def test_delete_entry_with_comment_removes_comment_first():
     scout_id = uuid.uuid4()
     db = DeleteFakeDb()
-    entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
+    entry = SimpleNamespace(
+        id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending
+    )
     delete_entry(db, entry, scout_with(scout_id))
     assert db.calls == ["delete comments", "delete entry", "commit"]
     # The comment delete must target only this entry's comments
@@ -86,7 +88,9 @@ def test_delete_entry_with_comment_removes_comment_first():
 # Deleting a pending entry through the route answers 204 with no body
 def test_delete_route_returns_204_for_own_pending_entry(monkeypatch):
     scout_id = uuid.uuid4()
-    entry = SimpleNamespace(id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending)
+    entry = SimpleNamespace(
+        id=uuid.uuid4(), scout_id=scout_id, status=EntryStatus.Pending
+    )
     monkeypatch.setattr(entry_service, "get_entry_or_404", lambda db, entry_id: entry)
     app.dependency_overrides[get_current_scout] = lambda: scout_with(scout_id)
     app.dependency_overrides[get_db] = lambda: DeleteFakeDb()

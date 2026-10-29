@@ -159,7 +159,9 @@ class CommentFakeDb:
 # A comment on a confirmed entry is refused, since the entry is already settled
 def test_comment_on_confirmed_entry_is_refused(monkeypatch):
     # Skip the troop check here, so the test reaches the confirmed-entry rule
-    monkeypatch.setattr(entry_service, "assert_leader_leads_scout", lambda db, leader_id, scout: None)
+    monkeypatch.setattr(
+        entry_service, "assert_leader_leads_scout", lambda db, leader_id, scout: None
+    )
     entry = SimpleNamespace(
         id=uuid.uuid4(), scout_id=uuid.uuid4(), status=EntryStatus.Confirmed
     )

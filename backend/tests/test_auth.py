@@ -19,7 +19,9 @@ class FakeSession:
 
 # A token that isn't a real JWT must be refused with 401
 def test_garbage_token_is_rejected():
-    credentials = HTTPAuthorizationCredentials(scheme="Bearer", credentials="not-a-token")
+    credentials = HTTPAuthorizationCredentials(
+        scheme="Bearer", credentials="not-a-token"
+    )
     with pytest.raises(HTTPException) as error:
         get_current_user_id(credentials)
     assert error.value.status_code == 401
