@@ -4,6 +4,7 @@ import RequireRole from "./components/RequireRole";
 import { Role } from "./enums";
 import Layout from "./layout/Layout";
 import AdminBadges from "./pages/AdminBadges";
+import AdminHomePage from "./pages/AdminHome";
 import AdminScouts from "./pages/AdminScouts";
 import BadgeDetail from "./pages/BadgeDetail";
 import Home from "./pages/Home";
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
                         // Admin screens: only Admins get through
                         element: <RequireRole allowed={[Role.Admin]} />,
                         children: [
+                            { path: "admin", element: <AdminHomePage /> },
                             { path: "admin/badges", element: <AdminBadges /> },
                             { path: "admin/scouts", element: <AdminScouts /> },
                         ],

@@ -54,13 +54,19 @@ export default function Layout() {
                         </svg>
                     </button>
                     <div className={menuOpen ? "nav-links nav-links-open" : "nav-links"}>
-                        <NavLink to="/" onClick={closeMenu}>
+                        {/* Admins have their own home; Scouts and Leaders use the main one */}
+                        <NavLink to={role === Role.Admin ? "/admin" : "/"} onClick={closeMenu}>
                             Home
                         </NavLink>
                         {role === Role.Admin && (
-                            <NavLink to="/admin/scouts" onClick={closeMenu}>
-                                Verify Scouts
-                            </NavLink>
+                            <>
+                                <NavLink to="/admin/badges" onClick={closeMenu}>
+                                    Badges
+                                </NavLink>
+                                <NavLink to="/admin/scouts" onClick={closeMenu}>
+                                    Verify Scouts
+                                </NavLink>
+                            </>
                         )}
                         <button
                             type="button"

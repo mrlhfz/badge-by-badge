@@ -39,6 +39,20 @@ describe("Login", () => {
         expect(html).toContain("Sign in");
     });
 
+    it("explains the app beside the form for signed-out visitors", () => {
+        vi.mocked(useAuth).mockReturnValue({
+            session: null,
+            role: null,
+            loading: false,
+            roleChecked: true,
+            signOut: vi.fn(),
+        });
+
+        const html = renderLogin();
+        expect(html).toContain("Track every badge in one place");
+        expect(html).toContain("Your Leader confirms it.");
+    });
+
     it("hides the sign-in form from signed-in users, who get redirected", () => {
         vi.mocked(useAuth).mockReturnValue({
             session: {} as Session,

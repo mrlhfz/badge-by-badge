@@ -3,6 +3,7 @@ import type {
     EntryStatus,
     ProgressStatus,
     TandaState,
+    VerificationAction,
 } from "../enums";
 
 // These match the backend response shapes in backend/app/schemas
@@ -182,4 +183,19 @@ export type AdminScout = {
     id: string;
     full_name: string;
     is_verified: boolean;
+};
+
+// Admin: one recent verify or unverify, with the Scout's name
+export type RecentVerification = {
+    id: string;
+    scout_name: string;
+    action: VerificationAction;
+    created_at: string;
+};
+
+// Admin: the counts and latest changes on the Admin home page
+export type AdminHome = {
+    unverified_scouts: number;
+    badge_count: number;
+    recent_verifications: RecentVerification[];
 };
