@@ -35,7 +35,9 @@ def list_requirements(db: Session, badge_id: uuid.UUID) -> list[Requirement]:
 
 
 # A group must belong to the same badge as the requirement it's given to
-def assert_group_on_badge(db: Session, group_id: uuid.UUID, badge_id: uuid.UUID) -> None:
+def assert_group_on_badge(
+    db: Session, group_id: uuid.UUID, badge_id: uuid.UUID
+) -> None:
     group = db.get(RequirementGroup, group_id)
     if group is None or group.badge_id != badge_id:
         raise HTTPException(
@@ -54,14 +56,18 @@ def assert_stream_exists(db: Session, stream_id: uuid.UUID) -> None:
 
 
 # Adds a requirement at the end of a badge's list
-def create_requirement(db: Session, badge_id: uuid.UUID, body: RequirementCreate) -> Requirement:
+def create_requirement(
+    db: Session, badge_id: uuid.UUID, body: RequirementCreate
+) -> Requirement:
     get_badge_or_404(db, badge_id)
     if body.group_id is not None:
         assert_group_on_badge(db, body.group_id, badge_id)
     if body.stream_id is not None:
         assert_stream_exists(db, body.stream_id)
     # Positions must stay unique per badge, and removed rows still hold theirs, so take the next free one
-    last = db.scalar(select(func.max(Requirement.position)).where(Requirement.badge_id == badge_id))
+    last = db.scalar(
+        select(func.max(Requirement.position)).where(Requirement.badge_id == badge_id)
+    )
     requirement = Requirement(
         badge_id=badge_id,
         position=(last or 0) + 1,
@@ -77,7 +83,9 @@ def create_requirement(db: Session, badge_id: uuid.UUID, body: RequirementCreate
 
 
 # Changes only the fields the Admin sent
-def update_requirement(db: Session, requirement: Requirement, body: RequirementUpdate) -> Requirement:
+def update_requirement(
+    db: Session, requirement: Requirement, body: RequirementUpdate
+) -> Requirement:
     changes = body.model_dump(exclude_unset=True)
     if changes.get("group_id") is not None:
         assert_group_on_badge(db, changes["group_id"], requirement.badge_id)

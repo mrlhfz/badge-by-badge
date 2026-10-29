@@ -97,7 +97,9 @@ def get_badge_detail(
                 detail=req.detail,
                 group_id=req.group_id,
                 entry=EntryOut.model_validate(entry) if entry is not None else None,
-                comments=[CommentOut.model_validate(c) for c in comments.get(entry.id, [])]
+                comments=[
+                    CommentOut.model_validate(c) for c in comments.get(entry.id, [])
+                ]
                 if entry is not None
                 else [],
             )

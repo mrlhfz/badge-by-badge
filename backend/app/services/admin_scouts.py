@@ -28,7 +28,9 @@ def set_verified(
             detail="Scout not found",
         )
     scout.is_verified = action == VerificationAction.Verify
-    db.add(VerificationEvent(scout_id=scout.id, action=action, actor_id=admin_profile_id))
+    db.add(
+        VerificationEvent(scout_id=scout.id, action=action, actor_id=admin_profile_id)
+    )
     db.commit()
     db.refresh(scout)
     return scout

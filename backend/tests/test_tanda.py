@@ -13,7 +13,9 @@ def test_add_months_keeps_day_and_handles_short_months():
 
 # A badge still missing means the Scout isn't there yet
 def test_missing_badge_is_not_yet():
-    result = evaluate({"Lencana Jaya": None, "Lencana Juragan": date(2026, 1, 1)}, date(2026, 6, 1))
+    result = evaluate(
+        {"Lencana Jaya": None, "Lencana Juragan": date(2026, 1, 1)}, date(2026, 6, 1)
+    )
     assert result.state == TandaState.NotYet
     assert result.missing == ["Lencana Jaya"]
 

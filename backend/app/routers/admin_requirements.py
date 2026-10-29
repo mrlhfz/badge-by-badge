@@ -55,6 +55,8 @@ def update_requirement(
 
 # Admin: remove a requirement from Scouts' checklists, keeping its entries
 @router.delete("/requirements/{requirement_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_requirement(requirement_id: uuid.UUID, db: Annotated[Session, Depends(get_db)]):
+def delete_requirement(
+    requirement_id: uuid.UUID, db: Annotated[Session, Depends(get_db)]
+):
     requirement = requirement_service.get_requirement_or_404(db, requirement_id)
     requirement_service.soft_delete_requirement(db, requirement)
