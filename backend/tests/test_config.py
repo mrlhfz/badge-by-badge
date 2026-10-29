@@ -24,3 +24,21 @@ def test_frontend_origins_splits_and_trims():
 def test_frontend_origins_single_origin():
     settings = make_settings("http://localhost:5173")
     assert settings.frontend_origins == ["http://localhost:5173"]
+
+
+# Empty pieces from stray commas are dropped
+def test_frontend_origins_ignores_empty_entries():
+    settings = make_settings("https://app.example.com,, http://localhost:5173,")
+    assert settings.frontend_origins == [
+        "https://app.example.com",
+        "http://localhost:5173",
+    ]
+
+
+# A trailing slash is removed so the origin matches what browsers send
+def test_frontend_origins_strips_trailing_slash():
+    settings = make_settings("https://app.example.com/, http://localhost:5173/")
+    assert settings.frontend_origins == [
+        "https://app.example.com",
+        "http://localhost:5173",
+    ]
